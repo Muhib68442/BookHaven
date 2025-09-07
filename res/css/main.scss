@@ -1,0 +1,166 @@
+// MAIN SCSS  
+
+// IMPORTING PARTIALS 
+@import 'variables';
+@import 'dashboard';
+@import 'books';
+@import 'genre';
+@import 'members';
+@import 'issue';
+@import 'return';
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    scroll-behavior: smooth;
+}
+
+.landing-body{
+    display: flex;
+    min-height: 100vh;
+    background-color: $bg;
+}
+
+// SIDEBAR
+.sidebar{
+    min-width : 17%;
+    min-height : 100vh !important;
+    background: $gradient;
+    box-shadow: $box-shadow;
+    border-top-right-radius : $radius;
+    border-bottom-right-radius : $radius;
+    user-select : none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap : 50px;
+
+
+    // SIDEBAR BRANDING 
+    .sidebar-branding{
+        display : flex;
+        justify-content: center;
+        align-items: center;
+        gap : 24px;
+        padding : 10px 4px;
+        margin-top : 20px;
+
+        img{
+            max-width: 48px;
+            height: auto;
+        }
+
+        h3{
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: $text-white;
+            font-family : $fontSB;
+        }
+    }
+
+
+    // SIDEBAR OPTIONS 
+    .sidebar-menu ul{
+        list-style-type : none;
+        li{
+            cursor: pointer;
+            margin: 10px 0px;
+            a{
+                width : 100%;
+                padding : 8px 12px;
+                display: flex;
+                // justify-content: space-around;
+                align-items: center;
+                gap: 30px;
+                // background-color: $text-white;
+                border-radius: 10px;
+                transition : 0.1s;
+
+                text-decoration: none;
+
+                &:hover{
+                    transition : 0.1s;
+                    background-color: lighten($theme, 20%);
+                    transform: scale(1.05);
+                    p{
+                        color: $text-black;
+                    }
+                    svg path{
+                        stroke: $text-black;
+                        fill : $text-black;
+
+                    }
+                }
+            }
+            svg{
+                max-width: 30px;
+                height: auto;
+                path{
+                    stroke : $text-white;
+                    fill : transparent;
+                    // fill : $text-white;
+                }
+            }
+            p{
+                font-size: 1.2rem;
+                font-weight: 500;
+                color: $text-white;
+                font-family : $fontM;
+            }
+        }
+    }
+
+
+}
+.selected{
+    transition : 0.1s;
+    background-color: lighten($theme, 20%);
+    transform: scale(1.05);
+    border-radius: $radiusT;
+    p{
+        color: $text-black !important;
+    }
+    svg path{
+        stroke: $text-black !important;
+        fill : $text-black !important;
+
+    }
+}
+
+
+// CONTENT - GENERAL
+.content{
+    min-width : 83%;
+    min-height : 100vh;
+    max-height : 100vh;
+    padding : 20px;
+
+    overflow-y: scroll;
+}
+
+
+// SCROLLBAR
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $theme;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: lighten($theme, 20%);
+}
+
+
+
+

@@ -1,0 +1,376 @@
+// PARTIAL FILE - VARIABLES 
+
+// MAIN COLORS
+$bg: #F5F6FA;
+$theme: #2F33B3;
+$secondary: #E0E0E0;
+
+// TEXT COLORS
+$text-theme : #2F33B3;
+$text-black: #212529;
+$text-white: #eeeeee;
+$text-secondary: #6C757D;
+
+// MISC COLORS 
+$success: #28A745;
+$danger: #DC3545;
+$warning: #FFC107;
+
+// OTHERS
+$radius : 20px;
+$radiusT : 10px;
+$box-shadow : 0px 0px 20px 4px rgba(0, 0, 0, 0.25);
+$gradient : linear-gradient(180deg, #3E42C0 6%, #2A2FAF 34%, #2F33AB 54%, #1D2077 100%);
+$fontSB : 'fontSB';
+$fontM : 'fontM';
+
+
+// FONT 
+@font-face {
+  font-family: 'fontM';
+  src: url('../fonts/inter_regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'fontSB';
+  src: url('../fonts/inter_semibold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 600;
+}
+
+
+@mixin button-primary {
+    background-color: $theme;
+    border: none;
+    color: $text-white;
+    user-select: none;
+    cursor: pointer;
+    padding: 12px 24px;
+    font-family : fontSB;
+    font-size : 1.2rem;
+    border : 2px solid transparent;
+    border-radius: $radiusT;
+    transition : 0.1s;
+    &:hover{
+      transition : 0.1s;
+      background-color : $bg;
+      border : 2px solid $theme;
+      color : $text-theme;
+    }
+    @content;
+}
+
+@mixin button-secondary {
+    background-color: transparent;
+    border: 2px solid $text-black;
+    color: $text-black;
+    padding: 6px 12px;
+    font-family: $fontM;
+    font-size: 1rem;
+    user-select: none;
+    cursor: pointer;
+    transition: 0.1s;
+    width : 120px;
+    
+    
+    @content;
+
+    &:hover {
+        transition : 0.1s;
+        background-color: $theme;
+        color: $text-white;
+    }
+}
+
+@mixin truncateText($maxWidth: 200px) {
+  max-width: $maxWidth;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin table{
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0;
+    margin: 10px 0;
+    
+
+    // THEAD-BODY GAP
+    tbody::before {
+        content: "";
+        display: block;
+        height: 10px;
+    }
+
+    // HEADING
+    thead {
+        th {
+            background-color: $theme;
+            padding: 18px 8px;
+            font-family: $fontSB;
+            font-size: 1.2rem;
+            color: $text-white;
+
+            &:first-child {
+                border-top-left-radius: $radiusT;
+                border-bottom-left-radius: $radiusT;
+            }
+            &:last-child {
+                border-top-right-radius: $radiusT;
+                border-bottom-right-radius: $radiusT;
+            }
+        }
+    }
+
+    // BODY
+    tbody {
+        tr {
+            td {
+                background-color: $secondary;
+                padding: 12px 8px;
+                font-family: $fontM;
+                font-size: 1rem;
+                color: $text-black;
+
+                button {
+                    @include button-secondary;
+                }
+            }
+
+            // Row Corner Radius
+            &:first-child {
+              // padding-left : 16px;
+                td:first-child {
+                    border-top-left-radius: 12px;
+                }
+                td:last-child {
+                    border-top-right-radius: 12px;
+                }
+            }
+
+            &:last-child {
+                td:first-child {
+                    border-bottom-left-radius: 12px;
+                }
+                td:last-child {
+                    border-bottom-right-radius: 12px;
+                }
+            }
+
+            &:nth-child(2){
+              @include truncateText;
+            }
+        }
+    }
+  }
+
+  
+
+  @content;
+}
+
+@mixin form{
+    .form-container{
+        width : 60%;
+        margin : 40px auto;
+
+        .form-topbar{
+            background-color: $theme;
+            padding : 12px 20px;
+            border-radius: $radiusT;
+            display: flex;
+            align-items: center;
+            gap : 20px;
+            svg{
+                width:  32px;
+                height: 32px;
+                fill: $text-white;
+            }
+            h3{
+                @include font($fontSB, 1.4rem, $text-white);
+            }
+        }
+
+        .form-body{
+            margin-top : 10px;
+            padding: 20px;
+            background-color: $secondary;
+            border-radius: $radiusT;
+            // box-shadow: $box-shadow;
+        
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap : 10px;
+
+            .uploadPreview{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: 20px;
+                background-color: darken($secondary, 5%);
+                border-radius: $radiusT;
+                width: 50%;
+                height: 70vh; 
+                min-height: 300px; 
+                object-fit: cover;
+                h3{
+                    @include font($fontM, 1.2rem);
+                }
+
+                #bookCoverUpload {
+                    display: none;
+                }
+
+                #bookCoverUploadBtn{
+                    display: inline-block;
+                    @include button-secondary;
+                    text-align: center;
+                }
+            }
+
+            .form-fields{
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+
+                input{
+                    @include input-style;
+                }
+                select{
+                    @include input-style;
+                }
+                button{
+                    @include button-primary;
+                }
+                .gender{
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    background-color: darken($secondary, 5%);
+                    padding: 20px 12px;
+                    border-radius: $radiusT;
+                    @include font($fontM, 1.2rem, $text-black);
+                    @include input-style;
+                    
+                }
+            }
+        }
+    }
+}
+
+@mixin top-bar{
+    background-color: $theme;
+    padding : 12px 20px;
+    border-radius: $radiusT;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width : 100%;
+    margin : 0 auto;
+
+    svg{
+        width:  32px;
+        height: 32px;
+        fill: $text-white;
+    }
+    h3{
+        @include font($fontSB, 1.4rem, $text-white);
+    }
+    @content;
+}
+
+@mixin font($family, $size, $color: $text-black) {
+    font-family: $family;
+    font-size: $size;
+    color: $color;
+    @content;
+}
+
+@mixin input-style{
+    background-color: darken($secondary, 5%);
+    border : none;
+    padding : 12px 24px;
+    border-radius: $radiusT;
+    font-size : 1.2rem;
+    font-family : fontM;
+    color : $text-black;
+    border : 2px solid transparent;
+    &::placeholder{
+        color: $text-secondary;
+        font-family: $fontM;
+        font-size: 1.2rem;
+        transition : 0.2s;
+    }
+    &:hover{
+        transition : 0.1s;
+        border : 2px solid darken($theme, 5%);
+    }
+    &:focus{
+        transition : 0.2s;
+        outline: none;
+        background-color: $bg;
+        border: 2px solid $theme;
+    }
+
+}
+
+@mixin searchbar{
+    display: flex;
+    align-items: center;
+    gap : 20px;
+    svg{
+        width : 38px;
+        path{
+            stroke: $text-black;
+            // fill: $text-black;
+        }
+    }
+    input{
+        border: 2px solid $text-black;
+        border-radius: $radiusT;
+        padding: 8px 12px;
+        font-family: $fontM;
+        font-size: 1rem;
+        color: $text-black;
+        transition: 0.1s;
+        background-color: transparent;
+        &::placeholder{
+            color : $text-secondary;
+        }
+        &:focus{
+            outline: none;
+            border: 2px solid $text-theme;
+        }
+    }
+    @content;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// DISABLE ARROW OF INPUT:NUMBER
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

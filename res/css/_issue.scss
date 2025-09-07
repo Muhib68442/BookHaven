@@ -1,0 +1,157 @@
+// GENRE PARTIAL
+
+// CONTENT - GENRE
+
+#issue{
+    .top-bar{
+        @include top-bar;
+        // background-color: $theme;
+        margin-bottom: 20px;
+        h3{
+            @include font($fontSB, 1.4rem, $text-white);
+        }
+        p{
+            @include font($fontM, 1.2rem, $text-white);
+        }
+    }
+
+    .issue-container{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap : 10px;
+
+        .btn-bar{
+            display: flex;
+            gap : 12px;
+
+            button{
+                @include button-primary{
+                    // padding: 8px 26px;
+                    width : 200px;
+                    background-color: darken($secondary, 5%);
+                    color: $text-black;
+
+                    &:hover {
+                        transition: 0.1s;
+                        background-color: darken($theme, 5%);
+                        color: $text-white;
+                    }
+                }
+            }
+        }
+
+        .searchbar{
+            @include searchbar{};
+            background-color: $secondary;
+            width : 100%;
+            svg{
+                width:  32px;
+                height: 32px;
+            }
+            input{
+                border : none;
+                &:focus{
+                    outline : none;
+                    border : none;
+                }
+            }
+            padding : 8px 12px;
+            border-radius: $radiusT;
+        }
+        .dynamic-table{
+            width : 100%;
+            max-height: 400px;
+            padding-right: 10px;
+            overflow-y: auto;
+            .issue-book-table{
+                @include table{
+                    table{
+                        margin-top : 0px !important;
+                    }
+                    table tbody::before {
+                        content: "";
+                        display: block;
+                        height: 2px !important;
+                    }
+                    table thead tr th{
+                        position : sticky;
+                        top : 0;
+                        background-color: $secondary !important;
+                        @include font($fontSB, 1.2rem, $text-black);
+                        padding : 8px 8px;
+                    }
+                }
+                text-align: left;
+                width : 100%;
+            }
+
+            .issue-member-table{
+                display: none;
+                @include table{
+                    table{
+                        margin-top : 0px !important;
+                    }
+                    table tbody::before {
+                        content: "";
+                        display: block;
+                        height: 2px !important;
+                    }
+                    table thead tr th{
+                        position : sticky;
+                        top : 0;
+                        background-color: $secondary !important;
+                        @include font($fontSB, 1.2rem, $text-black);
+                        padding : 8px 8px;
+                    }
+                }
+                text-align: left;
+                width : 100%;
+            }
+
+            .issue-summary{
+                display: none;
+                background-color: $secondary;
+                border-radius: $radiusT;
+                padding : 22px 36px;
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap : 20px;
+                div{
+                    display: flex;
+                    flex-direction: column;
+                    gap : 6px;
+
+                    h3{
+                        @include font($fontSB, 1.2rem, $text-black);
+                    }
+                    p{
+                        @include font($fontM, 1.2rem, $text-black);
+                    }
+                    button{
+                        @include button-secondary;
+                        width : 100%;
+                    }
+                    #resetIssue{
+                        background-color: $danger;
+                        color: $text-white;
+
+                        &:hover {
+                            transition: 0.1s;
+                            background-color: darken($theme, 5%);
+                            color: $text-white;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+
+.selectedBtn{
+    background-color: $theme !important;
+    color: $text-white !important;
+}

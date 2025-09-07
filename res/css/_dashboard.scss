@@ -1,0 +1,286 @@
+// DASHBOARD PARTIAL : 
+
+// CONTENT - DASHBOARD
+
+#dashboard{
+    padding : 10px;
+
+
+    // INFO BAR 
+    .info-bar{
+        background: $secondary;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px;
+        margin-bottom : 18px;
+        border-radius: $radiusT;
+
+        p{
+            font-size: 1.4rem;
+            color: $text-black;
+            font-family: $fontM;
+        }
+        button{
+            @include button-secondary;
+            &:hover{
+                background-color: $danger;
+                border-color : $danger;
+                color: $text-white;
+            }
+        }
+
+    }
+
+
+    // CARD SECTION
+    .card-section{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    
+        .card{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width : 30%;
+            min-height : 100px;
+            max-height : 250px;
+            overflow : hidden;
+            gap: 20px;
+            padding: 20px;
+            background-color: $theme;
+            border-radius: $radius;
+            transition : 0.1s;
+    
+            &:hover{
+                background-color: lighten($theme, 20%);
+                transform: scale(1.05);
+                transition : 0.1s;
+                svg{
+                    transform: scale(1.1);
+                    path{
+                        stroke: $text-black;
+                        fill: $text-black;
+                    }
+                }
+    
+                p{
+                    transform: scale(1.1);
+                    color: $text-black;
+                    span{
+                        font-family : $fontSB !important;
+                    }
+                }
+            }
+    
+            svg{
+                width : 50px;
+                height: auto;
+                path{
+                    stroke: $text-white;
+                    fill: $text-white;
+                }
+            }
+    
+            p{
+                font-size: 1.4rem;
+                color: $text-white;
+                font-family: $fontM;
+            }
+            
+        }
+    
+    }
+
+    .dashboard-body{
+        // min-width: 100%;
+        display: flex;
+        // justify-content: space-between;
+        align-items: flex-start;
+        margin-top : 20px;
+        gap : 20px;
+
+        // QUICK TABLE 
+        .quick-table{
+            width: 60%;
+            // margin : 20px 0px;
+    
+            // TABLE SWITCH
+            ul{
+                display: flex;
+                list-style-type: none;
+                gap : 10px;
+    
+                li{
+                    padding : 8px 12px;
+                    border-radius: 10px;
+                    background-color: $secondary;
+                    font-family : $fontM;
+                    font-size : 1rem;
+                    color : $text-black;
+                    transition : 0.1s;
+    
+                    &:hover{
+                        transition : 0.1s;
+                        background-color: $theme;
+                        color: $text-white;
+                    }
+                }
+            }
+            // TABLE
+            table {
+                width: 100%;
+                border-collapse: separate;
+                border-spacing: 0 0;
+                margin: 10px 0;
+    
+                // THEAD-BODY GAP
+                tbody::before {
+                    content: "";
+                    display: block;
+                    height: 10px;
+                }
+    
+                // HEADING
+                thead {
+                    th {
+                        background-color: $theme;
+                        padding: 18px 8px;
+                        font-family: $fontSB;
+                        font-size: 1.2rem;
+                        color: $text-white;
+    
+                        &:first-child {
+                            border-top-left-radius: $radiusT;
+                            border-bottom-left-radius: $radiusT;
+                        }
+                        &:last-child {
+                            border-top-right-radius: $radiusT;
+                            border-bottom-right-radius: $radiusT;
+                        }
+                    }
+                }
+    
+                // BODY
+                tbody {
+                    tr {
+                        td {
+                            background-color: $secondary;
+                            padding: 12px 8px;
+                            font-family: $fontM;
+                            font-size: 1rem;
+                            color: $text-black;
+    
+                            button {
+                                @include button-secondary;
+                            }
+                        }
+    
+                        // Row Corner Radius
+                        &:first-child {
+                            td:first-child {
+                                border-top-left-radius: 12px;
+                            }
+                            td:last-child {
+                                border-top-right-radius: 12px;
+                            }
+                        }
+    
+                        &:last-child {
+                            td:first-child {
+                                border-bottom-left-radius: 12px;
+                            }
+                            td:last-child {
+                                border-bottom-right-radius: 12px;
+                            }
+                        }
+                    }
+                }
+            }
+            .book-name {
+                white-space: nowrap;      
+                overflow: hidden;         
+                text-overflow: ellipsis;  
+                max-width: 200px;         
+                // display: inline-block;    
+            }
+    
+        } // QUICK TABLE ENDS 
+    
+    
+        // QUICK SEARCH 
+        .quick-search{
+            // margin: 20px 0px;
+            // min-width: 100% !important;
+            width : 40%;
+            h3{
+                font-family: $fontSB;
+                font-size: 1.4rem;
+                color: $text-black;
+                margin-bottom: 12px;
+            }
+            
+            // SEARCHBAR
+            .Qsearchbar{
+                margin-top : 18px !important;
+                padding : 10px 8px;
+                background-color: $theme;
+                border-radius: $radiusT;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                // min-width: 100%;
+                div{
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    gap : 20px;
+                    padding : 0 12px;
+                    svg{
+                        width:  40px !important;
+                        height: 40px !important;
+                        display: block !important;
+                        // fill: $text-black;
+                    }
+                    input{
+                        display: block;
+                        width: 100%;
+                        max-width : 300px;
+
+                        border : none;
+                        background-color: transparent;
+                        font-family : fontM;
+                        font-size: 1.2rem;
+                        color: $text-white;
+                        &::placeholder{
+                            color: $text-white;
+                        }
+                        &:focus{
+                            outline: none;
+                        }
+                    }
+                }
+                svg{
+                    width:  40px;
+                    height: 40px;
+                    display: none;
+                }
+            }
+
+            .search-result{
+                background-color : $secondary;
+                padding: 12px 16px;
+                color : $text-black;
+                font-family: $fontM;
+                font-size : 1.1rem;
+                margin-top : 10px;
+                border-radius: $radiusT;
+            }
+            
+        }
+    }
+
+} // DASHBOARD ENDS
