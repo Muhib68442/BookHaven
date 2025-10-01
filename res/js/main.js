@@ -3,86 +3,118 @@ $(document).ready(function(){
 
 
 
-    function hideAll(){
-        $("#dashboard").hide();
-        $("#books").hide();
-        $("#genre").hide();
-        $("#members").hide();
-        $("#issue").hide();
-        $("#return").hide();
-    }
+    // function hideAll(){
+    //     $("#dashboard").hide();
+    //     $("#books").hide();
+    //     $("#genre").hide();
+    //     $("#members").hide();
+    //     $("#issue").hide();
+    //     $("#return").hide();
+    // }
 
 
-    function selectedOption(option){
-        $(".selected").removeClass("selected");
-        switch (option) {
-            case "dashboard":
-                $("#dashboardBtn").addClass("selected");
-                break;
+    // function selectedOption(option){
+    //     $(".selected").removeClass("selected");
+    //     switch (option) {
+    //         case "dashboard":
+    //             $("#dashboardBtn").addClass("selected");
+    //             break;
 
-            case "books":
-                $("#booksBtn").addClass("selected");
-                break;
+    //         case "books":
+    //             $("#booksBtn").addClass("selected");
+    //             break;
 
-            case "genre":
-                $("#genreBtn").addClass("selected");
-                break;
+    //         case "genre":
+    //             $("#genreBtn").addClass("selected");
+    //             break;
 
-            case "members":
-                $("#membersBtn").addClass("selected");
-                break;
+    //         case "members":
+    //             $("#membersBtn").addClass("selected");
+    //             break;
 
-            case "issue":
-                $("#issueBtn").addClass("selected");
-                break;
+    //         case "issue":
+    //             $("#issueBtn").addClass("selected");
+    //             break;
 
-            case "return":
-                $("#returnBtn").addClass("selected");
-                break;
+    //         case "return":
+    //             $("#returnBtn").addClass("selected");
+    //             break;
             
-            default:
-                break;
-        }
-    }
+    //         default:
+    //             break;
+    //     }
+    // }
 
-    function showSection(section){
-        hideAll();
-        selectedOption(section);
-        $("#"+section).show();
-    }
+    // function showSection(section){
+    //     hideAll();
+    //     selectedOption(section);
+    //     $("#"+section).show();
+    // }
 
 
     // BUTTON MANAGEMENT 
 
     // INITIAL : DASHBOARD
-    hideAll();
-    $("#dashboard").show();
-    selectedOption(1);
+    // hideAll();
+    // $("#dashboard").show();
+    // selectedOption(1);
 
-    $("#dashboardBtn").click(function(){
-        showSection("dashboard");
-    })
+    // $("#dashboardBtn").click(function(){
+    //     showSection("dashboard");
+    // })
 
-    $("#booksBtn").click(function(){
-        showSection("books");
-    })
+    // $("#booksBtn").click(function(){
+    //     showSection("books");
+    // })
 
-    $("#genreBtn").click(function(){
-        showSection("genre");
-    })
+    // $("#genreBtn").click(function(){
+    //     showSection("genre");
+    // })
 
-    $("#membersBtn").click(function(){
-        showSection("members");
-    })
+    // $("#membersBtn").click(function(){
+    //     showSection("members");
+    // })
 
-    $("#issueBtn").click(function(){
-        showSection("issue");
-    })
+    // $("#issueBtn").click(function(){
+    //     showSection("issue");
+    // })
 
-    $("#returnBtn").click(function(){
-        showSection("return");
-    })
+    // $("#returnBtn").click(function(){
+    //     showSection("return");
+    // })
 
+
+    // SIDEBAR BUTTON SELECTED : 
+
+
+    var url = window.location.href;
+    var page = url.split("/").pop();
+    
+    switch(page){
+        case "dashboard.php":
+            $("#dashboardBtn").addClass("selected");
+            break;
+        case "books.php":
+            $("#booksBtn").addClass("selected");
+            break;
+        case "genre.php":
+            $("#genreBtn").addClass("selected");
+            break;
+        case "members.php":
+            $("#membersBtn").addClass("selected");
+            break;
+        case "issue.php":
+            $("#issueBtn").addClass("selected");
+            break;
+        case "return.php":
+            $("#returnBtn").addClass("selected");
+            break;
+
+        default:
+            break;
+
+        }
+        console.log(page);
 
     
 
@@ -109,9 +141,12 @@ $(document).ready(function(){
         $(".top-bar, #bookTable, #bookGrid, .addBookModal").slideUp(200);
         $("#bookDetailsContainer").slideDown(200);
     })
+
     $("#backBtnBookDetails").click(function(){
+        let view = $(".switch input").is(":checked") ? "#bookTable" : "#bookGrid";
+        console.log("View : " + view);
         $("#bookDetailsContainer").slideUp(200);
-        $(".top-bar, #bookTable").slideDown(200);
+        $(".top-bar, "+view).slideDown(200);
     })
 
     // MEMBERS BUTTONS 
@@ -154,34 +189,34 @@ $(document).ready(function(){
 
 
     // demo loop
-    for(let i=0; i<30; i++){
-        $("#books .table tbody").append(`
-            <tr>
-                <td>${i+1}</td>
-                <td class="truncateText">Snowflakes and seven motherfuckers</td>
-                <td class="truncateText">Md. Muhibbur Rahman</td>
-                <td>BHB01511</td>
-                <td>Romantic</td>
-                <td>3/5</td>
-                <td><button class="editBtn">Details</button></td>
-            </tr>
-        `)
-    }
-    for(let i=0; i<30; i++){
-        $("#bookGrid .grid-container").append(`
-            <div class="grid-item">
-                        <img src="res/uploads/book_cover/1.jpg" alt="Book Cover">
-                        <div class="book-info">
-                            <h3 class="truncateText">Snowflakes and seven motherfuckers</h3>
-                            <p class="truncateText">Md. Muhibbur Rahman</p>
-                            <p>BHB01511</p>
-                            <p>Romantic</p>
-                            <p>3/5</p>
-                            <button class="editBtn">Details</button>
-                        </div>
-                    </div>
-        `)
-    }
+    // for(let i=0; i<30; i++){
+    //     $("#books .table tbody").append(`
+    //         <tr>
+    //             <td>${i+1}</td>
+    //             <td class="truncateText">Snowflakes and seven motherfuckers</td>
+    //             <td class="truncateText">Md. Muhibbur Rahman</td>
+    //             <td>BHB01511</td>
+    //             <td>Romantic</td>
+    //             <td>3/5</td>
+    //             <td><button class="editBtn">Details</button></td>
+    //         </tr>
+    //     `)
+    // }
+    // for(let i=0; i<30; i++){
+    //     $("#bookGrid .grid-container").append(`
+    //         <div class="grid-item">
+    //                     <img src="res/uploads/book_cover/1.jpg" alt="Book Cover">
+    //                     <div class="book-info">
+    //                         <h3 class="truncateText">Snowflakes and seven motherfuckers</h3>
+    //                         <p class="truncateText">Md. Muhibbur Rahman</p>
+    //                         <p>BHB01511</p>
+    //                         <p>Romantic</p>
+    //                         <p>3/5</p>
+    //                         <button class="editBtn">Details</button>
+    //                     </div>
+    //                 </div>
+    //     `)
+    // }
 
     for (let i=0; i<30; i++){
         $("#members .member-table tbody").append(`
@@ -201,19 +236,7 @@ $(document).ready(function(){
 
 
     // TABLE - GRID VIEW TOGGLE SWITCH 
-    $("#bookTable").show();
-    $("#bookGrid").hide();
-    $(".switch input").on("change", function() {
-        if($(this).is(":checked")) {
-            console.log("Table View Selected");
-            $("#bookTable").show();
-            $("#bookGrid").hide();
-        } else {
-            console.log("Grid View Selected");
-            $("#bookTable").hide();
-            $("#bookGrid").show();
-        }
-    });
+    
 
 
 
@@ -251,7 +274,7 @@ $(document).ready(function(){
 
         // BUTTON HIGHLIGHTING AND TABLE CHANGING 
         $(".issue-member-table").slideUp(200);
-        $(".issue-summary").slideDown(200);
+        $(".issue-summary").slideDown(200).css({"display":"flex"});
         $("#selectMemberBtn").removeClass("selectedBtn");
         $("#selectSummaryBtn").addClass("selectedBtn");
     })
@@ -285,16 +308,12 @@ $(document).ready(function(){
         $(".issue-book-table").slideUp(200);
         $(".issue-member-table").slideUp(200);
 
-        $(".issue-summary").slideDown(200);
+        $(".issue-summary").slideDown(200).css({"display":"flex"});
 
         $("#selectBookBtn").removeClass("selectedBtn");
         $("#selectMemberBtn").removeClass("selectedBtn");
         $("#selectSummaryBtn").addClass("selectedBtn");
     })
-
-
-
-
 
 
 

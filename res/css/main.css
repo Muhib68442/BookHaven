@@ -286,6 +286,49 @@ input[type=number] {
   border-radius: 10px;
   padding: 2px 16px;
 }
+#books .top-bar .sort-table {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#books .top-bar .sort-table svg {
+  width: 38px;
+  height: 38px;
+}
+#books .top-bar .sort-table select {
+  padding: 8px 12px;
+  background-color: rgb(211.25, 211.25, 211.25);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-family: fontM;
+  color: #212529;
+  border: 2px solid transparent;
+}
+#books .top-bar .sort-table select::-moz-placeholder {
+  color: #6C757D;
+  font-family: "fontM";
+  font-size: 1.2rem;
+  -moz-transition: 0.2s;
+  transition: 0.2s;
+}
+#books .top-bar .sort-table select::placeholder {
+  color: #6C757D;
+  font-family: "fontM";
+  font-size: 1.2rem;
+  transition: 0.2s;
+}
+#books .top-bar .sort-table select:hover {
+  transition: 0.1s;
+  border: 2px solid rgb(41.6969026549, 45.2455752212, 158.8030973451);
+}
+#books .top-bar .sort-table select:focus {
+  transition: 0.2s;
+  outline: none;
+  background-color: #F5F6FA;
+  border: 2px solid #2F33B3;
+}
 #books .top-bar h3 {
   font-family: "fontSB";
   font-size: 1.4rem;
@@ -2175,7 +2218,6 @@ input[type=number] {
   background-color: #E0E0E0;
   border-radius: 10px;
   padding: 22px 36px;
-  display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 20px;

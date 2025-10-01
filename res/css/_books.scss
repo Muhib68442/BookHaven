@@ -16,7 +16,19 @@
         border-radius: $radiusT;
         padding : 2px 16px;
 
-
+        .sort-table{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            svg{
+                width: 38px;
+                height: 38px;
+            }
+            select{
+                padding: 8px 12px;
+                @include input-style;
+            }
+        }
 
         // TITLE 
         h3{
@@ -32,6 +44,7 @@
         button{
             @include button-primary;
         }
+
 
         // Toggle Switch 
         .switch {
