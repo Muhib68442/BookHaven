@@ -136,7 +136,7 @@
             <div id="bookDetailsContainer">
                 <div class="top-barD">
                     <svg id="backBtnBookDetails" width="64px" height="64px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> <style>.cls-1{fill:none;stroke:#ffffff;stroke-linecap:round;stroke-linejoin:round;stroke-width:20px;}</style> </defs> <g data-name="Layer 2" id="Layer_2"> <g data-name="E421, Back, buttons, multimedia, play, stop" id="E421_Back_buttons_multimedia_play_stop"> <circle class="cls-1" cx="256" cy="256" r="246"></circle> <line class="cls-1" x1="352.26" x2="170.43" y1="256" y2="256"></line> <polyline class="cls-1" points="223.91 202.52 170.44 256 223.91 309.48"></polyline> </g> </g> </g></svg>
-                    <h3>Books / The Story Of A Lonely Boy</h3>
+                    <h3>Books / <span class="page-title"></span></h3>
                 </div>
     
                 <div class="book-details">
@@ -233,7 +233,7 @@
                             <td class="truncateText">${element.book_name}</td>
                             <td class="truncateText">${element.author}</td>
                             <td>BHB${element.book_id}</td>
-                            <td>${element.genre}</td>
+                            <td>${element.genre_name}</td>
                             <td>3/${element.stock}</td>
                             <td><button class="bookDetailsBtn">Details</button></td>
                         </tr>
@@ -354,9 +354,10 @@
 
                     // APPEND DATA FOR TABLE
                     $("#bookTableBody").empty();
+
                     data.forEach(element => {
-                        $("#bookTableBody").append(`
-                            <tr>
+                        let row = $(`
+                            <tr class="bookRow">
                                 <td>1</td>
                                 <td class="truncateText">${element.book_name}</td>
                                 <td class="truncateText">${element.author}</td>
@@ -366,6 +367,12 @@
                                 <td><button class="bookDetailsBtn">Details</button></td>
                             </tr>
                         `);
+
+                        if(element.status === "Inactive"){
+                            row.find("td").css("color", "tomato");
+                        }
+
+                        $("#bookTableBody").append(row);
                     });
 
                     // APPEND DATA FOR GRID
@@ -437,10 +444,13 @@
                 dataType : "json",
                 data: JSON.stringify({ "show": "id", "value": book_id }),
                 success : function(data){
+                    $(".page-title").text(data[0].book_name);
                     $(".book-details").empty();
                     console.log(data);
     
                     let statusTextInverse = (data[0].status != "Active") ? "Active" : "Inactive";
+                    
+
                     $(".book-details").append(`
                         <img src="res/uploads/book_cover/2.jpg" alt="The Story Of A Lonely Boy">
                         <div class="book-info">
@@ -448,11 +458,11 @@
                             <p><b>Author:</b> ${data[0].author}</p>
                             <p><b>Publisher:</b> ${data[0].publisher}</p>
                             <p><b>Year:</b> ${data[0].year}</p>
-                            <p><b>Genre:</b> ${data[0].genre}</p>
-                            <p><b>ISBN/Code:</b> BHB<span id="deleteBookID">${data[0].book_id}</span></p>
+                            <p><b>Genre:</b> ${data[0].genre_name}</p>
+                            <p><b>ISBN/Code:</b> BHB<span id="bookID">${data[0].book_id}</span></p>
                             <p><b>Stock:</b> ${data[0].stock}</p>
                             <p><b>Issued:</b> ${data[0].issued}</p>
-                            <p><b>Status:</b> ${data[0].status}</p>
+                            <p><b>Status:</b> <span class="bookStatusText">${data[0].status}</span></p>
                             <div>
                                 <button id="deleteBookBtn">Delete</button>
                                 <button>Edit</button>
@@ -464,27 +474,46 @@
                             </div>
                         </div>
                     `);
+
+                    if(data[0].status != "Active"){
+                        $(".bookStatusText").css("color", "tomato");
+                    }else{
+                        $(".bookStatusText").css("color", "green");
+                    }
                 }
             })
        
         })
 
+
         // TOOGLE BOOK STATUS
-        // $(document).on("click","#toogleBookStatus", function(){
-        //     let statusText = $(this).text();
-        //     $.ajax({
-        //         url : "ajax/set_book.php", 
-        //         type : "POST",
-        //         contentType: "application/json",
-        //         dataType : "json",
-        //         data: JSON.stringify({ "set": "status", "value": statusText }),
-        //         success : function(data){
-        //             // console.log(data);
-        //             let statusTextInverse = (statusText == "Active") ? "Inactive" : "Active";
-        //             $("#toogleBookStatus").text(statusTextInverse);
-        //         }
-        //     })
-        // })
+        $(document).on("click","#toogleBookStatus", function(){
+            let statusText = $(this).text();
+            let book_id = $("#bookID").text();
+            // alert(statusText);
+            $.ajax({
+                url : "ajax/set_book.php", 
+                type : "POST",
+                contentType: "application/json",
+                dataType : "json",
+                data: JSON.stringify({ "set": "status", "value": statusText, "book_id" : book_id}),
+                success : function(data){
+                    // console.log(data);
+                    let statusTextInverse = (statusText == "Active") ? "Inactive" : "Active";
+                    $("#toogleBookStatus").text(statusTextInverse);
+                    if(statusText == "Active"){
+                        $(".bookStatusText").css("color", "green");
+                        $(".bookStatusText").text("Active");
+                    }else{
+                        $(".bookStatusText").css("color", "tomato");
+                        $(".bookStatusText").text("Inactive");
+                    }
+                }, 
+                error : function(data){
+                    console.log(data);
+                }
+            })
+        })
         
         
         
@@ -492,7 +521,7 @@
         $(document).on("click", "#deleteBookBtn", function(){
             let sure = confirm("Are you sure you want to delete this book?");
             if(sure){
-                let book_id = $("#deleteBookID").text();
+                let book_id = $("#bookID").text();
                 $.ajax({
                     url : "ajax/set_book.php",
                     type : "POST",
@@ -550,6 +579,10 @@
             })
 
         })
+
+
+
+
         
 
 

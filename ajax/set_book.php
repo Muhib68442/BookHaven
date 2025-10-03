@@ -21,5 +21,11 @@ if($op == "add"){
     else{
         echo json_encode(array("status" => "error", "message" => "Book could not be deleted"));
     }
+}else if($op == 'status'){
+    $status = $raw_data['value'];
+    $book_id = $raw_data['book_id'];
+    $db = new database();
+    $db->update("books", array("status" => $status), "book_id = '$book_id'");
+    echo json_encode(array("status" => "success", "message" => "Book status updated successfully"));
 }
 ?>
