@@ -1,8 +1,6 @@
 // BOOKS PARTIAL 
 
-// CONTENT - BOOKS 
-
-
+// CONTENT - BOOKS
 
 #books{
 
@@ -34,6 +32,9 @@
         h3{
             @include font($fontSB, 1.4rem);
         }
+        h4{
+            @include font($fontSB, 1.2rem);
+        }
 
         // SEARCH 
         .search{
@@ -41,7 +42,7 @@
         }
 
         // ADD BOOKS BUTTON
-        button{
+        a{
             @include button-primary;
         }
 
@@ -129,7 +130,7 @@
         margin : 20px 0px;
 
         .grid-item {
-            flex: 0 0 48%; // প্রতি row 2 items, gap adjust করতে 48%
+            flex: 0 0 48%; 
             background-color: $secondary;
             border-radius: $radius;
             display: flex;
@@ -139,9 +140,9 @@
             // padding: 10px;
 
             img {
-                width: 36%;          // item width-এর 40%
-                height: auto;        // aspect ratio maintain
-                object-fit: cover;   // any image resolution ঠিক থাকবে
+                width: 36%;          
+                height: auto;        
+                object-fit: cover;   
                 border-radius: $radius;
             }
 
@@ -172,11 +173,6 @@
     }
 
 
-    // ADD BOOK MODAL
-    .addBookModal{
-        @include form;
-        display: none;
-    }
 
 
     // BOOK DETAILS
@@ -242,4 +238,10 @@
             }
         }
     }
+}
+
+// ADD BOOK MODAL
+.addBookModal{
+    @include form;
+    
 }

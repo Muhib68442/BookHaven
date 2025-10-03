@@ -52,12 +52,18 @@ $fontM : 'fontM';
     font-size : 1.2rem;
     border : 2px solid transparent;
     border-radius: $radiusT;
+    text-decoration: none;
     transition : 0.1s;
     &:hover{
       transition : 0.1s;
       background-color : $bg;
       border : 2px solid $theme;
       color : $text-theme;
+    }
+    &:focus{
+        border : 2px solid $text-black;
+        transition : 0.2s;
+        background-color: transparent;
     }
     @content;
 }
@@ -259,6 +265,16 @@ $fontM : 'fontM';
                     @include font($fontM, 1.2rem, $text-black);
                     @include input-style;
                     
+                }
+
+                div{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 10px;
+                    label{
+                        @include font($fontM, 1.2rem, $text-black);
+                    }
                 }
             }
         }

@@ -8,6 +8,9 @@ $raw_data = json_decode(file_get_contents("php://input"), true);
 $op = $raw_data['set'];
 if($op == "add"){
     $form_data = $raw_data['value'];
+    if(is_null($form_data['book_id'])){
+        unset($form_data['book_id']);
+    }
     $db = new database();
     $db->insert("books", $form_data);
     echo json_encode(array("status" => "success", "message" => "Book added successfully"));
@@ -27,5 +30,11 @@ if($op == "add"){
     $db = new database();
     $db->update("books", array("status" => $status), "book_id = '$book_id'");
     echo json_encode(array("status" => "success", "message" => "Book status updated successfully"));
+}else if($op == 'edit'){
+    $data = $raw_data['value'];
+    $book_id = $raw_data['book_id'];
+    $db = new database();
+    $db->update("books", $data, "book_id = '$book_id'");
+    echo json_encode(array("status" => "success", "message" => "Book updated successfully"));
 }
 ?>

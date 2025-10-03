@@ -334,6 +334,11 @@ input[type=number] {
   font-size: 1.4rem;
   color: #212529;
 }
+#books .top-bar h4 {
+  font-family: "fontSB";
+  font-size: 1.2rem;
+  color: #212529;
+}
 #books .top-bar .search {
   display: flex;
   align-items: center;
@@ -365,7 +370,7 @@ input[type=number] {
   outline: none;
   border: 2px solid #2F33B3;
 }
-#books .top-bar button {
+#books .top-bar a {
   background-color: #2F33B3;
   border: none;
   color: #eeeeee;
@@ -378,13 +383,19 @@ input[type=number] {
   font-size: 1.2rem;
   border: 2px solid transparent;
   border-radius: 10px;
+  text-decoration: none;
   transition: 0.1s;
 }
-#books .top-bar button:hover {
+#books .top-bar a:hover {
   transition: 0.1s;
   background-color: #F5F6FA;
   border: 2px solid #2F33B3;
   color: #2F33B3;
+}
+#books .top-bar a:focus {
+  border: 2px solid #212529;
+  transition: 0.2s;
+  background-color: transparent;
 }
 #books .top-bar .switch {
   position: relative;
@@ -585,219 +596,6 @@ input[type=number] {
     flex: 0 0 100%;
   }
 }
-#books .addBookModal {
-  display: none;
-}
-#books .addBookModal .form-container {
-  width: 60%;
-  margin: 40px auto;
-}
-#books .addBookModal .form-container .form-topbar {
-  background-color: #2F33B3;
-  padding: 12px 20px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-#books .addBookModal .form-container .form-topbar svg {
-  width: 32px;
-  height: 32px;
-  fill: #eeeeee;
-}
-#books .addBookModal .form-container .form-topbar h3 {
-  font-family: "fontSB";
-  font-size: 1.4rem;
-  color: #eeeeee;
-}
-#books .addBookModal .form-container .form-body {
-  margin-top: 10px;
-  padding: 20px;
-  background-color: #E0E0E0;
-  border-radius: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 10px;
-}
-#books .addBookModal .form-container .form-body .uploadPreview {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 20px;
-  background-color: rgb(211.25, 211.25, 211.25);
-  border-radius: 10px;
-  width: 50%;
-  height: 70vh;
-  min-height: 300px;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-#books .addBookModal .form-container .form-body .uploadPreview h3 {
-  font-family: "fontM";
-  font-size: 1.2rem;
-  color: #212529;
-}
-#books .addBookModal .form-container .form-body .uploadPreview #bookCoverUpload {
-  display: none;
-}
-#books .addBookModal .form-container .form-body .uploadPreview #bookCoverUploadBtn {
-  display: inline-block;
-  background-color: transparent;
-  border: 2px solid #212529;
-  color: #212529;
-  padding: 6px 12px;
-  font-family: "fontM";
-  font-size: 1rem;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-  cursor: pointer;
-  transition: 0.1s;
-  width: 120px;
-  text-align: center;
-}
-#books .addBookModal .form-container .form-body .uploadPreview #bookCoverUploadBtn:hover {
-  transition: 0.1s;
-  background-color: #2F33B3;
-  color: #eeeeee;
-}
-#books .addBookModal .form-container .form-body .form-fields {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-#books .addBookModal .form-container .form-body .form-fields input {
-  background-color: rgb(211.25, 211.25, 211.25);
-  border: none;
-  padding: 12px 24px;
-  border-radius: 10px;
-  font-size: 1.2rem;
-  font-family: fontM;
-  color: #212529;
-  border: 2px solid transparent;
-}
-#books .addBookModal .form-container .form-body .form-fields input::-moz-placeholder {
-  color: #6C757D;
-  font-family: "fontM";
-  font-size: 1.2rem;
-  -moz-transition: 0.2s;
-  transition: 0.2s;
-}
-#books .addBookModal .form-container .form-body .form-fields input::placeholder {
-  color: #6C757D;
-  font-family: "fontM";
-  font-size: 1.2rem;
-  transition: 0.2s;
-}
-#books .addBookModal .form-container .form-body .form-fields input:hover {
-  transition: 0.1s;
-  border: 2px solid rgb(41.6969026549, 45.2455752212, 158.8030973451);
-}
-#books .addBookModal .form-container .form-body .form-fields input:focus {
-  transition: 0.2s;
-  outline: none;
-  background-color: #F5F6FA;
-  border: 2px solid #2F33B3;
-}
-#books .addBookModal .form-container .form-body .form-fields select {
-  background-color: rgb(211.25, 211.25, 211.25);
-  border: none;
-  padding: 12px 24px;
-  border-radius: 10px;
-  font-size: 1.2rem;
-  font-family: fontM;
-  color: #212529;
-  border: 2px solid transparent;
-}
-#books .addBookModal .form-container .form-body .form-fields select::-moz-placeholder {
-  color: #6C757D;
-  font-family: "fontM";
-  font-size: 1.2rem;
-  -moz-transition: 0.2s;
-  transition: 0.2s;
-}
-#books .addBookModal .form-container .form-body .form-fields select::placeholder {
-  color: #6C757D;
-  font-family: "fontM";
-  font-size: 1.2rem;
-  transition: 0.2s;
-}
-#books .addBookModal .form-container .form-body .form-fields select:hover {
-  transition: 0.1s;
-  border: 2px solid rgb(41.6969026549, 45.2455752212, 158.8030973451);
-}
-#books .addBookModal .form-container .form-body .form-fields select:focus {
-  transition: 0.2s;
-  outline: none;
-  background-color: #F5F6FA;
-  border: 2px solid #2F33B3;
-}
-#books .addBookModal .form-container .form-body .form-fields button {
-  background-color: #2F33B3;
-  border: none;
-  color: #eeeeee;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-  cursor: pointer;
-  padding: 12px 24px;
-  font-family: fontSB;
-  font-size: 1.2rem;
-  border: 2px solid transparent;
-  border-radius: 10px;
-  transition: 0.1s;
-}
-#books .addBookModal .form-container .form-body .form-fields button:hover {
-  transition: 0.1s;
-  background-color: #F5F6FA;
-  border: 2px solid #2F33B3;
-  color: #2F33B3;
-}
-#books .addBookModal .form-container .form-body .form-fields .gender {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background-color: rgb(211.25, 211.25, 211.25);
-  padding: 20px 12px;
-  border-radius: 10px;
-  font-family: "fontM";
-  font-size: 1.2rem;
-  color: #212529;
-  background-color: rgb(211.25, 211.25, 211.25);
-  border: none;
-  padding: 12px 24px;
-  border-radius: 10px;
-  font-size: 1.2rem;
-  font-family: fontM;
-  color: #212529;
-  border: 2px solid transparent;
-}
-#books .addBookModal .form-container .form-body .form-fields .gender::-moz-placeholder {
-  color: #6C757D;
-  font-family: "fontM";
-  font-size: 1.2rem;
-  -moz-transition: 0.2s;
-  transition: 0.2s;
-}
-#books .addBookModal .form-container .form-body .form-fields .gender::placeholder {
-  color: #6C757D;
-  font-family: "fontM";
-  font-size: 1.2rem;
-  transition: 0.2s;
-}
-#books .addBookModal .form-container .form-body .form-fields .gender:hover {
-  transition: 0.1s;
-  border: 2px solid rgb(41.6969026549, 45.2455752212, 158.8030973451);
-}
-#books .addBookModal .form-container .form-body .form-fields .gender:focus {
-  transition: 0.2s;
-  outline: none;
-  background-color: #F5F6FA;
-  border: 2px solid #2F33B3;
-}
 #books #bookDetailsContainer {
   display: none;
 }
@@ -948,6 +746,234 @@ input[type=number] {
   color: #212529;
 }
 
+.addBookModal .form-container {
+  width: 60%;
+  margin: 40px auto;
+}
+.addBookModal .form-container .form-topbar {
+  background-color: #2F33B3;
+  padding: 12px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.addBookModal .form-container .form-topbar svg {
+  width: 32px;
+  height: 32px;
+  fill: #eeeeee;
+}
+.addBookModal .form-container .form-topbar h3 {
+  font-family: "fontSB";
+  font-size: 1.4rem;
+  color: #eeeeee;
+}
+.addBookModal .form-container .form-body {
+  margin-top: 10px;
+  padding: 20px;
+  background-color: #E0E0E0;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+.addBookModal .form-container .form-body .uploadPreview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  background-color: rgb(211.25, 211.25, 211.25);
+  border-radius: 10px;
+  width: 50%;
+  height: 70vh;
+  min-height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.addBookModal .form-container .form-body .uploadPreview h3 {
+  font-family: "fontM";
+  font-size: 1.2rem;
+  color: #212529;
+}
+.addBookModal .form-container .form-body .uploadPreview #bookCoverUpload {
+  display: none;
+}
+.addBookModal .form-container .form-body .uploadPreview #bookCoverUploadBtn {
+  display: inline-block;
+  background-color: transparent;
+  border: 2px solid #212529;
+  color: #212529;
+  padding: 6px 12px;
+  font-family: "fontM";
+  font-size: 1rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  transition: 0.1s;
+  width: 120px;
+  text-align: center;
+}
+.addBookModal .form-container .form-body .uploadPreview #bookCoverUploadBtn:hover {
+  transition: 0.1s;
+  background-color: #2F33B3;
+  color: #eeeeee;
+}
+.addBookModal .form-container .form-body .form-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.addBookModal .form-container .form-body .form-fields input {
+  background-color: rgb(211.25, 211.25, 211.25);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-family: fontM;
+  color: #212529;
+  border: 2px solid transparent;
+}
+.addBookModal .form-container .form-body .form-fields input::-moz-placeholder {
+  color: #6C757D;
+  font-family: "fontM";
+  font-size: 1.2rem;
+  -moz-transition: 0.2s;
+  transition: 0.2s;
+}
+.addBookModal .form-container .form-body .form-fields input::placeholder {
+  color: #6C757D;
+  font-family: "fontM";
+  font-size: 1.2rem;
+  transition: 0.2s;
+}
+.addBookModal .form-container .form-body .form-fields input:hover {
+  transition: 0.1s;
+  border: 2px solid rgb(41.6969026549, 45.2455752212, 158.8030973451);
+}
+.addBookModal .form-container .form-body .form-fields input:focus {
+  transition: 0.2s;
+  outline: none;
+  background-color: #F5F6FA;
+  border: 2px solid #2F33B3;
+}
+.addBookModal .form-container .form-body .form-fields select {
+  background-color: rgb(211.25, 211.25, 211.25);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-family: fontM;
+  color: #212529;
+  border: 2px solid transparent;
+}
+.addBookModal .form-container .form-body .form-fields select::-moz-placeholder {
+  color: #6C757D;
+  font-family: "fontM";
+  font-size: 1.2rem;
+  -moz-transition: 0.2s;
+  transition: 0.2s;
+}
+.addBookModal .form-container .form-body .form-fields select::placeholder {
+  color: #6C757D;
+  font-family: "fontM";
+  font-size: 1.2rem;
+  transition: 0.2s;
+}
+.addBookModal .form-container .form-body .form-fields select:hover {
+  transition: 0.1s;
+  border: 2px solid rgb(41.6969026549, 45.2455752212, 158.8030973451);
+}
+.addBookModal .form-container .form-body .form-fields select:focus {
+  transition: 0.2s;
+  outline: none;
+  background-color: #F5F6FA;
+  border: 2px solid #2F33B3;
+}
+.addBookModal .form-container .form-body .form-fields button {
+  background-color: #2F33B3;
+  border: none;
+  color: #eeeeee;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  padding: 12px 24px;
+  font-family: fontSB;
+  font-size: 1.2rem;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: 0.1s;
+}
+.addBookModal .form-container .form-body .form-fields button:hover {
+  transition: 0.1s;
+  background-color: #F5F6FA;
+  border: 2px solid #2F33B3;
+  color: #2F33B3;
+}
+.addBookModal .form-container .form-body .form-fields button:focus {
+  border: 2px solid #212529;
+  transition: 0.2s;
+  background-color: transparent;
+}
+.addBookModal .form-container .form-body .form-fields .gender {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgb(211.25, 211.25, 211.25);
+  padding: 20px 12px;
+  border-radius: 10px;
+  font-family: "fontM";
+  font-size: 1.2rem;
+  color: #212529;
+  background-color: rgb(211.25, 211.25, 211.25);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-family: fontM;
+  color: #212529;
+  border: 2px solid transparent;
+}
+.addBookModal .form-container .form-body .form-fields .gender::-moz-placeholder {
+  color: #6C757D;
+  font-family: "fontM";
+  font-size: 1.2rem;
+  -moz-transition: 0.2s;
+  transition: 0.2s;
+}
+.addBookModal .form-container .form-body .form-fields .gender::placeholder {
+  color: #6C757D;
+  font-family: "fontM";
+  font-size: 1.2rem;
+  transition: 0.2s;
+}
+.addBookModal .form-container .form-body .form-fields .gender:hover {
+  transition: 0.1s;
+  border: 2px solid rgb(41.6969026549, 45.2455752212, 158.8030973451);
+}
+.addBookModal .form-container .form-body .form-fields .gender:focus {
+  transition: 0.2s;
+  outline: none;
+  background-color: #F5F6FA;
+  border: 2px solid #2F33B3;
+}
+.addBookModal .form-container .form-body .form-fields div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.addBookModal .form-container .form-body .form-fields div label {
+  font-family: "fontM";
+  font-size: 1.2rem;
+  color: #212529;
+}
+
 #genre .top-bar {
   background-color: #2F33B3;
   padding: 12px 20px;
@@ -1046,6 +1072,7 @@ input[type=number] {
   font-size: 1.2rem;
   border: 2px solid transparent;
   border-radius: 10px;
+  text-decoration: none;
   transition: 0.1s;
   padding: 8px 16px;
   background-color: rgb(211.25, 211.25, 211.25);
@@ -1056,6 +1083,11 @@ input[type=number] {
   background-color: #F5F6FA;
   border: 2px solid #2F33B3;
   color: #2F33B3;
+}
+#genre .genre-container .genre-mgmt .add-genre div button:focus {
+  border: 2px solid #212529;
+  transition: 0.2s;
+  background-color: transparent;
 }
 #genre .genre-container .genre-mgmt .add-genre div button:hover {
   transition: 0.1s;
@@ -1092,6 +1124,7 @@ input[type=number] {
   font-size: 1.2rem;
   border: 2px solid transparent;
   border-radius: 10px;
+  text-decoration: none;
   transition: 0.1s;
   padding: 8px 16px;
   background-color: rgb(211.25, 211.25, 211.25);
@@ -1102,6 +1135,11 @@ input[type=number] {
   background-color: #F5F6FA;
   border: 2px solid #2F33B3;
   color: #2F33B3;
+}
+#genre .genre-container .genre-mgmt .edit-genre div:nth-child(1) button:focus {
+  border: 2px solid #212529;
+  transition: 0.2s;
+  background-color: transparent;
 }
 #genre .genre-container .genre-mgmt .edit-genre div:nth-child(2) {
   margin-top: 10px;
@@ -1189,6 +1227,7 @@ input[type=number] {
   font-size: 1.2rem;
   border: 2px solid transparent;
   border-radius: 10px;
+  text-decoration: none;
   transition: 0.1s;
   padding: 8px 16px;
   background-color: rgb(211.25, 211.25, 211.25);
@@ -1199,6 +1238,11 @@ input[type=number] {
   background-color: #F5F6FA;
   border: 2px solid #2F33B3;
   color: #2F33B3;
+}
+#genre .genre-container .genre-mgmt .edit-genre div:nth-child(2) button:focus {
+  border: 2px solid #212529;
+  transition: 0.2s;
+  background-color: transparent;
 }
 #genre .genre-container .genre-mgmt .edit-genre div:nth-child(2) button:hover {
   transition: 0.1s;
@@ -1351,6 +1395,7 @@ input[type=number] {
   font-size: 1.2rem;
   border: 2px solid transparent;
   border-radius: 10px;
+  text-decoration: none;
   transition: 0.1s;
 }
 #members .top-bar button:hover {
@@ -1358,6 +1403,11 @@ input[type=number] {
   background-color: #F5F6FA;
   border: 2px solid #2F33B3;
   color: #2F33B3;
+}
+#members .top-bar button:focus {
+  border: 2px solid #212529;
+  transition: 0.2s;
+  background-color: transparent;
 }
 #members .member-table {
   text-align: left;
@@ -1848,6 +1898,7 @@ input[type=number] {
   font-size: 1.2rem;
   border: 2px solid transparent;
   border-radius: 10px;
+  text-decoration: none;
   transition: 0.1s;
 }
 #members .addMemberModal .form-container .form-body .form-fields button:hover {
@@ -1855,6 +1906,11 @@ input[type=number] {
   background-color: #F5F6FA;
   border: 2px solid #2F33B3;
   color: #2F33B3;
+}
+#members .addMemberModal .form-container .form-body .form-fields button:focus {
+  border: 2px solid #212529;
+  transition: 0.2s;
+  background-color: transparent;
 }
 #members .addMemberModal .form-container .form-body .form-fields .gender {
   display: flex;
@@ -1897,6 +1953,17 @@ input[type=number] {
   outline: none;
   background-color: #F5F6FA;
   border: 2px solid #2F33B3;
+}
+#members .addMemberModal .form-container .form-body .form-fields div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+#members .addMemberModal .form-container .form-body .form-fields div label {
+  font-family: "fontM";
+  font-size: 1.2rem;
+  color: #212529;
 }
 #members .addMemberModal .uploadPreview {
   height: 60vh !important;
@@ -1962,6 +2029,7 @@ input[type=number] {
   font-size: 1.2rem;
   border: 2px solid transparent;
   border-radius: 10px;
+  text-decoration: none;
   transition: 0.1s;
   width: 200px;
   background-color: rgb(211.25, 211.25, 211.25);
@@ -1972,6 +2040,11 @@ input[type=number] {
   background-color: #F5F6FA;
   border: 2px solid #2F33B3;
   color: #2F33B3;
+}
+#issue .issue-container .btn-bar button:focus {
+  border: 2px solid #212529;
+  transition: 0.2s;
+  background-color: transparent;
 }
 #issue .issue-container .btn-bar button:hover {
   transition: 0.1s;

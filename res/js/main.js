@@ -124,14 +124,14 @@ $(document).ready(function(){
 
 
     // BOOKS -> ADD BOOK BUTTON 
-    $("#addBookBtn").click(function(){
-        $(".top-bar, #bookTable, #bookGrid, #bookDetailsContainer").slideUp(200);
-        $(".addBookModal").slideDown(200);
-    })
-    $("#backBtnAddBookForm").click(function(){
-        $(".addBookModal").slideUp(200);
-        $(".top-bar, #bookTable").slideDown(200);
-    })
+    // $("#addBookBtn").click(function(){
+    //     $(".top-bar, #bookTable, #bookGrid, #bookDetailsContainer").slideUp(200);
+    //     $(".addBookModal").slideDown(200);
+    // })
+    // $("#backBtnAddBookForm").click(function(){
+    //     $(".addBookModal").slideUp(200);
+    //     $(".top-bar, #bookTable").slideDown(200);
+    // })
     // BOOKS -> DETAILS
     // $(".bookDetailsBtn").click(function(){
     //     $(".top-bar, #bookTable, #bookGrid, #addBookFormContainer").slideUp(200);

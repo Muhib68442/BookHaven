@@ -14,41 +14,37 @@
                     <div class="add-genre">
                         <h3>Add Genre</h3>
                         <div>
-                            <input type="text" placeholder="Genre Name">
-                            <button>+</button>
+                            <input type="text" placeholder="Genre Name" id="genre_name">
+                            <button id="addGenre">+</button>
                         </div>
                     </div>
 
                     <div class="edit-genre">
                         <div>
                             <h3>Edit Genre</h3>
-                            <button>-</button>
+                            <button id="deleteGenre">-</button>
                         </div>
 
                         <div>
                             <select name="select_genre" id="select_genre">
-                                <option value="fantasy">Fantasy</option>
-                                <option value="horror">Horror</option>
-                                <option value="comedy">Comedy</option>
-                                <option value="romantic">Romantic</option>
-                                <option value="adult">Adult</option>
+                                <!-- DYNAMICALLY APPENDING ALL GENRE -->
                             </select>
 
-                            <input type="text" placeholder="Genre Name">
+                            <input type="text" placeholder="Genre Name" id="genreNewName">
                             
-                            <button>></button>
+                            <button id="editGenre">></button>
                         </div>
                     </div>
                 </div>
 
                 <div class="genre-grid">
-                    <div class="grid-item">
+                    <!-- <a class="grid-item">
                         <img src="res/uploads/genre_cover/adult.jpg" alt="adult">
                         <h3>Adult</h3>
                         <p>69 Books</p>
-                    </div>
+                    </a> -->
 
-                    <div class="grid-item">
+                    <!-- <div class="grid-item">
                         <img src="res/uploads/genre_cover/comedy.jpg" alt="comedy">
                         <h3>Comedy</h3>
                         <p>420 Books</p>
@@ -88,7 +84,7 @@
                         <img src="res/uploads/genre_cover/research.jpg" alt="research">
                         <h3>Research</h3>
                         <p>371 Books</p>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
@@ -96,3 +92,112 @@
     </div>
 </body>
 <?php include_once('footer.php'); ?>
+
+<script>
+    // GET ALL GENRE 
+    $.ajax({
+        url : "ajax/genre.php",
+        method : "POST",
+        dataType : "json",
+        contentType : "application/json",
+        data : JSON.stringify({"op" : "all"}),
+        success : function(data){
+            console.log(data);
+            renderGenre(data);
+        },
+        error : function(err){
+            console.log(err)
+        }
+    })
+
+
+    function renderGenre(data){
+        
+        data.forEach(element => {
+
+            // RENDER IN EDIT GENRE SELECT 
+            $("#select_genre").append(`<option value="${element.genre_id}">${element.genre_name}</option>`)
+            
+            
+            // RENDER IN PAGE
+            let card = "";
+            card+= 
+            `<a href="books.php?genre=${element.genre_id}" class="grid-item">
+                <img src="res/uploads/genre_cover/${element.genre_name.toLowerCase()}.jpg" alt="${element.genre_name}">
+                <h3>${element.genre_name}</h3>
+                <p>${element.book_count} Books</p>
+            </a>`
+                
+            $("#genre .genre-grid").append(card);
+        })
+    }
+
+
+    // ADD GENRE
+    $("#addGenre").click(function(){
+        let genre_name = $("#genre_name").val();
+        let sure = confirm("Add Genre : "+genre_name);
+        if(!sure) return;
+
+        $.ajax({
+            url : "ajax/genre.php",
+            method : "POST",
+            dataType : "json",
+            contentType : "application/json",
+            data : JSON.stringify({"op" : "add", "value" : genre_name}),
+            success : function(data){
+                console.log(data.success);
+                location.reload();
+            },
+            error : function(err){
+                console.log(err)
+            }
+        })
+    });
+
+    // DELETE GENRE 
+    $("#deleteGenre").click(function(){
+        let genre_id = $("#select_genre").val();
+        let sure = confirm("Delete Genre : "+$("#select_genre option:selected").text());
+        if(!sure) return;
+
+        $.ajax({
+            url : "ajax/genre.php",
+            method : "POST",
+            dataType : "json",
+            contentType : "application/json",
+            data : JSON.stringify({"op" : "delete", "value" : genre_id}),
+            success : function(data){
+                console.log(data.success);
+                location.reload();
+            },
+            error : function(err){
+                console.log(err)
+            }
+        })
+    });
+
+    // RENAME GENRE
+    $("#editGenre").click(function(){
+        let old_name = $("#select_genre option:selected").text();
+        let new_name = $("#genreNewName").val();
+        let sure = confirm("Rename Genre : "+old_name+" to "+new_name);
+        if(!sure) return;
+
+        $.ajax({
+            url : "ajax/genre.php",
+            method : "POST",
+            dataType : "json",
+            contentType : "application/json",
+            data : JSON.stringify({"op" : "rename", "old_name" : old_name, "new_name" : new_name}),
+            success : function(data){
+                console.log(data.success);
+                location.reload();
+            },
+            error : function(err){
+                console.log(err)
+            }
+        })
+    });
+
+</script>

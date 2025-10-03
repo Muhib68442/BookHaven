@@ -1,4 +1,20 @@
-<?php include_once('header.php'); ?>
+<?php include_once('header.php'); 
+
+if(isset($_GET['status'])){
+    // if($_GET['status'] == "success"){
+    //     echo '<script>alert("Book added successfully")</script>';
+    // }
+
+    // if($_GET['status'] == "error"){
+    //     echo '<script>alert("Book could not be added")</script>';
+    // }
+}
+
+if(isset($_GET['genre']))
+    $genre_id = $_GET['genre'];
+
+?>
+
         
 <body class="landing-body">
     <?php include_once('sidebar.php'); ?>
@@ -8,8 +24,8 @@
         <section id="books">
             <!-- TOP BAR -->
             <div class="top-bar">
-                <h3>Total Books : <span>1557</span></h3>
-                
+                <h3>Total Books : <span id="totalBooks"></span></h3>
+                <h4 id="genreName"></h4>
                 <div class="search">
                     <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                     <input type="text" placeholder="Search Here">
@@ -38,7 +54,7 @@
                     </span>
                 </label>
     
-                <button id="addBookBtn">Add Book</button>
+                <a href="addbooks.php">Add Books</a>
             </div>
     
             <!-- TABLE -->
@@ -89,47 +105,6 @@
     
     
                 </div>
-            </div>
-            
-            <!-- ADD BOOK MODAL -->
-            <div class="addBookModal">
-                 <div id="addBookFormContainer" class="form-container">
-                    <div class="form-topbar">
-                        <svg id="backBtnAddBookForm" width="64px" height="64px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> <style>.cls-1{fill:none;stroke:#ffffff;stroke-linecap:round;stroke-linejoin:round;stroke-width:20px;}</style> </defs> <g data-name="Layer 2" id="Layer_2"> <g data-name="E421, Back, buttons, multimedia, play, stop" id="E421_Back_buttons_multimedia_play_stop"> <circle class="cls-1" cx="256" cy="256" r="246"></circle> <line class="cls-1" x1="352.26" x2="170.43" y1="256" y2="256"></line> <polyline class="cls-1" points="223.91 202.52 170.44 256 223.91 309.48"></polyline> </g> </g> </g></svg>
-                        <h3>Add Book</h3>
-                    </div>
-                    <div class="form-body">
-                         <div class="uploadPreview">
-                             <h3>Upload Cover</h3>
-                             <label id="bookCoverUploadBtn" for="bookCoverUpload">Select</label>
-                             <input type="file" id="bookCoverUpload">
-     
-                         </div>
-                         <div class="form-fields">
-                             <input type="text" name="book_name" placeholder="Book Name" required>
-                             <input type="text" name="author" placeholder="Author">
-                             <input type="text" name="publisher" placeholder="Publisher">
-                             <input type="number" name="year" placeholder="Year">
-                             <select name="genre_id" required>
-                                 <option value="1">Romance</option>
-                                 <option value="2">Fantasy</option>
-                                 <option value="3">Horror</option>
-                                 <option value="4">Mystery</option>
-                                 <option value="5">Historical</option>
-                                 <option value="0">Other</option>
-                             </select>
-                             <input type="text" name="book_id" placeholder="ISBN/Code">
-                             <input type="number" name="stock" placeholder="Stock" required>
-                             <!-- <input type="number" placeholder="Price"> -->
-                             <select name="status" id="">
-                                 <option value="Active">Active</option>
-                                 <option value="Inactive">Inactive</option>
-                             </select>
-                             <button id="insertBookBtn">Add</button>
-                         </div>
-                    </div>
-     
-                 </div>
             </div>
     
             <!-- BOOK DETAILS -->
@@ -214,63 +189,42 @@
 
     // AJAX CALL FOR BOOK DATA 
     $(document).ready(function(){
-
-        // GENERALLY SHOW ALL BOOK DATA 
-        $.ajax({
-            url : "ajax/get_book.php",
-            type : "POST",
-            contentType: "application/json",
-            dataType : "json",
-            data: JSON.stringify({ "show": "all" }),
-            success : function(data){
-
-                // APPEND DATA FOR TABLE
-                data.forEach(element => {
-                    // create row first
-                    let row = $(`
-                        <tr>
-                            <td>1</td>
-                            <td class="truncateText">${element.book_name}</td>
-                            <td class="truncateText">${element.author}</td>
-                            <td>BHB${element.book_id}</td>
-                            <td>${element.genre_name}</td>
-                            <td>3/${element.stock}</td>
-                            <td><button class="bookDetailsBtn">Details</button></td>
-                        </tr>
-                    `);
-
-                    // now check status
-                    if (element.status == "Inactive") { 
-                        row.find("td").css("color", "red");
-                    }
-
-                    // append row
-                    $("#bookTableBody").append(row);
-                });
-
-
-                // APPEND DATA FOR GRID
-                data.forEach(element =>{
-                    $(".grid-container").append(`
-                        <div class="grid-item">
-                            <img src="res/uploads/book_cover/1.jpg" alt="Book Cover">
-                            <div class="book-info">
-                                <h3 class="truncateText">${element.book_name}</h3>
-                                <p>${element.genre_id}</p>
-                                <p class="truncateText">${element.author}</p>
-                                <p>Release Year : ${element.year}</p>
-                                <p>ISBN/Code : BHB${element.book_id}</p>
-                                <p>Total Copies : ${element.stock}</p>
-                                <p>Issued : ${element.issued} times</p>
-                                <p>Status : ${element.status}</p>
-                                <button class="bookDetailsBtn">Details</button>
-                            </div>
-                        </div>
-                    `);
-                })
-
-            }
-        })
+        
+        // CHECK IF FROM GENRE 
+        const params = new URLSearchParams(window.location.search);
+        if(params.has("genre")){
+            let genreValue = params.get("genre");
+            $.ajax({
+                url : "ajax/get_book.php",
+                type : "POST",
+                contentType: "application/json",
+                dataType : "json",
+                data: JSON.stringify({ "show": "genre", "value": genreValue }),
+                success : function(data){
+                    $("#genreName").text(data.data[0].genre_name);
+                    $("#totalBooks").text(data.num_books);                
+                    renderData(data);
+                },
+                error : function(data){
+                    console.log(data);
+                }
+            })
+            console.log("Show Genre Data");
+        } else {
+            // GENERALLY SHOW ALL BOOK DATA 
+            $.ajax({
+                url : "ajax/get_book.php",
+                type : "POST",
+                contentType: "application/json",
+                dataType : "json",
+                data: JSON.stringify({ "show": "all" }),
+                success : function(data){
+                    renderData(data);
+                    $("#totalBooks").text(data.num_books);                
+                }
+            })
+            console.log("Show All Book Data");
+        }
 
         // SEARCHBAR  
         $(".search input").keyup(function(){
@@ -282,57 +236,7 @@
                 dataType : "json",
                 data: JSON.stringify({ "show": "search", "value": search_keyword }),
                 success : function(data){
-
-                    // APPEND DATA FOR TABLE
-                    $("#bookTableBody").empty();
-                    data.forEach(element => {
-
-                        let tableHTML = `
-                            <tr style="display: none;">
-                                <td>1</td>
-                                <td class="truncateText">${element.book_name}</td>
-                                <td class="truncateText">${element.author}</td>
-                                <td>BHB${element.book_id}</td>
-                                <td>${element.genre}</td>
-                                <td>3/${element.stock}</td>
-                                <td><button class="bookDetailsBtn">Details</button></td>
-                            </tr>
-                        `;
-
-                        let $row = $(tableHTML);
-                        $("#bookTableBody").append($row);
-                        $row.fadeIn(200); 
-
-                    });
-
-                    // APPEND DATA FOR GRID
-                    $(".grid-container").empty();
-                    data.forEach(element =>{
-
-                        let gridHTML = `
-                            <div class="grid-item" style="display: none;">
-                                <img src="res/uploads/book_cover/1.jpg" alt="Book Cover">
-                                <div class="book-info">
-                                    <h3 class="truncateText">${element.book_name}</h3>
-                                    <p>${element.genre_id}</p>
-                                    <p class="truncateText">${element.author}</p>
-                                    <p>Release Year : ${element.year}</p>
-                                    <p>ISBN/Code : BHB${element.book_id}</p>
-                                    <p>Total Copies : ${element.stock}</p>
-                                    <p>Issued : ${element.issued} times</p>
-                                    <p>Status : ${element.status}</p>
-                                    <button class="bookDetailsBtn">Details</button>
-                                </div>
-                            </div>
-                        `;
-                        
-
-
-                        let $row = $(gridHTML);
-                        $(".grid-container").append($row);
-                        $row.fadeIn(200); 
-                    })
-
+                    renderData(data);
                 }
 
             })
@@ -349,57 +253,13 @@
                 dataType : "json",
                 data : JSON.stringify({"show" : "sort", "value" : sort_by}),
                 success : function(data){
-                    
-                    console.log(data);
-
-                    // APPEND DATA FOR TABLE
-                    $("#bookTableBody").empty();
-
-                    data.forEach(element => {
-                        let row = $(`
-                            <tr class="bookRow">
-                                <td>1</td>
-                                <td class="truncateText">${element.book_name}</td>
-                                <td class="truncateText">${element.author}</td>
-                                <td>BHB${element.book_id}</td>
-                                <td>${element.genre}</td>
-                                <td>3/${element.stock}</td>
-                                <td><button class="bookDetailsBtn">Details</button></td>
-                            </tr>
-                        `);
-
-                        if(element.status === "Inactive"){
-                            row.find("td").css("color", "tomato");
-                        }
-
-                        $("#bookTableBody").append(row);
-                    });
-
-                    // APPEND DATA FOR GRID
-                    $(".grid-container").empty();
-                    data.forEach(element =>{
-                        $(".grid-container").append(`
-                            <div class="grid-item">
-                                <img src="res/uploads/book_cover/1.jpg" alt="Book Cover">
-                                <div class="book-info">
-                                    <h3 class="truncateText">${element.book_name}</h3>
-                                    <p>${element.genre_id}</p>
-                                    <p class="truncateText">${element.author}</p>
-                                    <p>Release Year : ${element.year}</p>
-                                    <p>ISBN/Code : BHB${element.book_id}</p>
-                                    <p>Total Copies : ${element.stock}</p>
-                                    <p>Issued : ${element.issued} times</p>
-                                    <p>Status : ${element.status}</p>
-                                    <button class="bookDetailsBtn">Details</button>
-                                </div>
-                            </div>
-                        `);
-                    })
+                    renderData(data)
                 }
             })
             console.log("Sort By : " + sort_by);
         })
 
+        
         // SWITCH BETWEEN VIEW - TABLE / GRID 
         var display = "table";
         $("#bookTable").show();
@@ -465,7 +325,7 @@
                             <p><b>Status:</b> <span class="bookStatusText">${data[0].status}</span></p>
                             <div>
                                 <button id="deleteBookBtn">Delete</button>
-                                <button>Edit</button>
+                                <a href="editBook.php?book_id=${data[0].book_id}"><button>Edit</button></a>
                                 <button id="toogleBookStatus">${statusTextInverse}</button>
                                 <div style="margin-top: 10px;">
                                     <button>Issue</button>
@@ -488,6 +348,9 @@
 
         // TOOGLE BOOK STATUS
         $(document).on("click","#toogleBookStatus", function(){
+            let sure = confirm("Toggle status to "+$(this).text()+" ?");
+            if(!sure) return;
+
             let statusText = $(this).text();
             let book_id = $("#bookID").text();
             // alert(statusText);
@@ -508,13 +371,13 @@
                         $(".bookStatusText").css("color", "tomato");
                         $(".bookStatusText").text("Inactive");
                     }
+                    // renderData();
                 }, 
                 error : function(data){
                     console.log(data);
                 }
             })
         })
-        
         
         
         // DELETE A BOOK 
@@ -529,62 +392,84 @@
                     dataType : "json",
                     data: JSON.stringify({ "set": "delete", "value": book_id }),
                     success : function(data){
-                        if(data.status == "success"){
-                            confirm(data.message);
-                            location.reload();
-                        }
-                    },
-                    error : function(data){
-                        console.log(data);
+                        $("#bookDetailsContainer").slideUp(200);
+                        $(".top-bar").slideDown(200);
+                        $("#bookTable").slideDown(200);
+                        renderData();
                     }
                 })
             }
         })
-    
 
-        // ADD BOOK 
-        $("#insertBookBtn").click(function(e){
-            e.preventDefault();
+        // RENDER DATA 
+        function renderData(data){
 
-            // COLLECT DATA 
-            let form_data = {};
-            $(".form-fields")
-            .find("input, select")
-            .each(function () {
-                let name = $(this).attr("name");
-                let value = $(this).val();
-                if (name) {
-                form_data[name] = value;
-                }
+            // IF NO DATA
+            // if(!data){
+            //     $.ajax({
+            //         url : "ajax/get_book.php",
+            //         type : "POST",
+            //         contentType: "application/json",
+            //         dataType : "json",
+            //         data: JSON.stringify({ "show": "all" }),
+            //         success : function(data){
+            //             renderData(data);
+            //         },
+            //         error : function(data){
+            //             console.log(data);
+            //         }
+            //     })
+            // }
+            
+            // TABLE
+            $("#bookTableBody").empty();
+            let row = "";
+
+            data.data.forEach(element => {
+                row += `
+                    <tr >
+                        <td >1</td>
+                        <td class="truncateText">${element.book_name}</td>
+                        <td class="truncateText">${element.author}</td>
+                        <td style="color : ${element.status != 'Active' ? 'tomato' : ''};">BHB${element.book_id}</td>
+                        <td>${element.genre_name}</td>
+                        <td>n/${element.stock}</td>
+                        <td><button class="bookDetailsBtn">Details</button></td>
+                    </tr>
+                `;
+                // if (element.status == "Inactive") { 
+                //     row.find("td").css("color", "red");
+                // }
+            });
+            $("#bookTableBody").html(row).hide().fadeIn(200);
+            
+
+            // GRID 
+            $(".grid-container").empty();
+            data.data.forEach(element =>{
+                $(".grid-container").append(`
+                    <div class="grid-item">
+                        <img src="res/uploads/book_cover/1.jpg" alt="Book Cover">
+                        <div class="book-info">
+                            <h3 class="truncateText">${element.book_name}</h3>
+                            <p>Genre : ${element.genre_name}</p>
+                            <p class="truncateText">${element.author}</p>
+                            <p>Release Year : ${element.year}</p>
+                            <p>ISBN/Code : <span style="color : ${element.status != 'Active' ? 'tomato' : ''};">BHB${element.book_id}</span></p>
+                            <p>Total Copies : ${element.stock}</p>
+                            <p>Issued : ${element.issued} times</p>
+                            <p>Status : <span style="color : ${element.status != 'Active' ? 'tomato' : ''};">${element.status}</span></p>
+                            <button class="bookDetailsBtn">Details</button>
+                        </div>
+                    </div>
+                `);
             });
 
-            console.log(form_data);
-
-            // AJAX SEND
-            $.ajax({
-                url : "ajax/set_book.php",
-                type : "POST", 
-                contentType: "application/json",
-                dataType : "json",
-                data: JSON.stringify({ "set": "add", "value": form_data }),
-                success : function(data){
-                    if(data.status == "success"){
-                        alert(data.message);
-                        setTimeout(function(){ location.reload(); }, 5000);
-                    }
-                }, 
-                error : function(data){
-                    console.log(data);
-                }
-            })
-
-        })
-
-
+            console.log('Data Rendered');
+        }
 
 
         
-
 
 
     }) // END OF DOCUMENT READY
