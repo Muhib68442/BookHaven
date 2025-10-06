@@ -12,7 +12,7 @@
                 <p>Hello, <span>Md. Muhibbur Rahman</span></p>
                 <p>August 31, 2025</p>
                 <p>3:45 PM</p>
-                <button>Logout</button>
+                <button id="logoutBtn">Logout</button>
             </div>
 
             <!-- DASHBOARD HEADER (CARD SECTION) -->
@@ -117,3 +117,9 @@
 
 </body>
 <?php include_once('footer.php'); ?>
+
+<script>
+    $("#logoutBtn").click(function(){
+        window.location.href = "logout.php";
+    })
+</script>

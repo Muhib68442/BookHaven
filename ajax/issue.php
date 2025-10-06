@@ -1,5 +1,6 @@
 <?php 
 
+
 header('Content-Type: application/json');
 
 include('../core/database.php');
@@ -39,9 +40,9 @@ if($raw_data['get'] == "searchBook"){
     $issueDate = date('Y-m-d');
     $returnDate = date('Y-m-d', strtotime('+6 month'));
     $status = "Issued";
-   
+    $issuedBy = $raw_data['issued_by'];
     $db = new database();
-    $db->insert("issues", array("book_id" => $bookID, "member_id" => $memberID, "issue_date" => $issueDate, "return_date" => $returnDate, "status" => $status));
+    $db->insert("issues", array("book_id" => $bookID, "member_id" => $memberID, "issued_by" => $issuedBy, "issue_date" => $issueDate, "return_date" => $returnDate, "status" => $status));
 
     // decrement stock
     $db->sql("UPDATE books SET stock = stock - 1 WHERE book_id = '$bookID'");
@@ -51,7 +52,8 @@ if($raw_data['get'] == "searchBook"){
     $db = new database();
     $db->sql("SELECT *, issues.status as issue_status FROM issues
         JOIN books ON issues.book_id = books.book_id
-        JOIN members ON issues.member_id = members.member_id");
+        JOIN members ON issues.member_id = members.member_id
+        ORDER BY issues.issue_id DESC");
     $result = $db->get_result();
     if(!$result){
         echo json_encode(array("error" => "Query failed")); // ERROR BLOCK

@@ -1,6 +1,21 @@
 <?php 
 include_once('header.php');
 include_once('core/database.php');
+
+if(!isset($_GET['id'])) {
+    header('Location: members.php');
+    exit();
+}
+
+// AUTH
+// $allowed_roles = array('admin', 'staff', 'member');
+// if (!in_array($_SESSION['role'], $allowed_roles)) {
+//     header("Location: ../login.php");
+//     exit;
+// }
+
+
+
 ?>
 
 <body class="landing-body">

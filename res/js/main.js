@@ -37,10 +37,10 @@ $(document).ready(function(){
 
 
 
-    $(document).on("click", ".bookDetailsBtn", function(){
-        $(".top-bar, #bookTable, #bookGrid, .addBookModal").slideUp(200);
-        $("#bookDetailsContainer").slideDown(200);
-    })
+    // $(document).on("click", ".bookDetailsBtn", function(){
+    //     $(".top-bar, #bookTable, #bookGrid, .addBookModal").slideUp(200);
+    //     $("#bookDetailsContainer").slideDown(200);
+    // })
 
     $("#backBtnBookDetails").click(function(){
         let view = $(".switch input").is(":checked") ? "#bookTable" : "#bookGrid";

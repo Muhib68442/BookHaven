@@ -328,6 +328,7 @@
     $("#issueBook").click(function(){
         let sure = confirm("Issue Book : "+$("#summaryBookName").text()+" to "+$("#summaryMemberName").text());
         if(!sure) return;
+        let issuedBy = "<?php echo $_SESSION['user_name']; ?>";
         $.ajax({
             url : "ajax/issue.php",
             type : "POST",
@@ -336,7 +337,9 @@
             data : JSON.stringify({
                 "get" : "new_issue",
                 "book_id" : selectedBook, 
-                "member_id" : selectedMember}),
+                "member_id" : selectedMember,
+                "issued_by" : issuedBy
+            }),
             success : function(data){
                 if(data.status){
                     alert(data.message);

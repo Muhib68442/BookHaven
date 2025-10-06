@@ -20,8 +20,18 @@ if($raw_data['get'] == "searchReturn"){
 }else if($raw_data['get'] == "returnBook"){
     $issueID = $raw_data['issueID'];
     $bookID = $raw_data['bookID'];
+    $returnedBy = $raw_data['returnedBy'];
     $db = new database();
-    $db->update("issues", array("status" => "Returned", "return_date" => date('Y-m-d')), "issue_id = '$issueID'");
+    $db->update(
+        "issues",
+        array(
+            "status" => "Returned",
+            "return_date" => date('Y-m-d'),
+            "returned_by" => $returnedBy
+        ),
+        "issue_id = '$issueID'"
+    );
+
 
     // increment stock
     $db->sql("UPDATE books SET stock = stock + 1 WHERE book_id = '$bookID'");

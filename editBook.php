@@ -2,6 +2,7 @@
 include_once('core/database.php');
 include_once('header.php');
 
+// AUTH
 
 
 if (isset($_GET['book_id'])) {

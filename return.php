@@ -100,12 +100,13 @@
     $("#returnBookBtn").click(function(){
         let sure = confirm("Return Book : "+$("#returnBookName").text());
         if(!sure) return;
+        let returnedBy = "<?php echo $_SESSION['user_name']; ?>";
         $.ajax({
             url : "ajax/return.php",
             method : "POST",
             dataType : "json",
             contentType : 'application/json',
-            data : JSON.stringify({"get" : "returnBook", "issueID" : issueID, "bookID" : bookID}),
+            data : JSON.stringify({"get" : "returnBook", "issueID" : issueID, "returnedBy" : returnedBy, "bookID" : bookID}),
             success : function(data){
                 console.log(data);
                 alert(data.message);

@@ -10,6 +10,8 @@
                 <h3>Genre (17)</h3>
             </div>
             <div class="genre-container">
+
+            <?php if($role == 'admin') : ?>
                 <div class="genre-mgmt">
                     <div class="add-genre">
                         <h3>Add Genre</h3>
@@ -37,6 +39,7 @@
                         </div>
                     </div>
                 </div>
+            <?php endif; ?>
 
                 <div class="genre-grid">
                     <!-- <a class="grid-item">

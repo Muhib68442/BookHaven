@@ -1,7 +1,12 @@
 <?php
 include_once('header.php');
 include_once('core/database.php');
+
+
+
+
 ?> 
+
 <body>
     <!-- MEMBERS - ADD -->
     <div class="addMemberModal">

@@ -1,3 +1,12 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$role    = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : null;
+$auth_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

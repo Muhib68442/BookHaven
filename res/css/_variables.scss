@@ -180,8 +180,6 @@ $fontM : 'fontM';
     }
   }
 
-  
-
   @content;
 }
 
@@ -285,6 +283,7 @@ $fontM : 'fontM';
             }
         }
     }
+    @content;
 }
 
 @mixin top-bar{
@@ -340,6 +339,7 @@ $fontM : 'fontM';
         background-color: $bg;
         border: 2px solid $theme;
     }
+    @content;
 
 }
 

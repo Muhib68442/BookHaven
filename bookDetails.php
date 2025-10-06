@@ -2,6 +2,9 @@
 
 include_once('header.php');
 include_once('core/database.php');
+
+
+
 ?>
 
 <body class="landing-body">
@@ -43,7 +46,9 @@ include_once('core/database.php');
                 </div>
             </div>
 
-            <div class="book-history">
+
+            <?php if($role == 'admin' || $role == 'staff') : ?>
+            <div class="book-history"> 
                 <h3>Issue History</h3>
                
                 <div class="bar">
@@ -78,6 +83,7 @@ include_once('core/database.php');
                     </tbody>
                 </table>
             </div>
+            <?php endif; ?>
         </div>
     </div>
 </body>
@@ -116,13 +122,16 @@ include_once('core/database.php');
                     <p><b>Issued:</b> ${data[0].issued}</p>
                     <p><b>Status:</b> <span class="bookStatusText">${data[0].status}</span></p>
                     <div>
+                        <?php if($role == 'admin') : ?>
                         <button id="deleteBookBtn">Delete</button>
                         <a href="editBook.php?book_id=${data[0].book_id}"><button>Edit</button></a>
                         <button id="toogleBookStatus">${statusTextInverse}</button>
+                        <?php endif; if($role == 'staff') : ?>
                         <div style="margin-top: 10px;">
                             <button id="selectBook">Issue</button>
                             <button>Return</button>
                         </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             `);
@@ -249,7 +258,7 @@ include_once('core/database.php');
     });
 
 
-    // BLOCK: LIVE SEARCH FILTER (NO TRANSITION)
+    // BLOCK: LIVE SEARCH FILTER 
     $("#issueSearch").on("input", function(){
         const keyword = $(this).val().toLowerCase();
         $("#issueTableBody tr").each(function(){

@@ -3,6 +3,9 @@
 include_once('header.php');
 include('core/database.php');
 
+if($role === 'kiosk' || $role === 'staff') {
+    header('Location: books.php');
+}
 
 ?>
 
