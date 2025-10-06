@@ -127,14 +127,33 @@ class database{
 
 
     // SQL
+    // public function sql($sql){
+    //     $query = $this->mysqli->query($sql);
+    //     if($query){
+    //         $this->result = $query->fetch_all(MYSQLI_ASSOC);
+    //     }else{
+    //         array_push($this->result, $this->mysqli->error);
+    //     }
+    // }
     public function sql($sql){
         $query = $this->mysqli->query($sql);
-        if($query){
-            $this->result = $query->fetch_all(MYSQLI_ASSOC);
-        }else{
+
+        if($query === false){
             array_push($this->result, $this->mysqli->error);
+            return false;
         }
+
+        // SELECT query হলে fetch_all চালাও
+        if($query instanceof mysqli_result){
+            $this->result = $query->fetch_all(MYSQLI_ASSOC);
+            $query->free();
+        } else {
+            $this->result = $this->mysqli->affected_rows;
+        }
+
+        return true;
     }
+
 
     // PAGINATION 
     public function pagination($table, $rows='*', $join=null, $where=null, $order=null, $limit=null ){

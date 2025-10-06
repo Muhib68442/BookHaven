@@ -7,14 +7,26 @@
         <!-- CONTENT - MEMBERS -->
         <section id="members">
             <div class="top-bar">
-                <h3>Total Members : <span>147</span></h3>
+                <h3>Total Members : <span id="totalMembers"></span></h3>
 
                 <div class="search">
                     <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                     <input type="text" placeholder="Search Here">
                 </div>
 
-                <button id="addMemberBtn">Add Member</button>
+                <div class="sort-table">
+                    <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M13 12H21M13 8H21M13 16H21M6 7V17M6 17L3 14M6 17L9 14" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                    <select name="sort" id="sortMemberData">
+                        <option value="default">Default</option>
+                        <option value="full_name">Name</option>
+                        <option value="member_id">ID</option>
+                        <option value="join_date">Joined</option>
+                        <option value="mostIssued">Most Issued</option>
+                        <option value="status">Status</option>
+                    </select>
+                </div>
+
+                <a href="addMember.php">Add Member</a>
             </div>
 
             <!-- MEMBERS - TABLE -->
@@ -32,8 +44,8 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="memberTableBody">
+                        <!-- <tr>
                             <td>1</td>
                             <td>John Doe</td>
                             <td>BHM125486</td>
@@ -42,140 +54,107 @@
                             <td>01654782365</td>
                             <td>Active</td>
                             <td><button id="memberDetailsBtn">Details</button></td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
-
-            <!-- MEMBERS - DETAILS -->
-            <div id="memberDetailsContainer">
-                <div class="top-barM">
-                    <svg id="backBtnMemberDetails" width="64px" height="64px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> <style>.cls-1{fill:none;stroke:#ffffff;stroke-linecap:round;stroke-linejoin:round;stroke-width:20px;}</style> </defs> <g data-name="Layer 2" id="Layer_2"> <g data-name="E421, Back, buttons, multimedia, play, stop" id="E421_Back_buttons_multimedia_play_stop"> <circle class="cls-1" cx="256" cy="256" r="246"></circle> <line class="cls-1" x1="352.26" x2="170.43" y1="256" y2="256"></line> <polyline class="cls-1" points="223.91 202.52 170.44 256 223.91 309.48"></polyline> </g> </g> </g></svg>
-                    <h3>Member Information</h3>
-                </div>
-                <div class="member-info-container">
-                    <div>
-                        <img src="res/uploads/members/1.jpg" alt="member">
-                        
-                        <div class="member-info">
-                            <p>Name: <span>John Doe</span></p>
-                            <p>Phone: <span>01654782365</span></p>
-                            <p>E-mail: <span>johndoe5211@gmail.com</span></p>
-                            <p>Address: <span>Bhairab Bazar, Bhairab Kishoreganj</span></p>
-                        </div>
-                    </div>
-
-                    <div class="member-mgmt">
-                        <div>
-                            <button>Edit</button>
-                            <button>Inactive</button>
-                            <button>Delete</button>
-                        </div>
-                        <p>Member ID : <span>BHM0001</span></p>
-                        <p>Join Date : <span>29/8/2025</span></p>
-                        <p>Renew Date : <span>29/8/2026</span></p>
-                        <p>Pending Return : <span>2</span></p>
-                    </div>
-                </div>
-                <div class="member-issue-table">
-                    <div class="bar">
-                        <div class="search">
-                            <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-                            <input type="text" placeholder="Search Here">
-                        </div>
-
-                        <div>
-                            <button>Issue Books</button>
-                            <button>Return Books</button>
-                        </div>
-                    </div>
-
-                    <div class="member-details-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Book Name</th>
-                                    <th>ISBN/Code</th>
-                                    <th>Genre</th>
-                                    <th>Issue Date</th>
-                                    <th>Return Date</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Fifty Shades of Gay</td>
-                                    <td>BHM25031</td>
-                                    <td>Adult</td>
-                                    <td>25 Aug 2025</td>
-                                    <td>29 Aug 2025</td>
-                                    <td><button>Details</button></td>
-                                </tr>
-
-                                <tr>
-                                    <td>1</td>
-                                    <td>Stepsister Chapter-1</td>
-                                    <td>BHM25023</td>
-                                    <td>Adult</td>
-                                    <td>18 Aug 2025</td>
-                                    <td>25 Aug 2025</td>
-                                    <td><button>Details</button></td>
-                                </tr>
-
-                                <tr>
-                                    <td>1</td>
-                                    <td>69 Days Left</td>
-                                    <td>BHM25084</td>
-                                    <td>Adult</td>
-                                    <td>10 Aug 2025</td>
-                                    <td>18 Aug 2025</td>
-                                    <td><button>Details</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- MEMBERS - ADD -->
-            <div class="addMemberModal">
-                 <div id="addBookFormContainer" class="form-container">
-                    <div class="form-topbar">
-                        <svg id="backBtnAddMemberForm" width="64px" height="64px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> <style>.cls-1{fill:none;stroke:#ffffff;stroke-linecap:round;stroke-linejoin:round;stroke-width:20px;}</style> </defs> <g data-name="Layer 2" id="Layer_2"> <g data-name="E421, Back, buttons, multimedia, play, stop" id="E421_Back_buttons_multimedia_play_stop"> <circle class="cls-1" cx="256" cy="256" r="246"></circle> <line class="cls-1" x1="352.26" x2="170.43" y1="256" y2="256"></line> <polyline class="cls-1" points="223.91 202.52 170.44 256 223.91 309.48"></polyline> </g> </g> </g></svg>
-                        <h3>Add Member</h3>
-                    </div>
-                    <div class="form-body">
-                         <div class="uploadPreview">
-                             <h3>Upload Cover</h3>
-                             <label id="bookCoverUploadBtn" for="bookCoverUpload">Select</label>
-                             <input type="file" id="bookCoverUpload">
-     
-                         </div>
-                         <div class="form-fields">
-                             <input type="text" placeholder="Member Name" required>
-                             <input type="email" placeholder="Email">
-                             <input type="number" placeholder="Phone" required>
-                             <input type="text" placeholder="Address">
-
-                             <select name="status" id="status">
-                                 <option value="active">Active</option>
-                                 <option value="inactive">Inactive</option>
-                             </select>
-                             <p>Member ID : BHM00005</p>
-                             <p>Join Date : 29/8/2025</p>
-                             <p>Renew Date : 29/8/2026</p>
-                             <button>Add</button>
-                         </div>
-                    </div>
-     
-                 </div>
-             </div>
-
 
         </section> <!-- MEMBERS ENDS -->
     </div>
 </body>
 
 <?php include_once('footer.php'); ?>
+
+<script>
+
+    // RENDER TABLE 
+    function renderTable(data){
+        if(!data){
+            $.ajax({
+                url : 'ajax/get_members.php',
+                type : 'POST', 
+                dataType : 'json', 
+                contentType : 'application/json',
+                data : JSON.stringify({"show" : "all"}),
+                success : function(data){
+                    renderTable(data);
+                }, 
+                error : function(err){
+                    console.log(err);
+                }
+            })
+        }else {
+            console.log(data);
+
+            let tableBody = $("#memberTableBody");
+            tableBody.empty();
+            let html = "";
+            data.data.forEach((element, index) => {
+                html += `
+                    <tr>
+                        <td>${index+1}</td>
+                        <td>${element.full_name}</td>
+                        <td style="${element.status == 'Inactive' ? 'color : tomato' : ''}">BHM${element.member_id}</td>
+                        <td>${new Date(element.join_date).toLocaleDateString('en-GB')}</td>
+                        <td>${element.issues}</td>
+                        <td>${element.phone}</td>
+                        <td style="${element.status == 'Inactive' ? 'color : tomato' : ''}">${element.status}</td>
+                        <td><button><a href="memberDetails.php?id=${element.member_id}">Details</a></button></td>
+                    </tr>
+                `
+            })
+            tableBody.html(html).hide().fadeIn(200);
+            $("#totalMembers").text(data.num_members);
+            
+
+        }
+    }
+    renderTable();
+
+
+    // SEARCH
+    $(".search input").on("input", function(){
+        $.ajax({
+            url : 'ajax/get_members.php',
+            type : 'POST', 
+            dataType : 'json', 
+            contentType : 'application/json',
+            data : JSON.stringify({"show" : "search", "value" : $(this).val()}),
+            success : function(data){
+                renderTable(data);
+            }, 
+            error : function(err){
+                console.log(err);
+            }
+        })
+    })
+
+
+    // SORT
+    $("#sortMemberData").on("change", function(){
+        $.ajax({
+            url : 'ajax/get_members.php',
+            type : 'POST', 
+            dataType : 'json', 
+            contentType : 'application/json',
+            data : JSON.stringify({"show" : "sort", "value" : $(this).val()}),
+            success : function(data){
+                renderTable(data);
+            }, 
+            error : function(err){
+                console.log(err);
+            }
+        })
+        if($(this).val() == "default"){
+            renderTable();
+        }
+    })
+
+    // ADD MEMBER 
+    $("#addMember").click(function(){
+        location.href = "addMember.php";
+    })
+
+    
+    
+</script>

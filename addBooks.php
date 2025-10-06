@@ -17,12 +17,15 @@ include('core/database.php');
             </div>
             <div class="form-body">
                 <div class="uploadPreview">
-                    <h3>Upload Cover</h3>
-                    <label id="bookCoverUploadBtn" for="bookCoverUpload">Select</label>
-                    <input type="file" id="bookCoverUpload">
-
+                    <div class="uploadPreview">
+                        <h3>Upload Cover</h3>
+                        <label id="bookCoverUploadBtn" for="bookCoverUpload">Select</label>
+                        <input type="file" id="bookCoverUpload" style="display:none;">
+                        <button id="uploadCoverBtn">Upload</button>
+                    </div>
                 </div>
                 <div class="form-fields">
+                    <input type="hidden" name="book_cover" id="bookCoverHidden">
                     <input type="text" name="book_name" placeholder="Book Name" required>
                     <input type="text" name="author" placeholder="Author">
                     <input type="text" name="publisher" placeholder="Publisher">
@@ -88,6 +91,49 @@ $("#insertBookBtn").click(function(e){
             console.log(data);
         }
     })
+
 })
+
+// PREVIEW
+$("#bookCoverUpload").on("change", function(){
+    const file = this.files[0];
+    if(file){
+        const reader = new FileReader();
+        reader.onload = function(e){
+            $(".uploadPreview").css({
+                "background-image": `url(${e.target.result})`,
+                "background-size": "cover",
+                "background-position": "center"
+            });
+        }
+        reader.readAsDataURL(file);
+    }
+});
+
+
+$("#uploadCoverBtn").click(function(){
+    const file = $("#bookCoverUpload")[0].files[0];
+    const ext = file.name.split('.').pop();
+    const randomName = Date.now() + "_" + Math.floor(Math.random() * 1000) + "." + ext;
+
+    const formData = new FormData();
+    formData.append("book_cover", file);
+    formData.append("filename", randomName);
+    formData.append("image", "book");
+
+    $.ajax({
+        url: "ajax/upload.php",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        dataType: "json",
+        success: function(res){
+            if(res.status === "success"){
+                $("#bookCoverHidden").val(randomName); 
+            }
+        }
+    });
+});
 </script>
 

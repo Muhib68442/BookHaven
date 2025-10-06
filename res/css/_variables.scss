@@ -135,15 +135,21 @@ $fontM : 'fontM';
     // BODY
     tbody {
         tr {
+            padding : 12px 20px;
             td {
+                border-bottom : 1px solid darken($secondary, 10%) !important;
                 background-color: $secondary;
                 padding: 12px 8px;
                 font-family: $fontM;
                 font-size: 1rem;
                 color: $text-black;
 
-                button {
+                button{
                     @include button-secondary;
+                    a{
+                        text-decoration: none;
+                        color : $text-black;
+                    }
                 }
             }
 

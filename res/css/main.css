@@ -482,7 +482,11 @@ input[type=number] {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+#books .table table tbody tr {
+  padding: 12px 20px;
+}
 #books .table table tbody tr td {
+  border-bottom: 1px solid rgb(198.5, 198.5, 198.5) !important;
   background-color: #E0E0E0;
   padding: 12px 8px;
   font-family: "fontM";
@@ -507,6 +511,10 @@ input[type=number] {
   transition: 0.1s;
   background-color: #2F33B3;
   color: #eeeeee;
+}
+#books .table table tbody tr td button a {
+  text-decoration: none;
+  color: #212529;
 }
 #books .table table tbody tr:first-child td:first-child {
   border-top-left-radius: 12px;
@@ -596,10 +604,8 @@ input[type=number] {
     flex: 0 0 100%;
   }
 }
-#books #bookDetailsContainer {
-  display: none;
-}
-#books #bookDetailsContainer .top-barD {
+
+#bookDetailsContainer .top-barD {
   background-color: #2F33B3;
   padding: 12px 20px;
   display: flex;
@@ -607,47 +613,47 @@ input[type=number] {
   gap: 12px;
   border-radius: 10px;
 }
-#books #bookDetailsContainer .top-barD svg {
+#bookDetailsContainer .top-barD svg {
   width: 32px;
   height: 32px;
   fill: #212529;
 }
-#books #bookDetailsContainer .top-barD h3 {
+#bookDetailsContainer .top-barD h3 {
   font-family: "fontSB";
   font-size: 1.4rem;
   color: #eeeeee;
 }
-#books #bookDetailsContainer .book-details {
+#bookDetailsContainer .book-details {
   display: flex;
   align-items: flex-start;
   gap: 40px;
   padding: 20px 0px;
 }
-#books #bookDetailsContainer .book-details img {
+#bookDetailsContainer .book-details img {
   border-radius: 10px;
   width: 30%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
-#books #bookDetailsContainer .book-details .book-info {
+#bookDetailsContainer .book-details .book-info {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 12px 0;
 }
-#books #bookDetailsContainer .book-details .book-info h3 {
+#bookDetailsContainer .book-details .book-info h3 {
   font-family: "fontSB";
   font-size: 1.4rem;
   color: #212529;
 }
-#books #bookDetailsContainer .book-details .book-info p {
+#bookDetailsContainer .book-details .book-info p {
   font-family: "fontM";
   font-size: 1.2rem;
   color: #212529;
 }
-#books #bookDetailsContainer .book-details .book-info button {
+#bookDetailsContainer .book-details .book-info button {
   background-color: transparent;
   border: 2px solid #212529;
   color: #212529;
@@ -661,49 +667,131 @@ input[type=number] {
   transition: 0.1s;
   width: 120px;
 }
-#books #bookDetailsContainer .book-details .book-info button:hover {
+#bookDetailsContainer .book-details .book-info button:hover {
   transition: 0.1s;
   background-color: #2F33B3;
   color: #eeeeee;
 }
-#books #bookDetailsContainer .book-history {
+#bookDetailsContainer .book-history {
   margin-top: 20px;
   text-align: left;
 }
-#books #bookDetailsContainer .book-history table {
+#bookDetailsContainer .book-history .bar {
+  background-color: #2F33B3;
+  padding: 12px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 auto;
+  background-color: transparent;
+  border: 2px solid #212529;
+}
+#bookDetailsContainer .book-history .bar svg {
+  width: 32px;
+  height: 32px;
+  fill: #eeeeee;
+}
+#bookDetailsContainer .book-history .bar h3 {
+  font-family: "fontSB";
+  font-size: 1.4rem;
+  color: #eeeeee;
+}
+#bookDetailsContainer .book-history .bar .search {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+#bookDetailsContainer .book-history .bar .search svg {
+  width: 38px;
+}
+#bookDetailsContainer .book-history .bar .search svg path {
+  stroke: #212529;
+}
+#bookDetailsContainer .book-history .bar .search input {
+  border: 2px solid #212529;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-family: "fontM";
+  font-size: 1rem;
+  color: #212529;
+  transition: 0.1s;
+  background-color: transparent;
+}
+#bookDetailsContainer .book-history .bar .search input::-moz-placeholder {
+  color: #6C757D;
+}
+#bookDetailsContainer .book-history .bar .search input::placeholder {
+  color: #6C757D;
+}
+#bookDetailsContainer .book-history .bar .search input:focus {
+  outline: none;
+  border: 2px solid #2F33B3;
+}
+#bookDetailsContainer .book-history .bar .search svg {
+  fill: transparent;
+}
+#bookDetailsContainer .book-history .bar div button {
+  background-color: transparent;
+  border: 2px solid #212529;
+  color: #212529;
+  padding: 6px 12px;
+  font-family: "fontM";
+  font-size: 1rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  transition: 0.1s;
+  width: 120px;
+  width: -moz-max-content;
+  width: max-content;
+  margin-left: 10px;
+}
+#bookDetailsContainer .book-history .bar div button:hover {
+  transition: 0.1s;
+  background-color: #2F33B3;
+  color: #eeeeee;
+}
+#bookDetailsContainer .book-history table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0 0;
   margin: 10px 0;
 }
-#books #bookDetailsContainer .book-history table tbody::before {
+#bookDetailsContainer .book-history table tbody::before {
   content: "";
   display: block;
   height: 10px;
 }
-#books #bookDetailsContainer .book-history table thead th {
+#bookDetailsContainer .book-history table thead th {
   background-color: #2F33B3;
   padding: 18px 8px;
   font-family: "fontSB";
   font-size: 1.2rem;
   color: #eeeeee;
 }
-#books #bookDetailsContainer .book-history table thead th:first-child {
+#bookDetailsContainer .book-history table thead th:first-child {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
-#books #bookDetailsContainer .book-history table thead th:last-child {
+#bookDetailsContainer .book-history table thead th:last-child {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
-#books #bookDetailsContainer .book-history table tbody tr td {
+#bookDetailsContainer .book-history table tbody tr {
+  padding: 12px 20px;
+}
+#bookDetailsContainer .book-history table tbody tr td {
+  border-bottom: 1px solid rgb(198.5, 198.5, 198.5) !important;
   background-color: #E0E0E0;
   padding: 12px 8px;
   font-family: "fontM";
   font-size: 1rem;
   color: #212529;
 }
-#books #bookDetailsContainer .book-history table tbody tr td button {
+#bookDetailsContainer .book-history table tbody tr td button {
   background-color: transparent;
   border: 2px solid #212529;
   color: #212529;
@@ -717,30 +805,57 @@ input[type=number] {
   transition: 0.1s;
   width: 120px;
 }
-#books #bookDetailsContainer .book-history table tbody tr td button:hover {
+#bookDetailsContainer .book-history table tbody tr td button:hover {
   transition: 0.1s;
   background-color: #2F33B3;
   color: #eeeeee;
 }
-#books #bookDetailsContainer .book-history table tbody tr:first-child td:first-child {
+#bookDetailsContainer .book-history table tbody tr td button a {
+  text-decoration: none;
+  color: #212529;
+}
+#bookDetailsContainer .book-history table tbody tr:first-child td:first-child {
   border-top-left-radius: 12px;
 }
-#books #bookDetailsContainer .book-history table tbody tr:first-child td:last-child {
+#bookDetailsContainer .book-history table tbody tr:first-child td:last-child {
   border-top-right-radius: 12px;
 }
-#books #bookDetailsContainer .book-history table tbody tr:last-child td:first-child {
+#bookDetailsContainer .book-history table tbody tr:last-child td:first-child {
   border-bottom-left-radius: 12px;
 }
-#books #bookDetailsContainer .book-history table tbody tr:last-child td:last-child {
+#bookDetailsContainer .book-history table tbody tr:last-child td:last-child {
   border-bottom-right-radius: 12px;
 }
-#books #bookDetailsContainer .book-history table tbody tr:nth-child(2) {
+#bookDetailsContainer .book-history table tbody tr:nth-child(2) {
   max-width: 200px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-#books #bookDetailsContainer .book-history h3 {
+#bookDetailsContainer .book-history a {
+  text-decoration: none;
+  background-color: transparent;
+  border: 2px solid #212529;
+  color: #212529;
+  padding: 6px 12px;
+  font-family: "fontM";
+  font-size: 1rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  transition: 0.1s;
+  width: 120px;
+}
+#bookDetailsContainer .book-history a:hover {
+  transition: 0.1s;
+  background-color: #2F33B3;
+  color: #eeeeee;
+}
+#bookDetailsContainer .book-history tbody tr td {
+  padding: 20px;
+}
+#bookDetailsContainer .book-history h3 {
   font-family: "fontSB";
   font-size: 1.4rem;
   color: #212529;
@@ -972,6 +1087,30 @@ input[type=number] {
   font-family: "fontM";
   font-size: 1.2rem;
   color: #212529;
+}
+
+#uploadCoverBtn {
+  background-color: transparent;
+  border: 2px solid #212529;
+  color: #212529;
+  padding: 6px 12px;
+  font-family: "fontM";
+  font-size: 1rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  transition: 0.1s;
+  width: 120px;
+  background-color: #eeeeee;
+  color: #212529;
+  padding: 12px 20px;
+  border-radius: 10px;
+}
+#uploadCoverBtn:hover {
+  transition: 0.1s;
+  background-color: #2F33B3;
+  color: #eeeeee;
 }
 
 #genre .top-bar {
@@ -1382,7 +1521,7 @@ input[type=number] {
 #members .top-bar div svg {
   fill: transparent;
 }
-#members .top-bar button {
+#members .top-bar a {
   background-color: #2F33B3;
   border: none;
   color: #eeeeee;
@@ -1398,16 +1537,59 @@ input[type=number] {
   text-decoration: none;
   transition: 0.1s;
 }
-#members .top-bar button:hover {
+#members .top-bar a:hover {
   transition: 0.1s;
   background-color: #F5F6FA;
   border: 2px solid #2F33B3;
   color: #2F33B3;
 }
-#members .top-bar button:focus {
+#members .top-bar a:focus {
   border: 2px solid #212529;
   transition: 0.2s;
   background-color: transparent;
+}
+#members .top-bar .sort-table {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#members .top-bar .sort-table svg {
+  width: 38px;
+  height: 38px;
+}
+#members .top-bar .sort-table select {
+  padding: 8px 12px;
+  background-color: rgb(211.25, 211.25, 211.25);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-family: fontM;
+  color: #212529;
+  border: 2px solid transparent;
+}
+#members .top-bar .sort-table select::-moz-placeholder {
+  color: #6C757D;
+  font-family: "fontM";
+  font-size: 1.2rem;
+  -moz-transition: 0.2s;
+  transition: 0.2s;
+}
+#members .top-bar .sort-table select::placeholder {
+  color: #6C757D;
+  font-family: "fontM";
+  font-size: 1.2rem;
+  transition: 0.2s;
+}
+#members .top-bar .sort-table select:hover {
+  transition: 0.1s;
+  border: 2px solid rgb(41.6969026549, 45.2455752212, 158.8030973451);
+}
+#members .top-bar .sort-table select:focus {
+  transition: 0.2s;
+  outline: none;
+  background-color: #F5F6FA;
+  border: 2px solid #2F33B3;
 }
 #members .member-table {
   text-align: left;
@@ -1438,7 +1620,11 @@ input[type=number] {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+#members .member-table table tbody tr {
+  padding: 12px 20px;
+}
 #members .member-table table tbody tr td {
+  border-bottom: 1px solid rgb(198.5, 198.5, 198.5) !important;
   background-color: #E0E0E0;
   padding: 12px 8px;
   font-family: "fontM";
@@ -1464,6 +1650,10 @@ input[type=number] {
   background-color: #2F33B3;
   color: #eeeeee;
 }
+#members .member-table table tbody tr td button a {
+  text-decoration: none;
+  color: #212529;
+}
 #members .member-table table tbody tr:first-child td:first-child {
   border-top-left-radius: 12px;
 }
@@ -1482,10 +1672,13 @@ input[type=number] {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-#members #memberDetailsContainer {
-  display: none;
+#members .member-table table thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
-#members #memberDetailsContainer .top-barM {
+
+#memberDetailsContainer .top-barM {
   background-color: #E0E0E0;
   background-color: #2F33B3;
   padding: 12px 20px;
@@ -1498,69 +1691,69 @@ input[type=number] {
   justify-content: flex-start;
   gap: 16px;
 }
-#members #memberDetailsContainer .top-barM svg {
+#memberDetailsContainer .top-barM svg {
   width: 32px;
   height: 32px;
   fill: #eeeeee;
 }
-#members #memberDetailsContainer .top-barM h3 {
+#memberDetailsContainer .top-barM h3 {
   font-family: "fontSB";
   font-size: 1.4rem;
   color: #eeeeee;
 }
-#members #memberDetailsContainer .top-barM h3 {
+#memberDetailsContainer .top-barM h3 {
   font-family: "fontSB";
   font-size: 1.4rem;
   color: #eeeeee;
 }
-#members #memberDetailsContainer .member-info-container {
+#memberDetailsContainer .member-info-container {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   padding: 20px;
   padding-top: 30px;
 }
-#members #memberDetailsContainer .member-info-container div {
+#memberDetailsContainer .member-info-container div {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 20px;
 }
-#members #memberDetailsContainer .member-info-container div img {
+#memberDetailsContainer .member-info-container div img {
   width: 20%;
   border-radius: 10px;
   height: auto;
   -o-object-fit: cover;
      object-fit: cover;
 }
-#members #memberDetailsContainer .member-info-container div .member-info {
+#memberDetailsContainer .member-info-container div .member-info {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-#members #memberDetailsContainer .member-info-container div .member-info h3 {
+#memberDetailsContainer .member-info-container div .member-info h3 {
   font-family: "fontSB";
   font-size: 1.7rem;
   color: #212529;
 }
-#members #memberDetailsContainer .member-info-container div .member-info p {
+#memberDetailsContainer .member-info-container div .member-info p {
   font-family: "fontM";
   font-size: 1.4rem;
   color: #212529;
 }
-#members #memberDetailsContainer .member-info-container .member-mgmt {
+#memberDetailsContainer .member-info-container .member-mgmt {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
 }
-#members #memberDetailsContainer .member-info-container .member-mgmt div {
+#memberDetailsContainer .member-info-container .member-mgmt div {
   display: flex;
   align-items: center;
   gap: 5px;
 }
-#members #memberDetailsContainer .member-info-container .member-mgmt div button {
+#memberDetailsContainer .member-info-container .member-mgmt div button {
   background-color: transparent;
   border: 2px solid #212529;
   color: #212529;
@@ -1574,17 +1767,17 @@ input[type=number] {
   transition: 0.1s;
   width: 120px;
 }
-#members #memberDetailsContainer .member-info-container .member-mgmt div button:hover {
+#memberDetailsContainer .member-info-container .member-mgmt div button:hover {
   transition: 0.1s;
   background-color: #2F33B3;
   color: #eeeeee;
 }
-#members #memberDetailsContainer .member-info-container .member-mgmt p {
+#memberDetailsContainer .member-info-container .member-mgmt p {
   font-family: "fontM";
   font-size: 1.4rem;
   color: #212529;
 }
-#members #memberDetailsContainer .member-issue-table .bar {
+#memberDetailsContainer .member-issue-table .bar {
   background-color: #2F33B3;
   padding: 12px 20px;
   border-radius: 10px;
@@ -1596,28 +1789,28 @@ input[type=number] {
   background-color: transparent;
   border: 2px solid #212529;
 }
-#members #memberDetailsContainer .member-issue-table .bar svg {
+#memberDetailsContainer .member-issue-table .bar svg {
   width: 32px;
   height: 32px;
   fill: #eeeeee;
 }
-#members #memberDetailsContainer .member-issue-table .bar h3 {
+#memberDetailsContainer .member-issue-table .bar h3 {
   font-family: "fontSB";
   font-size: 1.4rem;
   color: #eeeeee;
 }
-#members #memberDetailsContainer .member-issue-table .bar .search {
+#memberDetailsContainer .member-issue-table .bar .search {
   display: flex;
   align-items: center;
   gap: 20px;
 }
-#members #memberDetailsContainer .member-issue-table .bar .search svg {
+#memberDetailsContainer .member-issue-table .bar .search svg {
   width: 38px;
 }
-#members #memberDetailsContainer .member-issue-table .bar .search svg path {
+#memberDetailsContainer .member-issue-table .bar .search svg path {
   stroke: #212529;
 }
-#members #memberDetailsContainer .member-issue-table .bar .search input {
+#memberDetailsContainer .member-issue-table .bar .search input {
   border: 2px solid #212529;
   border-radius: 10px;
   padding: 8px 12px;
@@ -1627,20 +1820,20 @@ input[type=number] {
   transition: 0.1s;
   background-color: transparent;
 }
-#members #memberDetailsContainer .member-issue-table .bar .search input::-moz-placeholder {
+#memberDetailsContainer .member-issue-table .bar .search input::-moz-placeholder {
   color: #6C757D;
 }
-#members #memberDetailsContainer .member-issue-table .bar .search input::placeholder {
+#memberDetailsContainer .member-issue-table .bar .search input::placeholder {
   color: #6C757D;
 }
-#members #memberDetailsContainer .member-issue-table .bar .search input:focus {
+#memberDetailsContainer .member-issue-table .bar .search input:focus {
   outline: none;
   border: 2px solid #2F33B3;
 }
-#members #memberDetailsContainer .member-issue-table .bar .search svg {
+#memberDetailsContainer .member-issue-table .bar .search svg {
   fill: transparent;
 }
-#members #memberDetailsContainer .member-issue-table .bar div button {
+#memberDetailsContainer .member-issue-table .bar div button {
   background-color: transparent;
   border: 2px solid #212529;
   color: #212529;
@@ -1657,48 +1850,52 @@ input[type=number] {
   width: max-content;
   margin-left: 10px;
 }
-#members #memberDetailsContainer .member-issue-table .bar div button:hover {
+#memberDetailsContainer .member-issue-table .bar div button:hover {
   transition: 0.1s;
   background-color: #2F33B3;
   color: #eeeeee;
 }
-#members #memberDetailsContainer .member-issue-table .member-details-table {
+#memberDetailsContainer .member-issue-table .member-details-table {
   text-align: left;
 }
-#members #memberDetailsContainer .member-issue-table .member-details-table table {
+#memberDetailsContainer .member-issue-table .member-details-table table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0 0;
   margin: 10px 0;
 }
-#members #memberDetailsContainer .member-issue-table .member-details-table table tbody::before {
+#memberDetailsContainer .member-issue-table .member-details-table table tbody::before {
   content: "";
   display: block;
   height: 10px;
 }
-#members #memberDetailsContainer .member-issue-table .member-details-table table thead th {
+#memberDetailsContainer .member-issue-table .member-details-table table thead th {
   background-color: #2F33B3;
   padding: 18px 8px;
   font-family: "fontSB";
   font-size: 1.2rem;
   color: #eeeeee;
 }
-#members #memberDetailsContainer .member-issue-table .member-details-table table thead th:first-child {
+#memberDetailsContainer .member-issue-table .member-details-table table thead th:first-child {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
-#members #memberDetailsContainer .member-issue-table .member-details-table table thead th:last-child {
+#memberDetailsContainer .member-issue-table .member-details-table table thead th:last-child {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
-#members #memberDetailsContainer .member-issue-table .member-details-table table tbody tr td {
+#memberDetailsContainer .member-issue-table .member-details-table table tbody tr {
+  padding: 12px 20px;
+}
+#memberDetailsContainer .member-issue-table .member-details-table table tbody tr td {
+  border-bottom: 1px solid rgb(198.5, 198.5, 198.5) !important;
   background-color: #E0E0E0;
   padding: 12px 8px;
   font-family: "fontM";
   font-size: 1rem;
   color: #212529;
 }
-#members #memberDetailsContainer .member-issue-table .member-details-table table tbody tr td button {
+#memberDetailsContainer .member-issue-table .member-details-table table tbody tr td button {
   background-color: transparent;
   border: 2px solid #212529;
   color: #212529;
@@ -1712,37 +1909,39 @@ input[type=number] {
   transition: 0.1s;
   width: 120px;
 }
-#members #memberDetailsContainer .member-issue-table .member-details-table table tbody tr td button:hover {
+#memberDetailsContainer .member-issue-table .member-details-table table tbody tr td button:hover {
   transition: 0.1s;
   background-color: #2F33B3;
   color: #eeeeee;
 }
-#members #memberDetailsContainer .member-issue-table .member-details-table table tbody tr:first-child td:first-child {
+#memberDetailsContainer .member-issue-table .member-details-table table tbody tr td button a {
+  text-decoration: none;
+  color: #212529;
+}
+#memberDetailsContainer .member-issue-table .member-details-table table tbody tr:first-child td:first-child {
   border-top-left-radius: 12px;
 }
-#members #memberDetailsContainer .member-issue-table .member-details-table table tbody tr:first-child td:last-child {
+#memberDetailsContainer .member-issue-table .member-details-table table tbody tr:first-child td:last-child {
   border-top-right-radius: 12px;
 }
-#members #memberDetailsContainer .member-issue-table .member-details-table table tbody tr:last-child td:first-child {
+#memberDetailsContainer .member-issue-table .member-details-table table tbody tr:last-child td:first-child {
   border-bottom-left-radius: 12px;
 }
-#members #memberDetailsContainer .member-issue-table .member-details-table table tbody tr:last-child td:last-child {
+#memberDetailsContainer .member-issue-table .member-details-table table tbody tr:last-child td:last-child {
   border-bottom-right-radius: 12px;
 }
-#members #memberDetailsContainer .member-issue-table .member-details-table table tbody tr:nth-child(2) {
+#memberDetailsContainer .member-issue-table .member-details-table table tbody tr:nth-child(2) {
   max-width: 200px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-#members .addMemberModal {
-  display: none;
-}
-#members .addMemberModal .form-container {
+
+.addMemberModal .form-container {
   width: 60%;
   margin: 40px auto;
 }
-#members .addMemberModal .form-container .form-topbar {
+.addMemberModal .form-container .form-topbar {
   background-color: #2F33B3;
   padding: 12px 20px;
   border-radius: 10px;
@@ -1750,17 +1949,17 @@ input[type=number] {
   align-items: center;
   gap: 20px;
 }
-#members .addMemberModal .form-container .form-topbar svg {
+.addMemberModal .form-container .form-topbar svg {
   width: 32px;
   height: 32px;
   fill: #eeeeee;
 }
-#members .addMemberModal .form-container .form-topbar h3 {
+.addMemberModal .form-container .form-topbar h3 {
   font-family: "fontSB";
   font-size: 1.4rem;
   color: #eeeeee;
 }
-#members .addMemberModal .form-container .form-body {
+.addMemberModal .form-container .form-body {
   margin-top: 10px;
   padding: 20px;
   background-color: #E0E0E0;
@@ -1770,7 +1969,7 @@ input[type=number] {
   align-items: flex-start;
   gap: 10px;
 }
-#members .addMemberModal .form-container .form-body .uploadPreview {
+.addMemberModal .form-container .form-body .uploadPreview {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1784,15 +1983,15 @@ input[type=number] {
   -o-object-fit: cover;
      object-fit: cover;
 }
-#members .addMemberModal .form-container .form-body .uploadPreview h3 {
+.addMemberModal .form-container .form-body .uploadPreview h3 {
   font-family: "fontM";
   font-size: 1.2rem;
   color: #212529;
 }
-#members .addMemberModal .form-container .form-body .uploadPreview #bookCoverUpload {
+.addMemberModal .form-container .form-body .uploadPreview #bookCoverUpload {
   display: none;
 }
-#members .addMemberModal .form-container .form-body .uploadPreview #bookCoverUploadBtn {
+.addMemberModal .form-container .form-body .uploadPreview #bookCoverUploadBtn {
   display: inline-block;
   background-color: transparent;
   border: 2px solid #212529;
@@ -1808,18 +2007,18 @@ input[type=number] {
   width: 120px;
   text-align: center;
 }
-#members .addMemberModal .form-container .form-body .uploadPreview #bookCoverUploadBtn:hover {
+.addMemberModal .form-container .form-body .uploadPreview #bookCoverUploadBtn:hover {
   transition: 0.1s;
   background-color: #2F33B3;
   color: #eeeeee;
 }
-#members .addMemberModal .form-container .form-body .form-fields {
+.addMemberModal .form-container .form-body .form-fields {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
-#members .addMemberModal .form-container .form-body .form-fields input {
+.addMemberModal .form-container .form-body .form-fields input {
   background-color: rgb(211.25, 211.25, 211.25);
   border: none;
   padding: 12px 24px;
@@ -1829,30 +2028,30 @@ input[type=number] {
   color: #212529;
   border: 2px solid transparent;
 }
-#members .addMemberModal .form-container .form-body .form-fields input::-moz-placeholder {
+.addMemberModal .form-container .form-body .form-fields input::-moz-placeholder {
   color: #6C757D;
   font-family: "fontM";
   font-size: 1.2rem;
   -moz-transition: 0.2s;
   transition: 0.2s;
 }
-#members .addMemberModal .form-container .form-body .form-fields input::placeholder {
+.addMemberModal .form-container .form-body .form-fields input::placeholder {
   color: #6C757D;
   font-family: "fontM";
   font-size: 1.2rem;
   transition: 0.2s;
 }
-#members .addMemberModal .form-container .form-body .form-fields input:hover {
+.addMemberModal .form-container .form-body .form-fields input:hover {
   transition: 0.1s;
   border: 2px solid rgb(41.6969026549, 45.2455752212, 158.8030973451);
 }
-#members .addMemberModal .form-container .form-body .form-fields input:focus {
+.addMemberModal .form-container .form-body .form-fields input:focus {
   transition: 0.2s;
   outline: none;
   background-color: #F5F6FA;
   border: 2px solid #2F33B3;
 }
-#members .addMemberModal .form-container .form-body .form-fields select {
+.addMemberModal .form-container .form-body .form-fields select {
   background-color: rgb(211.25, 211.25, 211.25);
   border: none;
   padding: 12px 24px;
@@ -1862,30 +2061,30 @@ input[type=number] {
   color: #212529;
   border: 2px solid transparent;
 }
-#members .addMemberModal .form-container .form-body .form-fields select::-moz-placeholder {
+.addMemberModal .form-container .form-body .form-fields select::-moz-placeholder {
   color: #6C757D;
   font-family: "fontM";
   font-size: 1.2rem;
   -moz-transition: 0.2s;
   transition: 0.2s;
 }
-#members .addMemberModal .form-container .form-body .form-fields select::placeholder {
+.addMemberModal .form-container .form-body .form-fields select::placeholder {
   color: #6C757D;
   font-family: "fontM";
   font-size: 1.2rem;
   transition: 0.2s;
 }
-#members .addMemberModal .form-container .form-body .form-fields select:hover {
+.addMemberModal .form-container .form-body .form-fields select:hover {
   transition: 0.1s;
   border: 2px solid rgb(41.6969026549, 45.2455752212, 158.8030973451);
 }
-#members .addMemberModal .form-container .form-body .form-fields select:focus {
+.addMemberModal .form-container .form-body .form-fields select:focus {
   transition: 0.2s;
   outline: none;
   background-color: #F5F6FA;
   border: 2px solid #2F33B3;
 }
-#members .addMemberModal .form-container .form-body .form-fields button {
+.addMemberModal .form-container .form-body .form-fields button {
   background-color: #2F33B3;
   border: none;
   color: #eeeeee;
@@ -1901,18 +2100,18 @@ input[type=number] {
   text-decoration: none;
   transition: 0.1s;
 }
-#members .addMemberModal .form-container .form-body .form-fields button:hover {
+.addMemberModal .form-container .form-body .form-fields button:hover {
   transition: 0.1s;
   background-color: #F5F6FA;
   border: 2px solid #2F33B3;
   color: #2F33B3;
 }
-#members .addMemberModal .form-container .form-body .form-fields button:focus {
+.addMemberModal .form-container .form-body .form-fields button:focus {
   border: 2px solid #212529;
   transition: 0.2s;
   background-color: transparent;
 }
-#members .addMemberModal .form-container .form-body .form-fields .gender {
+.addMemberModal .form-container .form-body .form-fields .gender {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1931,44 +2130,44 @@ input[type=number] {
   color: #212529;
   border: 2px solid transparent;
 }
-#members .addMemberModal .form-container .form-body .form-fields .gender::-moz-placeholder {
+.addMemberModal .form-container .form-body .form-fields .gender::-moz-placeholder {
   color: #6C757D;
   font-family: "fontM";
   font-size: 1.2rem;
   -moz-transition: 0.2s;
   transition: 0.2s;
 }
-#members .addMemberModal .form-container .form-body .form-fields .gender::placeholder {
+.addMemberModal .form-container .form-body .form-fields .gender::placeholder {
   color: #6C757D;
   font-family: "fontM";
   font-size: 1.2rem;
   transition: 0.2s;
 }
-#members .addMemberModal .form-container .form-body .form-fields .gender:hover {
+.addMemberModal .form-container .form-body .form-fields .gender:hover {
   transition: 0.1s;
   border: 2px solid rgb(41.6969026549, 45.2455752212, 158.8030973451);
 }
-#members .addMemberModal .form-container .form-body .form-fields .gender:focus {
+.addMemberModal .form-container .form-body .form-fields .gender:focus {
   transition: 0.2s;
   outline: none;
   background-color: #F5F6FA;
   border: 2px solid #2F33B3;
 }
-#members .addMemberModal .form-container .form-body .form-fields div {
+.addMemberModal .form-container .form-body .form-fields div {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
 }
-#members .addMemberModal .form-container .form-body .form-fields div label {
+.addMemberModal .form-container .form-body .form-fields div label {
   font-family: "fontM";
   font-size: 1.2rem;
   color: #212529;
 }
-#members .addMemberModal .uploadPreview {
+.addMemberModal .uploadPreview {
   height: 60vh !important;
 }
-#members .addMemberModal p {
+.addMemberModal p {
   font-family: "fontM";
   font-size: 1rem;
   color: #212529;
@@ -2006,6 +2205,34 @@ input[type=number] {
   font-size: 1.2rem;
   color: #eeeeee;
 }
+#issue .top-bar button {
+  background-color: #2F33B3;
+  border: none;
+  color: #eeeeee;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  padding: 12px 24px;
+  font-family: fontSB;
+  font-size: 1.2rem;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: 0.1s;
+  border-color: #eeeeee;
+}
+#issue .top-bar button:hover {
+  transition: 0.1s;
+  background-color: #F5F6FA;
+  border: 2px solid #2F33B3;
+  color: #2F33B3;
+}
+#issue .top-bar button:focus {
+  border: 2px solid #212529;
+  transition: 0.2s;
+  background-color: transparent;
+}
 #issue .issue-container {
   display: flex;
   flex-direction: column;
@@ -2013,8 +2240,16 @@ input[type=number] {
   gap: 10px;
 }
 #issue .issue-container .btn-bar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#issue .issue-container .btn-bar div {
   display: flex;
   gap: 12px;
+  align-items: center;
+  justify-content: center;
 }
 #issue .issue-container .btn-bar button {
   background-color: #2F33B3;
@@ -2057,6 +2292,7 @@ input[type=number] {
   gap: 20px;
   background-color: #E0E0E0;
   width: 100%;
+  margin-bottom: 10px !important;
   padding: 8px 12px;
   border-radius: 10px;
 }
@@ -2133,7 +2369,11 @@ input[type=number] {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+#issue .issue-container .dynamic-table .issue-book-table table tbody tr {
+  padding: 12px 20px;
+}
 #issue .issue-container .dynamic-table .issue-book-table table tbody tr td {
+  border-bottom: 1px solid rgb(198.5, 198.5, 198.5) !important;
   background-color: #E0E0E0;
   padding: 12px 8px;
   font-family: "fontM";
@@ -2158,6 +2398,10 @@ input[type=number] {
   transition: 0.1s;
   background-color: #2F33B3;
   color: #eeeeee;
+}
+#issue .issue-container .dynamic-table .issue-book-table table tbody tr td button a {
+  text-decoration: none;
+  color: #212529;
 }
 #issue .issue-container .dynamic-table .issue-book-table table tbody tr:first-child td:first-child {
   border-top-left-radius: 12px;
@@ -2225,7 +2469,11 @@ input[type=number] {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+#issue .issue-container .dynamic-table .issue-member-table table tbody tr {
+  padding: 12px 20px;
+}
 #issue .issue-container .dynamic-table .issue-member-table table tbody tr td {
+  border-bottom: 1px solid rgb(198.5, 198.5, 198.5) !important;
   background-color: #E0E0E0;
   padding: 12px 8px;
   font-family: "fontM";
@@ -2250,6 +2498,10 @@ input[type=number] {
   transition: 0.1s;
   background-color: #2F33B3;
   color: #eeeeee;
+}
+#issue .issue-container .dynamic-table .issue-member-table table tbody tr td button a {
+  text-decoration: none;
+  color: #212529;
 }
 #issue .issue-container .dynamic-table .issue-member-table table tbody tr:first-child td:first-child {
   border-top-left-radius: 12px;
@@ -2340,9 +2592,282 @@ input[type=number] {
   color: #eeeeee;
 }
 
+#allIssues {
+  display: none;
+  margin-top: 10px;
+  text-align: left;
+  width: 100%;
+}
+#allIssues table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0;
+  margin: 10px 0;
+}
+#allIssues table tbody::before {
+  content: "";
+  display: block;
+  height: 10px;
+}
+#allIssues table thead th {
+  background-color: #2F33B3;
+  padding: 18px 8px;
+  font-family: "fontSB";
+  font-size: 1.2rem;
+  color: #eeeeee;
+}
+#allIssues table thead th:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+#allIssues table thead th:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+#allIssues table tbody tr {
+  padding: 12px 20px;
+}
+#allIssues table tbody tr td {
+  border-bottom: 1px solid rgb(198.5, 198.5, 198.5) !important;
+  background-color: #E0E0E0;
+  padding: 12px 8px;
+  font-family: "fontM";
+  font-size: 1rem;
+  color: #212529;
+}
+#allIssues table tbody tr td button {
+  background-color: transparent;
+  border: 2px solid #212529;
+  color: #212529;
+  padding: 6px 12px;
+  font-family: "fontM";
+  font-size: 1rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  transition: 0.1s;
+  width: 120px;
+}
+#allIssues table tbody tr td button:hover {
+  transition: 0.1s;
+  background-color: #2F33B3;
+  color: #eeeeee;
+}
+#allIssues table tbody tr td button a {
+  text-decoration: none;
+  color: #212529;
+}
+#allIssues table tbody tr:first-child td:first-child {
+  border-top-left-radius: 12px;
+}
+#allIssues table tbody tr:first-child td:last-child {
+  border-top-right-radius: 12px;
+}
+#allIssues table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 12px;
+}
+#allIssues table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 12px;
+}
+#allIssues table tbody tr:nth-child(2) {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#allIssues table {
+  margin-top: 0px !important;
+}
+#allIssues table tbody::before {
+  content: "";
+  display: block;
+  height: 2px !important;
+}
+#allIssues table thead tr th {
+  position: sticky;
+  top: 0;
+  background-color: #E0E0E0 !important;
+  font-family: "fontSB";
+  font-size: 1.2rem;
+  color: #212529;
+  padding: 8px 8px;
+}
+#allIssues .searchbar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: #E0E0E0;
+  width: 100%;
+  margin-bottom: 10px !important;
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+#allIssues .searchbar svg {
+  width: 38px;
+}
+#allIssues .searchbar svg path {
+  stroke: #212529;
+}
+#allIssues .searchbar input {
+  border: 2px solid #212529;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-family: "fontM";
+  font-size: 1rem;
+  color: #212529;
+  transition: 0.1s;
+  background-color: transparent;
+}
+#allIssues .searchbar input::-moz-placeholder {
+  color: #6C757D;
+}
+#allIssues .searchbar input::placeholder {
+  color: #6C757D;
+}
+#allIssues .searchbar input:focus {
+  outline: none;
+  border: 2px solid #2F33B3;
+}
+#allIssues .searchbar svg {
+  width: 32px;
+  height: 32px;
+}
+#allIssues .searchbar input {
+  border: none;
+  width: 100% !important;
+}
+#allIssues .searchbar input:focus {
+  outline: none;
+  border: none;
+}
+
 .selectedBtn {
   background-color: #2F33B3 !important;
   color: #eeeeee !important;
+}
+
+.issue-details-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.issue-details-content .top-bar {
+  background-color: #2F33B3;
+  padding: 12px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+.issue-details-content .top-bar svg {
+  width: 32px;
+  height: 32px;
+  fill: #eeeeee;
+}
+.issue-details-content .top-bar h3 {
+  font-family: "fontSB";
+  font-size: 1.4rem;
+  color: #eeeeee;
+}
+.issue-details-content .top-bar a {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  text-decoration: none;
+  font-family: "fontSB";
+  font-size: 1.4rem;
+  color: #eeeeee;
+}
+.issue-details-content .top-bar p {
+  font-family: "fontM";
+  font-size: 1.2rem;
+  color: #eeeeee;
+}
+.issue-details-content .top-bar button {
+  background-color: #2F33B3;
+  border: none;
+  color: #eeeeee;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  padding: 12px 24px;
+  font-family: fontSB;
+  font-size: 1.2rem;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: 0.1s;
+  border-color: #eeeeee;
+}
+.issue-details-content .top-bar button:hover {
+  transition: 0.1s;
+  background-color: #F5F6FA;
+  border: 2px solid #2F33B3;
+  color: #2F33B3;
+}
+.issue-details-content .top-bar button:focus {
+  border: 2px solid #212529;
+  transition: 0.2s;
+  background-color: transparent;
+}
+.issue-details-content .issue-details-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+.issue-details-content .issue-details-container div {
+  background-color: #E0E0E0;
+  padding: 22px 36px;
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.issue-details-content .issue-details-container div img {
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.issue-details-content .issue-details-container div h3 {
+  font-family: "fontSB";
+  font-size: 1.2rem;
+  color: #212529;
+}
+.issue-details-content .issue-details-container div p {
+  font-family: "fontM";
+  font-size: 1.2rem;
+  color: #212529;
+}
+.issue-details-content .issue-details-container div a {
+  background-color: transparent;
+  border: 2px solid #212529;
+  color: #212529;
+  padding: 6px 12px;
+  font-family: "fontM";
+  font-size: 1rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  transition: 0.1s;
+  width: 120px;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+}
+.issue-details-content .issue-details-container div a:hover {
+  transition: 0.1s;
+  background-color: #2F33B3;
+  color: #eeeeee;
 }
 
 #return .return-search-container {
@@ -2440,6 +2965,7 @@ input[type=number] {
 }
 #return .return-summary-container {
   margin: 0 auto;
+  display: none;
   width: 45%;
 }
 #return .return-summary-container .bar {

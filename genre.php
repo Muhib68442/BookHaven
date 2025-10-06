@@ -28,6 +28,7 @@
                         <div>
                             <select name="select_genre" id="select_genre">
                                 <!-- DYNAMICALLY APPENDING ALL GENRE -->
+                                <option value="null">Select Genre</option>
                             </select>
 
                             <input type="text" placeholder="Genre Name" id="genreNewName">
@@ -123,7 +124,7 @@
             let card = "";
             card+= 
             `<a href="books.php?genre=${element.genre_id}" class="grid-item">
-                <img src="res/uploads/genre_cover/${element.genre_name.toLowerCase()}.jpg" alt="${element.genre_name}">
+                <img src="res/uploads/genre_cover/${element.genre_name.toLowerCase()}.jpg" onerror="this.src='res/uploads/genre_cover/default.png';" alt="${element.genre_name}">
                 <h3>${element.genre_name}</h3>
                 <p>${element.book_count} Books</p>
             </a>`
@@ -136,8 +137,10 @@
     // ADD GENRE
     $("#addGenre").click(function(){
         let genre_name = $("#genre_name").val();
+        if(genre_name == "") return alert("Please enter genre name");
         let sure = confirm("Add Genre : "+genre_name);
         if(!sure) return;
+        
 
         $.ajax({
             url : "ajax/genre.php",
@@ -181,6 +184,10 @@
     $("#editGenre").click(function(){
         let old_name = $("#select_genre option:selected").text();
         let new_name = $("#genreNewName").val();
+        
+        if(new_name == "") return alert("Please enter genre name");
+        if(old_name == new_name) return alert("Please enter different genre name");
+        if(old_name == "Select Genre") return alert("Please select genre to rename");
         let sure = confirm("Rename Genre : "+old_name+" to "+new_name);
         if(!sure) return;
 

@@ -51,7 +51,7 @@
     }
     .return-summary-container{
         @include window;
-
+        display : none;
         width: 45%;
     }
 }

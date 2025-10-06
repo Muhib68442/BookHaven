@@ -175,73 +175,113 @@
 
 
 
-    // BOOK DETAILS
-    #bookDetailsContainer{
-        display: none;
+}
 
-        .top-barD{
-            background-color: $theme;
-            padding : 12px 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+// BOOK DETAILS
+#bookDetailsContainer{
+    // display: none;
+
+    .top-barD{
+        background-color: $theme;
+        padding : 12px 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border-radius: $radiusT;
+        svg{
+            width:  32px;
+            height: 32px;
+            fill: $text-black;
+        }
+        h3{
+            @include font($fontSB, 1.4rem, $text-white);
+        }
+    }
+
+    .book-details{
+        display: flex;
+        // justify-content: space-between;
+        align-items: flex-start;
+        gap: 40px;
+        padding : 20px 0px;
+        
+        img{
             border-radius: $radiusT;
-            svg{
-                width:  32px;
-                height: 32px;
-                fill: $text-black;
-            }
-            h3{
-                @include font($fontSB, 1.4rem, $text-white);
-            }
+            width: 30%;
+            height: 100%;
+            object-fit: cover;
         }
+        
 
-        .book-details{
+        .book-info{
+            flex: 1;
             display: flex;
-            // justify-content: space-between;
-            align-items: flex-start;
-            gap: 40px;
-            padding : 20px 0px;
-            
-            img{
-                border-radius: $radiusT;
-                width: 30%;
-                height: 100%;
-                object-fit: cover;
-            }
-            
-
-            .book-info{
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                gap : 10px;
-                padding: 12px 0;
-                h3{
-                    @include font($fontSB, 1.4rem, $text-black);
-                }
-                p{
-                    @include font($fontM, 1.2rem, $text-black);
-                }
-                button{
-                    @include button-secondary;
-                }
-            }
-
-        }
-        .book-history{
-            @include table;         
-            margin-top : 20px;
-            text-align: left;
+            flex-direction: column;
+            gap : 10px;
+            padding: 12px 0;
             h3{
                 @include font($fontSB, 1.4rem, $text-black);
             }
+            p{
+                @include font($fontM, 1.2rem, $text-black);
+            }
+            button{
+                @include button-secondary;
+            }
+        }
+
+    }
+    .book-history{
+        .bar{
+            @include top-bar;
+            background-color: transparent;
+            border: 2px solid $text-black;
+
+            .search{
+                @include searchbar;
+                svg{
+                    fill : transparent;
+                }
+            }
+            div{
+                
+                button{
+                    @include button-secondary;
+                    width: max-content;
+                    margin-left: 10px;
+                }
+            }
+        }
+
+        @include table{
+            a{
+                text-decoration: none;
+                @include button-secondary()
+            }
+            tbody tr td{
+                padding : 20px;
+            }
+        };         
+        margin-top : 20px;
+        text-align: left;
+        h3{
+            @include font($fontSB, 1.4rem, $text-black);
         }
     }
 }
+
 
 // ADD BOOK MODAL
 .addBookModal{
     @include form;
     
+}
+
+#uploadCoverBtn{
+    @include button-secondary{
+    };
+    background-color: $text-white;
+    color: $text-black;
+    padding : 12px 20px;
+    border-radius: $radiusT;
 }

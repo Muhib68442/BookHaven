@@ -26,7 +26,7 @@ else if($raw_data['show'] == "search"){
 else if($raw_data['show']=="id"){
     $id = $raw_data['value'];
     $db = new database();
-    $db->sql("SELECT * FROM books JOIN genres ON genres.genre_id = books.genre_id WHERE book_id = '$id' ");;
+    $db->sql("SELECT * FROM books JOIN genres ON genres.genre_id = books.genre_id WHERE book_id = $id ");
     $result = $db->get_result();
     echo json_encode($result);
 }

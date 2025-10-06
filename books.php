@@ -39,9 +39,6 @@ if(isset($_GET['genre']))
                         <option value="author">Author</option>
                         <option value="year">Year</option>
                         <option value="mostIssued">Most Issued</option>
-                        <option value="book_id">ISBN/Code</option>
-                        <option value="genre_id">Genre</option>
-                        <option value="stock">Stock</option>
                         <option value="status">Status</option>
                     </select>
                 </div>
@@ -72,15 +69,7 @@ if(isset($_GET['genre']))
                         </tr>
                     </thead>
                     <tbody id="bookTableBody">
-                        <tr>
-                            <td>1</td>
-                            <td class="truncateText">Snowflakes and seven motherfuckers</td>
-                            <td class="truncateText">Md. Muhibbur Rahman</td>
-                            <td>BHB01511</td>
-                            <td>Romantic</td>
-                            <td>3/5</td>
-                            <td><button class="bookDetailsBtn">Details</button></td>
-                        </tr>
+                        
                     </tbody>
                 </table>
             </div>
@@ -89,7 +78,7 @@ if(isset($_GET['genre']))
             <div class="grid" id="bookGrid">
                 <div class="grid-container">
     
-                    <div class="grid-item">
+                    <!-- <div class="grid-item">
                         <img src="res/uploads/book_cover/1.jpg" alt="Book Cover">
                         <div class="book-info">
                             <h3 class="truncateText">The Story of a lonely boy</h3>
@@ -101,81 +90,14 @@ if(isset($_GET['genre']))
                             <p>Status : Active</p>
                             <button class="bookDetailsBtn">Details</button>
                         </div>
-                    </div>
+                    </div> -->
     
     
                 </div>
             </div>
     
             <!-- BOOK DETAILS -->
-            <div id="bookDetailsContainer">
-                <div class="top-barD">
-                    <svg id="backBtnBookDetails" width="64px" height="64px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> <style>.cls-1{fill:none;stroke:#ffffff;stroke-linecap:round;stroke-linejoin:round;stroke-width:20px;}</style> </defs> <g data-name="Layer 2" id="Layer_2"> <g data-name="E421, Back, buttons, multimedia, play, stop" id="E421_Back_buttons_multimedia_play_stop"> <circle class="cls-1" cx="256" cy="256" r="246"></circle> <line class="cls-1" x1="352.26" x2="170.43" y1="256" y2="256"></line> <polyline class="cls-1" points="223.91 202.52 170.44 256 223.91 309.48"></polyline> </g> </g> </g></svg>
-                    <h3>Books / <span class="page-title"></span></h3>
-                </div>
-    
-                <div class="book-details">
-                    <img src="res/uploads/book_cover/1.jpg" alt="The Story Of A Lonely Boy">
-                    <div class="book-info">
-                        <!-- <h3>Book Details</h3> -->
-                        <!-- <h3>The Story Of A Lonely Boy</h3>
-                        <p><b>Author:</b> John Doe</p>
-                        <p><b>Genre:</b> Romance</p>
-                        <p><b>Year:</b> 2017</p>
-                        <p><b>Publisher:</b> AKZ Prints</p>
-                        <p><b>ISBN/Code:</b> BHB54641</p>
-                        <p><b>Total Copies:</b> 5</p>
-                        <p><b>Issued:</b> 3</p>
-                        <p><b>Available:</b> 2</p>
-                        <p><b>Total Issued:</b> 7 Times</p> -->
-                        
-                        <!-- <button>Issue History</button> -->
-                        <div>
-                            <button>Remove</button>
-                            <button>Edit</button>
-                            <button>Inactive</button>
-                            <div style="margin-top: 10px;">
-                                <button>Issue</button>
-                                <button>Return</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="book-history">
-                    <h3>Issue History</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Member Name</th>
-                                <th>Member ID</th>
-                                <th>Issue Date</th>
-                                <th>Return Date</th>
-                                <th>Remarks</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>John Doe</td>
-                                <td>123456</td>
-                                <td>2022-01-01</td>
-                                <td>2022-01-15</td>
-                                <td>Returned</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>John Doe</td>
-                                <td>123456</td>
-                                <td>2022-01-01</td>
-                                <td>2022-01-15</td>
-                                <td>Returned</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            
 
         </section>
         <!-- BOOKS ENDS -->
@@ -185,6 +107,7 @@ if(isset($_GET['genre']))
 
 
 <?php include_once('footer.php'); ?>
+
 <script>
 
     // AJAX CALL FOR BOOK DATA 
@@ -280,8 +203,8 @@ if(isset($_GET['genre']))
 
         // BOOK DETAILS PAGE 
         $(document).on("click", ".bookDetailsBtn", function(){
+            
             // GET THE ID OF THE ROW 
-
             var row = "" , book_id = "";
             if(display == "table"){
                 console.log("Table View");
@@ -295,140 +218,21 @@ if(isset($_GET['genre']))
                 book_id = book_id.replace("ISBN/Code : BHB", "").trim();
             }
 
-            // alert(book_id);
-            // AJAX CALL FOR BOOK DATA 
-            $.ajax({
-                url : "ajax/get_book.php",
-                type : "POST",
-                contentType: "application/json",
-                dataType : "json",
-                data: JSON.stringify({ "show": "id", "value": book_id }),
-                success : function(data){
-                    $(".page-title").text(data[0].book_name);
-                    $(".book-details").empty();
-                    console.log(data);
-    
-                    let statusTextInverse = (data[0].status != "Active") ? "Active" : "Inactive";
-                    
-
-                    $(".book-details").append(`
-                        <img src="res/uploads/book_cover/2.jpg" alt="The Story Of A Lonely Boy">
-                        <div class="book-info">
-                            <h3>${data[0].book_name}</h3>
-                            <p><b>Author:</b> ${data[0].author}</p>
-                            <p><b>Publisher:</b> ${data[0].publisher}</p>
-                            <p><b>Year:</b> ${data[0].year}</p>
-                            <p><b>Genre:</b> ${data[0].genre_name}</p>
-                            <p><b>ISBN/Code:</b> BHB<span id="bookID">${data[0].book_id}</span></p>
-                            <p><b>Stock:</b> ${data[0].stock}</p>
-                            <p><b>Issued:</b> ${data[0].issued}</p>
-                            <p><b>Status:</b> <span class="bookStatusText">${data[0].status}</span></p>
-                            <div>
-                                <button id="deleteBookBtn">Delete</button>
-                                <a href="editBook.php?book_id=${data[0].book_id}"><button>Edit</button></a>
-                                <button id="toogleBookStatus">${statusTextInverse}</button>
-                                <div style="margin-top: 10px;">
-                                    <button>Issue</button>
-                                    <button>Return</button>
-                                </div>
-                            </div>
-                        </div>
-                    `);
-
-                    if(data[0].status != "Active"){
-                        $(".bookStatusText").css("color", "tomato");
-                    }else{
-                        $(".bookStatusText").css("color", "green");
-                    }
-                }
-            })
-       
+            window.location.href = "bookDetails.php?id=" + book_id;
         })
 
-
-        // TOOGLE BOOK STATUS
-        $(document).on("click","#toogleBookStatus", function(){
-            let sure = confirm("Toggle status to "+$(this).text()+" ?");
-            if(!sure) return;
-
-            let statusText = $(this).text();
-            let book_id = $("#bookID").text();
-            // alert(statusText);
-            $.ajax({
-                url : "ajax/set_book.php", 
-                type : "POST",
-                contentType: "application/json",
-                dataType : "json",
-                data: JSON.stringify({ "set": "status", "value": statusText, "book_id" : book_id}),
-                success : function(data){
-                    // console.log(data);
-                    let statusTextInverse = (statusText == "Active") ? "Inactive" : "Active";
-                    $("#toogleBookStatus").text(statusTextInverse);
-                    if(statusText == "Active"){
-                        $(".bookStatusText").css("color", "green");
-                        $(".bookStatusText").text("Active");
-                    }else{
-                        $(".bookStatusText").css("color", "tomato");
-                        $(".bookStatusText").text("Inactive");
-                    }
-                    // renderData();
-                }, 
-                error : function(data){
-                    console.log(data);
-                }
-            })
-        })
-        
-        
-        // DELETE A BOOK 
-        $(document).on("click", "#deleteBookBtn", function(){
-            let sure = confirm("Are you sure you want to delete this book?");
-            if(sure){
-                let book_id = $("#bookID").text();
-                $.ajax({
-                    url : "ajax/set_book.php",
-                    type : "POST",
-                    contentType: "application/json",
-                    dataType : "json",
-                    data: JSON.stringify({ "set": "delete", "value": book_id }),
-                    success : function(data){
-                        $("#bookDetailsContainer").slideUp(200);
-                        $(".top-bar").slideDown(200);
-                        $("#bookTable").slideDown(200);
-                        renderData();
-                    }
-                })
-            }
-        })
 
         // RENDER DATA 
         function renderData(data){
-
-            // IF NO DATA
-            // if(!data){
-            //     $.ajax({
-            //         url : "ajax/get_book.php",
-            //         type : "POST",
-            //         contentType: "application/json",
-            //         dataType : "json",
-            //         data: JSON.stringify({ "show": "all" }),
-            //         success : function(data){
-            //             renderData(data);
-            //         },
-            //         error : function(data){
-            //             console.log(data);
-            //         }
-            //     })
-            // }
             
             // TABLE
             $("#bookTableBody").empty();
             let row = "";
 
-            data.data.forEach(element => {
+            data.data.forEach((element, index) => {
                 row += `
                     <tr >
-                        <td >1</td>
+                        <td> ${index+1}</td>
                         <td class="truncateText">${element.book_name}</td>
                         <td class="truncateText">${element.author}</td>
                         <td style="color : ${element.status != 'Active' ? 'tomato' : ''};">BHB${element.book_id}</td>
@@ -467,9 +271,6 @@ if(isset($_GET['genre']))
 
             console.log('Data Rendered');
         }
-
-
-        
 
 
     }) // END OF DOCUMENT READY

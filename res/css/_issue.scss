@@ -13,6 +13,11 @@
         p{
             @include font($fontM, 1.2rem, $text-white);
         }
+        button{
+            @include button-primary{
+                border-color: $text-white;
+            };
+        }
     }
 
     .issue-container{
@@ -21,10 +26,21 @@
         align-items: flex-start;
         gap : 10px;
 
-        .btn-bar{
-            display: flex;
-            gap : 12px;
+        
 
+        .btn-bar{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            // gap : 12px;
+
+            div{
+                display: flex;
+                gap : 12px;
+                align-items: center;
+                justify-content: center;
+            }
             button{
                 @include button-primary{
                     // padding: 8px 26px;
@@ -39,12 +55,14 @@
                     }
                 }
             }
-        }
 
+        }
+        
         .searchbar{
             @include searchbar{};
             background-color: $secondary;
             width : 100%;
+            margin-bottom: 10px !important;
             svg{
                 width:  32px;
                 height: 32px;
@@ -59,6 +77,7 @@
             padding : 8px 12px;
             border-radius: $radiusT;
         }
+
         .dynamic-table{
             width : 100%;
             max-height: 400px;
@@ -149,8 +168,119 @@
     }
 }
 
+#allIssues{
+    display: none;
+    margin-top: 10px;
+    @include table{
+        table{
+            margin-top : 0px !important;
+        }
+        table tbody::before {
+            content: "";
+            display: block;
+            height: 2px !important;
+        }
+        table thead tr th{
+            position : sticky;
+            top : 0;
+            background-color: $secondary !important;
+            @include font($fontSB, 1.2rem, $text-black);
+            padding : 8px 8px;
+        }
+    }
+    text-align: left;
+    width : 100%;
+
+    .searchbar{
+        
+        @include searchbar{};
+        background-color: $secondary;
+        width : 100%;
+        margin-bottom: 10px !important;
+        svg{
+            width:  32px;
+            height: 32px;
+        }
+        input{
+            border : none;
+            width : 100% !important;
+            &:focus{
+                outline : none;
+                border : none;
+            }
+        }
+        padding : 8px 12px;
+        border-radius: $radiusT;
+    }
+}
+
 
 .selectedBtn{
     background-color: $theme !important;
     color: $text-white !important;
+}
+
+
+// ISSUE DETAILS 
+.issue-details-content{
+    display: flex;
+    flex-direction: column;
+    gap : 20px;
+
+    .top-bar{
+        @include top-bar;
+        margin-bottom: 20px;
+        a{
+            display: flex;
+            align-items: center;
+            gap : 22px;
+            text-decoration: none;
+            @include font($fontSB, 1.4rem, $text-white);
+
+        }
+        
+        p{
+            @include font($fontM, 1.2rem, $text-white);
+        }
+        button{
+            @include button-primary{
+                border-color: $text-white;
+            };
+        }
+    }
+
+    .issue-details-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap : 20px;
+        div{
+            background-color: $secondary;
+            padding : 22px 36px;
+            border-radius: $radiusT;
+            width : 100%;
+            display: flex;
+            flex-direction: column;
+            gap : 10px;
+            img{
+                width :100%;
+                height : 300px;
+                border-radius: $radiusT;
+                object-fit: cover;
+            }
+            h3{
+                @include font($fontSB, 1.2rem, $text-black);
+            }
+            p{
+                @include font($fontM, 1.2rem, $text-black);
+            }
+            a{
+                @include button-secondary;
+                width : 100%;
+                text-align: center;
+                text-decoration: none;
+            }
+            
+        }
+    }
 }
