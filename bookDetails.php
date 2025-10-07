@@ -19,30 +19,38 @@ include_once('core/database.php');
             </div>
 
             <div class="book-details">
-                <img src="res/uploads/book_cover/default.jpg" alt="Default">
+                <img id="bookCover" src="res/uploads/book_cover/${data[0].book_cover}"  alt="" onerror="this.onerror=null; this.src='res/uploads/book_cover/default.jpg';">
                 <div class="book-info">
-                    <!-- <h3>Book Details</h3> -->
-                    <!-- <h3>The Story Of A Lonely Boy</h3>
-                    <p><b>Author:</b> John Doe</p>
-                    <p><b>Genre:</b> Romance</p>
-                    <p><b>Year:</b> 2017</p>
-                    <p><b>Publisher:</b> AKZ Prints</p>
-                    <p><b>ISBN/Code:</b> BHB54641</p>
-                    <p><b>Total Copies:</b> 5</p>
-                    <p><b>Issued:</b> 3</p>
-                    <p><b>Available:</b> 2</p>
-                    <p><b>Total Issued:</b> 7 Times</p> -->
+                    <h3 id="bookName"></h3>
+                    <p><b>Author:</b> <span id="bookAuthor"></span></p>
+                    <p><b>Publisher:</b> <span id="bookPublisher"></span></p>
+                    <p><b>Year:</b> <span id="bookYear"></span></p>
+                    <p><b>Genre:</b> <span id="bookGenre"></span></p>
+                    <p><b>ISBN/Code:</b> BHB<span id="bookID"></span></p>
+                    <p class="bookStockText"><b>Stock:</b> <span id="bookStock"></span></p>
+                    <p><b>Issued:</b> <span id="bookIssued"></span></p>
+                    <p><b>Status:</b> <span class="bookStatusText"></span></p>
                     
-                    <!-- <button>Issue History</button> -->
-                    <!-- <div>
-                        <button>Remove</button>
-                        <button>Edit</button>
-                        <button>Inactive</button>
+
+                    <div>
+                        <?php if($role == 'admin') : ?>
+                        <button id="toogleBookStatus"></button>
+                        <a id="editBookBtn" href="editBook.php?book_id="><button>Edit</button></a>
+                        <button id="deleteBookBtn">Delete</button>
+                        <?php endif; if($role == 'staff' || $role == 'admin') : ?>
                         <div style="margin-top: 10px;">
-                            <button >Issue</button>
+                            <button id="selectBook">Issue</button>
                             <button>Return</button>
                         </div>
-                    </div> -->
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <div class="book-location">
+                    <h3>Book Location</h3>
+                    <p><b>Section:</b> <span id='bookSection'></span></p>
+                    <p><b>Shelf:</b> <span id='bookShelf'></span></p>
+                    <p><b>Row:</b> <span id='bookRow'></span></p>
+                    <p id="disabled">Please keep the book where it is after reading</p>
                 </div>
             </div>
 
@@ -104,43 +112,38 @@ include_once('core/database.php');
         success : function(data){
             // console.log(data);
             $(".page-title").text(data[0].book_name);
-            $(".book-details").empty();
+            // $(".book-details").empty();
 
             let statusTextInverse = (data[0].status != "Active") ? "Active" : "Inactive";
             
+            // LOCATION 
+            $("#bookSection").text(data[0].genre_name+" Section");
+            
+            $("#bookShelf").text(data[0].shelf_number);
+            $("#bookRow").text(data[0].row_number);
 
-            $(".book-details").append(`
-                <img src="res/uploads/book_cover/${data[0].book_cover}"  alt="" onerror="this.onerror=null; this.src='res/uploads/book_cover/default.jpg';">
-                <div class="book-info">
-                    <h3>${data[0].book_name}</h3>
-                    <p><b>Author:</b> ${data[0].author}</p>
-                    <p><b>Publisher:</b> ${data[0].publisher}</p>
-                    <p><b>Year:</b> ${data[0].year}</p>
-                    <p><b>Genre:</b> ${data[0].genre_name}</p>
-                    <p><b>ISBN/Code:</b> BHB<span id="bookID">${data[0].book_id}</span></p>
-                    <p class="bookStockText"><b>Stock:</b> ${data[0].stock}</p>
-                    <p><b>Issued:</b> ${data[0].issued}</p>
-                    <p><b>Status:</b> <span class="bookStatusText">${data[0].status}</span></p>
-                    <div>
-                        <?php if($role == 'admin') : ?>
-                        <button id="deleteBookBtn">Delete</button>
-                        <a href="editBook.php?book_id=${data[0].book_id}"><button>Edit</button></a>
-                        <button id="toogleBookStatus">${statusTextInverse}</button>
-                        <?php endif; if($role == 'staff') : ?>
-                        <div style="margin-top: 10px;">
-                            <button id="selectBook">Issue</button>
-                            <button>Return</button>
-                        </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            `);
+            // BOOK DETAILS 
+            $("#bookID").text(data[0].book_id);
+            $("#bookName").text(data[0].book_name);
+            $("#bookAuthor").text(data[0].author);
+            $("#bookPublisher").text(data[0].publisher);
+            $("#bookYear").text(data[0].year);
+            $("#bookGenre").text(data[0].genre_name);
+            $("#bookStock").text(data[0].stock);
+            $("#bookIssued").text(data[0].issued);
+            $(".bookStatusText").text(data[0].status);
+            $("#toogleBookStatus").text(statusTextInverse);
+            $("#editBookBtn").attr("href", "editBook.php?book_id="+data[0].book_id);
+            data[0].book_cover == null ? $("#bookCover").attr("src", "res/uploads/book_cover/default.jpg") : $("#bookCover").attr("src", "res/uploads/book_cover/"+data[0].book_cover);
+            
+
             // STATUS COLOR
             if(data[0].status != "Active"){
                 $(".bookStatusText").css("color", "tomato");
             }else{
                 $(".bookStatusText").css("color", "green");
             }
+
             // STOCK COLOR 
             if(data[0].stock == 0){
                 $(".bookStockText").css("color", "tomato").text("Out of Stock (0 Copies)");

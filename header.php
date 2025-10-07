@@ -17,4 +17,9 @@ $auth_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
     <!-- CSS -->
     <link rel="stylesheet" href="res/css/main.css">
+
+    <!-- TOASTIFY -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
 </head>

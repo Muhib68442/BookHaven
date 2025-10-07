@@ -153,7 +153,7 @@
             data : JSON.stringify({"op" : "add", "value" : genre_name}),
             success : function(data){
                 console.log(data.success);
-                location.reload();
+                window.location.href = "genre.php?status=1";
             },
             error : function(err){
                 console.log(err)
@@ -175,7 +175,7 @@
             data : JSON.stringify({"op" : "delete", "value" : genre_id}),
             success : function(data){
                 console.log(data.success);
-                location.reload();
+                window.location.href = "genre.php?status=3";
             },
             error : function(err){
                 console.log(err)
@@ -202,12 +202,51 @@
             data : JSON.stringify({"op" : "rename", "old_name" : old_name, "new_name" : new_name}),
             success : function(data){
                 console.log(data.success);
-                location.reload();
+                window.location.href = "genre.php?status=2";
             },
             error : function(err){
                 console.log(err)
             }
         })
     });
+
+
+
+    // TOASTIFY
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('status') === '1') {
+            Toastify({
+                text: "Genre added successfully!",
+                duration: 5000,
+                gravity: "top",
+                position: "center",
+                stopOnFocus: true
+
+            }).showToast();
+
+        }else if(params.get('status') === '2'){
+            Toastify({
+                text: "Genre renamed successfully!",
+                duration: 5000,
+                gravity: "top",
+                position: "center",
+                // backgroundColor: "#dda704ff",
+                color : "black",
+                stopOnFocus: true
+
+            }).showToast();
+        }
+        else if(params.get('status') === '3'){
+            Toastify({
+                text: "Genre deleted successfully!",
+                duration: 5000,
+                gravity: "top",
+                position: "center",
+                // backgroundColor: "tomato",
+                stopOnFocus: true
+
+            }).showToast();
+        }
+        history.replaceState(null, "", window.location.pathname);
 
 </script>

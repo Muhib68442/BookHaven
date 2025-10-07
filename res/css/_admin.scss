@@ -1,0 +1,143 @@
+// ADMIN PARTIAL
+
+// CONTENT - ADMIN
+
+.admin-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap : 10px;
+    div{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+    }
+    h1{
+        @include font($fontSB, 1.8rem, $text-black);
+    }
+
+    .top-bar{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: $secondary;
+        width : 100%;
+        border-radius: $radiusT;
+        padding : 2px 16px;
+
+        .sort-table{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            svg{
+                width: 38px;
+                height: 38px;
+            }
+            select{
+                width: 200px;
+                padding: 8px 12px;
+                @include input-style;
+            }
+        }
+
+        // TITLE 
+        h3{
+            width : 100%;
+            @include font($fontSB, 1.4rem, $text-black);
+        }
+        p{
+            width : 100%;
+            @include font($fontM, 1.2rem, $text-black);
+        }
+        // SEARCH 
+        .search{
+            @include searchbar;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap : 10px;
+        }
+        
+        a{
+            @include button-primary;
+        }
+
+    }
+
+
+    // LOG SECTION 
+    .log-table{
+        width: 100%;
+        height : 80vh;
+        overflow-y: scroll;
+        // box-shadow : $box-shadow;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap : 10px;
+        padding : 10px;
+        border-radius: 20px;;
+        #logList{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            gap : 10px;
+            padding : 20px 0px;
+            width: 100%;
+            
+            li{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap : 10px;
+                width : 100%;
+                a{
+                    border-radius: 4px;
+                    padding : 12px 20px;
+                    width: 100%;
+                    background-color: $secondary;
+                    text-decoration: none;
+                    transition : 0.1s;
+                    font-size : 18px;
+                    color : $text-black;
+                    border: 2px solid transparent;
+
+                    &:hover{
+                        // background-color: $theme;
+                        transition : 0.1s;
+                        // font-size : 20px;
+                        color : $theme;
+                        border-left: 3px solid $theme;
+                        // color : $text-white;
+                    }
+                    // @include button-secondary(){
+                    //     display: flex;
+                    //     align-items: center;
+                    //     justify-content: center;
+                    // };
+                    // color : darkblue;
+                    // display: inline !important;
+                }
+                @include font($fontM, 1.2rem, $text-black);
+                p{
+                    @include font($fontM, 1.2rem, $text-black);
+                }
+            }
+        }
+    }
+}
+
+.logDetails{
+    .top-bar{
+        @include top-bar();
+    }
+}
+.logDetailsContainer{
+    
+}

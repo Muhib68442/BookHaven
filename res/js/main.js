@@ -27,6 +27,9 @@ $(document).ready(function(){
         case "userManagement.php" : 
             $("#usermgmtBtn").addClass("selected");
             break;
+        case "adminLog.php":
+            $("#adminLogBtn").addClass("selected");
+            break;
 
         default:
             break;

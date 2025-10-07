@@ -109,8 +109,17 @@ $("#returnBookBtn").click(function(){
         data : JSON.stringify({"get" : "returnBook", "issueID" : issueID, "returnedBy" : returnedBy, "bookID" : $(".bookID").text()}),
         success : function(data){
             console.log(data);
-            alert(data.message);
-            window.location.href = "issueDetails.php?id="+issueID;
+            Toastify({
+                text: "Book returned successfully!",
+                duration: 3000,
+                gravity: "top",
+                position: "center",
+                stopOnFocus: true
+            }).showToast();
+            $("#returnBookBtn").slideUp(200);
+            $(".returnedBy").text(returnedBy);
+
+            // window.location.href = "issueDetails.php?id="+issueID;
         },
         error : function(err){
             console.log(err);

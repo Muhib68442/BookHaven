@@ -155,6 +155,30 @@
         location.href = "addMember.php";
     })
 
+    // TOASTIFY
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('status') === '1') {
+            Toastify({
+                text: "Member added successfully!",
+                duration: 5000,
+                gravity: "top",
+                position: "center",
+                stopOnFocus: true
+
+            }).showToast();
+
+        }else if(params.get('status') === '3'){
+            Toastify({
+                text: "Member deleted successfully!",
+                duration: 5000,
+                gravity: "top",
+                position: "center",
+                stopOnFocus: true
+
+            }).showToast();
+        }
+        
+        history.replaceState(null, "", window.location.pathname);
     
     
 </script>

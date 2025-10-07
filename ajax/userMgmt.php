@@ -62,3 +62,15 @@ else if($raw_data['set'] == 'toggleUserStatus'){
     echo json_encode($final);
 }
 
+else if($raw_data['set'] == "adminLog"){
+    $db = new Database();
+    $db->sql("
+        SELECT *, admin_logs.id as admin_log_id FROM admin_logs 
+        JOIN users ON admin_logs.user_id = users.id
+        ORDER BY admin_logs.created_at DESC
+        ");
+    echo json_encode($db->get_result());
+    // JOIN users ON admin_logs.user_id = users.id
+    // JOIN books ON admin_logs.book_id = books.book_id
+    // JOIN members ON admin_logs.member_id = members.member_id
+}

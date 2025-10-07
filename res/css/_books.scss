@@ -204,7 +204,6 @@
         align-items: flex-start;
         gap: 40px;
         padding : 20px 0px;
-        
         img{
             border-radius: $radiusT;
             width: 30%;
@@ -214,11 +213,21 @@
         
 
         .book-info{
+            // box-shadow: $box-shadow;
+            padding : 20px;
+            height : 100%;
+            border-radius: 20px;
             flex: 1;
             display: flex;
             flex-direction: column;
             gap : 10px;
-            padding: 12px 0;
+            div{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap : 10px;
+            }
+            // padding: 12px 0;
             h3{
                 @include font($fontSB, 1.4rem, $text-black);
             }
@@ -227,6 +236,29 @@
             }
             button{
                 @include button-secondary;
+            }
+        }
+        .book-location{
+            box-shadow: $box-shadow;
+            margin: 20px;
+            padding : 20px;
+            height : 100%;
+            border-radius: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap : 10px;
+            h3{
+                @include font($fontSB, 1.4rem, $text-black);
+            }
+            p{
+                @include font($fontM, 1.2rem, $text-black);
+            }
+            #disabled{
+                opacity: 0.6;
+                font-size : 0.9rem;
+                font-family : $fontSB;
+                text-align: center
             }
         }
 

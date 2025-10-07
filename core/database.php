@@ -1,6 +1,8 @@
 <?php 
 
-
+if(session_status() === PHP_SESSION_NONE){
+    session_start();
+}
 require_once 'config.php'; 
 
 class database{
@@ -137,20 +139,42 @@ class database{
     //         array_push($this->result, $this->mysqli->error);
     //     }
     // }
+    // public function sql($sql){
+    //     $query = $this->mysqli->query($sql);
+
+    //     // if($query === false){
+    //     //     $this->result[] = $this->mysqli->error;
+    //     //     return false;
+    //     // }
+
+    //     if($query instanceof mysqli_result){
+    //         $this->result = $query->fetch_all(MYSQLI_ASSOC);
+    //         $query->free();
+    //     } else {
+    //         $this->result = $this->mysqli->affected_rows;
+    //     }
+
+    //     return true;
+    // }
+
     public function sql($sql){
         $query = $this->mysqli->query($sql);
 
-        if($query === false){
-            array_push($this->result, $this->mysqli->error);
+        if ($query === false) {
+            // 🔧 Ensure $this->result is array before push
+            if (!is_array($this->result)) {
+                $this->result = [];
+            }
+            $this->result[] = $this->mysqli->error;
             return false;
         }
 
-        // SELECT query হলে fetch_all চালাও
-        if($query instanceof mysqli_result){
+        if ($query instanceof mysqli_result) {
             $this->result = $query->fetch_all(MYSQLI_ASSOC);
             $query->free();
         } else {
-            $this->result = $this->mysqli->affected_rows;
+            // 🔧 Don't assign int directly — wrap in array
+            $this->result = ['affected_rows' => $this->mysqli->affected_rows];
         }
 
         return true;
@@ -236,7 +260,40 @@ class database{
         return $val;
     }
 
+    // GET LAST ID
+    public function get_last_id() {
+        return $this->mysqli->insert_id;
+    }
 
+    // ADMIN LOG
+    public function log($action_type, $target_type, $target_id = null, $book_id = null, $member_id = null) {
+        $user_id = $_SESSION['user_id'] ?? 0;
+
+        // NULL handling for SQL
+        $target_id  = is_numeric($target_id)  ? $target_id  : 'NULL';
+        $book_id    = is_numeric($book_id)    ? $book_id    : 'NULL';
+        $member_id  = is_numeric($member_id)  ? $member_id  : 'NULL';
+
+        // Optional: short description placeholder
+        $desc = "$action_type $target_type";
+
+        // Final SQL insert
+        $this->sql("
+            INSERT INTO admin_logs (
+                user_id, action_type, target_type, target_id, book_id, member_id, description
+            ) VALUES (
+                $user_id,
+                '$action_type',
+                '$target_type',
+                $target_id,
+                $book_id,
+                $member_id,
+                '$desc'
+            )
+        ");
+
+        return true;
+    }
 
     // DESTRUCTOR : CLOSE CONNECTION
     public function __destruct(){

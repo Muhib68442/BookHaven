@@ -78,6 +78,7 @@
                     
                     <div class="issue-summary">
                         <div>
+                            <img id="summaryBookCover" src="" alt="Book_Cover" onerror="this.onerror=null; this.src='res/uploads/book_cover/default.jpg';">
                             <h3>Book Info</h3>
                             <p id="summaryBookName"></p>
                             <p>by <span id="summaryBookAuthor"></span></p>
@@ -86,6 +87,7 @@
                         </div>
                         
                         <div>
+                            <img src="res/uploads/members/default2.png" alt="profile">
                             <h3>Member Info</h3>
                             <p>Name : <span id="summaryMemberName"></span></p>
                             <p>Member ID : BHM<span id="summaryMemberID"></span></p>
@@ -261,6 +263,7 @@
 
 
 
+
     //////////////////////////////////////////////////////////////////////////////
     // SELECT BOOK
     $(document).on("click", "#selectBook", function(){
@@ -291,6 +294,7 @@
             data : JSON.stringify({"show" : "id", "value" : selectedBook}),
             success : function(data){
                 console.log(data);
+                $("#summaryBookCover").attr("src", (data[0].book_cover != null) ? "res/uploads/book_cover/"+data[0].book_cover : "res/uploads/book_cover/default.jpg");
                 $("#summaryBookName").text(data[0].book_name);
                 $("#summaryBookAuthor").text(data[0].author);
                 $("#summaryBookGenre").text(data[0].genre_name);
@@ -342,8 +346,8 @@
             }),
             success : function(data){
                 if(data.status){
-                    alert(data.message);
-                    location.reload();  
+                    // alert(data.message);
+                    window.location.href = "issue.php?status=1";  
                 }
             },
             error : function(err){
@@ -353,7 +357,20 @@
     })
     //////////////////////////////////////////////////////////////////////////////
     
-    
+    if(param.get('status') == 1){
+        Toastify({
+            text: "Book issued successfully!",
+            duration: 5000,
+            gravity: "top",
+            position: "center",
+            // backgroundColor: "#dda704ff",
+            color : "black",
+            stopOnFocus: true
+
+        }).showToast();
+        history.replaceState(null, "", window.location.pathname);
+    }
+
     
     
     

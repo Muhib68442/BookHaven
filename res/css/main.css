@@ -637,11 +637,19 @@ input[type=number] {
      object-fit: cover;
 }
 #bookDetailsContainer .book-details .book-info {
+  padding: 20px;
+  height: 100%;
+  border-radius: 20px;
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 12px 0;
+}
+#bookDetailsContainer .book-details .book-info div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
 }
 #bookDetailsContainer .book-details .book-info h3 {
   font-family: "fontSB";
@@ -671,6 +679,33 @@ input[type=number] {
   transition: 0.1s;
   background-color: #2F33B3;
   color: #eeeeee;
+}
+#bookDetailsContainer .book-details .book-location {
+  box-shadow: 0px 0px 20px 4px rgba(0, 0, 0, 0.25);
+  margin: 20px;
+  padding: 20px;
+  height: 100%;
+  border-radius: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#bookDetailsContainer .book-details .book-location h3 {
+  font-family: "fontSB";
+  font-size: 1.4rem;
+  color: #212529;
+}
+#bookDetailsContainer .book-details .book-location p {
+  font-family: "fontM";
+  font-size: 1.2rem;
+  color: #212529;
+}
+#bookDetailsContainer .book-details .book-location #disabled {
+  opacity: 0.6;
+  font-size: 0.9rem;
+  font-family: "fontSB";
+  text-align: center;
 }
 #bookDetailsContainer .book-history {
   margin-top: 20px;
@@ -2552,6 +2587,14 @@ input[type=number] {
   flex-direction: column;
   gap: 6px;
 }
+#issue .issue-container .dynamic-table .issue-summary div img {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
 #issue .issue-container .dynamic-table .issue-summary div h3 {
   font-family: "fontSB";
   font-size: 1.2rem;
@@ -4048,6 +4091,226 @@ input[type=number] {
   color: #eeeeee;
 }
 
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+}
+.admin-container div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.admin-container h1 {
+  font-family: "fontSB";
+  font-size: 1.8rem;
+  color: #212529;
+}
+.admin-container .top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #E0E0E0;
+  width: 100%;
+  border-radius: 10px;
+  padding: 2px 16px;
+}
+.admin-container .top-bar .sort-table {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.admin-container .top-bar .sort-table svg {
+  width: 38px;
+  height: 38px;
+}
+.admin-container .top-bar .sort-table select {
+  width: 200px;
+  padding: 8px 12px;
+  background-color: rgb(211.25, 211.25, 211.25);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-family: fontM;
+  color: #212529;
+  border: 2px solid transparent;
+}
+.admin-container .top-bar .sort-table select::-moz-placeholder {
+  color: #6C757D;
+  font-family: "fontM";
+  font-size: 1.2rem;
+  -moz-transition: 0.2s;
+  transition: 0.2s;
+}
+.admin-container .top-bar .sort-table select::placeholder {
+  color: #6C757D;
+  font-family: "fontM";
+  font-size: 1.2rem;
+  transition: 0.2s;
+}
+.admin-container .top-bar .sort-table select:hover {
+  transition: 0.1s;
+  border: 2px solid rgb(41.6969026549, 45.2455752212, 158.8030973451);
+}
+.admin-container .top-bar .sort-table select:focus {
+  transition: 0.2s;
+  outline: none;
+  background-color: #F5F6FA;
+  border: 2px solid #2F33B3;
+}
+.admin-container .top-bar h3 {
+  width: 100%;
+  font-family: "fontSB";
+  font-size: 1.4rem;
+  color: #212529;
+}
+.admin-container .top-bar p {
+  width: 100%;
+  font-family: "fontM";
+  font-size: 1.2rem;
+  color: #212529;
+}
+.admin-container .top-bar .search {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.admin-container .top-bar .search svg {
+  width: 38px;
+}
+.admin-container .top-bar .search svg path {
+  stroke: #212529;
+}
+.admin-container .top-bar .search input {
+  border: 2px solid #212529;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-family: "fontM";
+  font-size: 1rem;
+  color: #212529;
+  transition: 0.1s;
+  background-color: transparent;
+}
+.admin-container .top-bar .search input::-moz-placeholder {
+  color: #6C757D;
+}
+.admin-container .top-bar .search input::placeholder {
+  color: #6C757D;
+}
+.admin-container .top-bar .search input:focus {
+  outline: none;
+  border: 2px solid #2F33B3;
+}
+.admin-container .top-bar a {
+  background-color: #2F33B3;
+  border: none;
+  color: #eeeeee;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  padding: 12px 24px;
+  font-family: fontSB;
+  font-size: 1.2rem;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: 0.1s;
+}
+.admin-container .top-bar a:hover {
+  transition: 0.1s;
+  background-color: #F5F6FA;
+  border: 2px solid #2F33B3;
+  color: #2F33B3;
+}
+.admin-container .top-bar a:focus {
+  border: 2px solid #212529;
+  transition: 0.2s;
+  background-color: transparent;
+}
+.admin-container .log-table {
+  width: 100%;
+  height: 80vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 20px;
+}
+.admin-container .log-table #logList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px 0px;
+  width: 100%;
+}
+.admin-container .log-table #logList li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  font-family: "fontM";
+  font-size: 1.2rem;
+  color: #212529;
+}
+.admin-container .log-table #logList li a {
+  border-radius: 4px;
+  padding: 12px 20px;
+  width: 100%;
+  background-color: #E0E0E0;
+  text-decoration: none;
+  transition: 0.1s;
+  font-size: 18px;
+  color: #212529;
+  border: 2px solid transparent;
+}
+.admin-container .log-table #logList li a:hover {
+  transition: 0.1s;
+  color: #2F33B3;
+  border-left: 3px solid #2F33B3;
+}
+.admin-container .log-table #logList li p {
+  font-family: "fontM";
+  font-size: 1.2rem;
+  color: #212529;
+}
+
+.logDetails .top-bar {
+  background-color: #2F33B3;
+  padding: 12px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 auto;
+}
+.logDetails .top-bar svg {
+  width: 32px;
+  height: 32px;
+  fill: #eeeeee;
+}
+.logDetails .top-bar h3 {
+  font-family: "fontSB";
+  font-size: 1.4rem;
+  color: #eeeeee;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -4179,4 +4442,24 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(110.8495575221, 114.0707964602, 217.1504424779);
+}
+
+.toastify {
+  border-radius: 20px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  animation: fadeIn 0.4s ease !important;
+  font-size: 1rem !important;
+  font-family: "fontM" !important;
+  background-color: #2F33B3;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }/*# sourceMappingURL=main.css.map */

@@ -43,9 +43,13 @@ if($raw_data['get'] == "searchBook"){
     $issuedBy = $raw_data['issued_by'];
     $db = new database();
     $db->insert("issues", array("book_id" => $bookID, "member_id" => $memberID, "issued_by" => $issuedBy, "issue_date" => $issueDate, "return_date" => $returnDate, "status" => $status));
+    $issueID = $db->get_last_id();
 
     // decrement stock
     $db->sql("UPDATE books SET stock = stock - 1 WHERE book_id = '$bookID'");
+
+    // log
+    $db->log('issue','book', $issueID, $bookID, $memberID);
 
     echo json_encode(array("status" => "success", "message" => "Book issued successfully"));
 }else if($raw_data['get'] == "allIssues"){

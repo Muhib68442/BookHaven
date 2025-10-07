@@ -85,7 +85,7 @@ include_once('footer.php');
             contentType : 'application/json',
             data : JSON.stringify({"set" : "update", "value" : formData, "member_id" : memberID}),
             success : function(data){
-                window.location.href = "members.php";
+                window.location.href = "memberDetails.php?id="+memberID+"&status=2";
             }, 
             error : function(err){
                 console.log(err);

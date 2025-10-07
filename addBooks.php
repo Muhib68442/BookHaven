@@ -88,7 +88,7 @@ $("#insertBookBtn").click(function(e){
         dataType : "json",
         data: JSON.stringify({ "set": "add", "value": form_data }),
         success : function(data){
-            window.location.href = ('books.php');
+            window.location.href = ('books.php?status=1');
         }, 
         error : function(data){
             console.log(data);

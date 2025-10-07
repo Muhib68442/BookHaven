@@ -48,7 +48,14 @@
                         <h3>Issue Date</h3>
                         <p id="returnIssueDate"></p>
                     </div>
-                    <button id="returnBookBtn">Return</button>
+                    <div>
+                        <h3>Issued By</h3>
+                        <p id="returnIssuedBy"></p>
+                    </div>
+                    <div>
+                        <button id="returnBookDetails">Details</button>
+                        <button id="returnBookBtn">Return</button>
+                    </div>
                 </div>
             </div>
         </section> <!-- RETURN ENDS -->
@@ -88,12 +95,19 @@
                 $("#returnBookAuthor").text(data[0].author);
                 $("#returnMemberName").text(data[0].full_name +"("+data[0].member_id+")");
                 $("#returnIssueDate").text(data[0].issue_date);
+                $("#returnIssuedBy").text(data[0].issued_by);
+                
             },
             error : function(err){
                 console.log(err);
             }
         })
     })
+
+    $("#returnBookDetails").click(function(){
+        window.location.href = "issueDetails.php?id="+issueID;
+    })
+
 
 
     // RETURN SET 
@@ -109,12 +123,25 @@
             data : JSON.stringify({"get" : "returnBook", "issueID" : issueID, "returnedBy" : returnedBy, "bookID" : bookID}),
             success : function(data){
                 console.log(data);
-                alert(data.message);
-                window.location.href = "return.php";
+                window.location.href = "return.php?status=1";
             },
             error : function(err){
                 console.log(err);
             }
         })
     })
+
+    const param = new URLSearchParams(window.location.search);
+    
+    if(param.get('status') == 1){
+        Toastify({
+            text: "Book returned successfully!",
+            duration: 3000,
+            gravity: "top",
+            position: "center",
+            stopOnFocus: true
+        }).showToast();
+    }
+    history.replaceState(null, "", window.location.pathname);
+
 </script>

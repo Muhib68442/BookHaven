@@ -1,5 +1,5 @@
 <?php 
-
+session_start();
 header('Content-Type: application/json');
 include_once('../core/database.php');
 
@@ -31,6 +31,12 @@ if($raw_data['get'] == "searchReturn"){
         ),
         "issue_id = '$issueID'"
     );
+
+    $db->select('issues', 'member_id', null, "issue_id = '$issueID'", null, null);
+    $memberID = $db->get_result()[0]['member_id'];
+
+    // log
+    $db->log('return','book', $issueID, $bookID, $memberID);
 
 
     // increment stock

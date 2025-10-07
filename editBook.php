@@ -13,7 +13,7 @@ if (isset($_GET['book_id'])) {
     $book = $result[0];
 
 }else{
-    header("Location: books.php");
+    header("Location: books.php?error=book_not_found");
 }
 
 
@@ -134,7 +134,7 @@ if (isset($_GET['book_id'])) {
             dataType : "json",
             data: JSON.stringify({ "set": "edit", "value": form_data, "book_id": "<?php echo $book['book_id']; ?>" }),
             success : function(data){
-                window.location.href = "books.php?status="+data.status;
+                window.location.href = "books.php?status=2";
             },
             error : function(data){
                 console.log(data);
@@ -184,8 +184,23 @@ if (isset($_GET['book_id'])) {
                 if(res.status === "success"){
                     $("#bookCoverHidden").val(randomName);
                     $(".uploadPreview").css("border", "2px solid green");
+                    Toastify({
+                        text: "Upload successful",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "center",
+                        // backgroundColor: "",
+                        stopOnFocus: true
+                    }).showToast();
                 } else {
-                    alert("Upload failed");
+                    Toastify({
+                        text: "Upload failed",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "center",
+                        backgroundColor: "tomato",
+                        stopOnFocus: true
+                    }).showToast();
                 }
             }
         });

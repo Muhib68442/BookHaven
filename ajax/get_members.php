@@ -1,5 +1,8 @@
 <?php 
 
+if(session_status() === PHP_SESSION_NONE){
+    session_start();
+}
 header("Content-Type: application/json");
 
 include('../core/database.php');
@@ -29,3 +32,8 @@ else if($raw_data['show'] == "sort"){
     $result = $database->get_result();
     echo json_encode($result);
 }
+
+// echo $_SESSION['user_name'];
+// echo $_SESSION['user_id'];
+
+?>

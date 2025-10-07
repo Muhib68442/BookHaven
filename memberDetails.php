@@ -139,7 +139,7 @@ if(!isset($_GET['id'])) {
             contentType : 'application/json',
             data : JSON.stringify({"set" : "delete", "value" : memberID}),
             success : function(data){
-                window.location.href = "members.php";
+                window.location.href = "members.php?status=3";
             }, 
             error : function(err){
                 console.log(err);
@@ -173,6 +173,16 @@ if(!isset($_GET['id'])) {
                     $("#memberStatus").css("color", "tomato");
                     $("#memberID").css("color", "tomato");
                 }
+
+                Toastify({
+                    text: "Status updated successfully!",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "center",
+                    color : "black",
+                    stopOnFocus: true
+                }).showToast();
+
             }, 
             error : function(err){
                 console.log(err);
@@ -252,9 +262,29 @@ if(!isset($_GET['id'])) {
         });
     });
 
-function formatDate(dateStr){
-    const date = new Date(dateStr);
-    const options = { day: 'numeric', month: 'short', year: 'numeric' };
-    return date.toLocaleDateString('en-GB', options);
-}
+
+    // TOASTIFY    
+    // 1 : Add
+    // 2 : Update
+    // 3 : Delete
+    // 4 : Status
+
+    if (params.get('status') === '2') {
+        Toastify({
+            text: "Member updated successfully!",
+            duration: 5000,
+            gravity: "top",
+            position: "center",
+            stopOnFocus: true
+
+        }).showToast();
+
+    }
+    history.replaceState(null, "", window.location.pathname);
+
+    function formatDate(dateStr){
+        const date = new Date(dateStr);
+        const options = { day: 'numeric', month: 'short', year: 'numeric' };
+        return date.toLocaleDateString('en-GB', options);
+    }
 </script>

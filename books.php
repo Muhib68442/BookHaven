@@ -273,5 +273,45 @@ if(isset($_GET['genre']))
         }
 
 
+
+        // TOASTIFY
+        // const urlParams = new URLSearchParams(window.location.search);
+        if (params.get('status') === '1') {
+            Toastify({
+                text: "Book added successfully!",
+                duration: 5000,
+                gravity: "top",
+                position: "center",
+                stopOnFocus: true
+
+            }).showToast();
+
+        }else if(params.get('status') === '2'){
+            Toastify({
+                text: "Book updated successfully!",
+                duration: 5000,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#dda704ff",
+                color : "black",
+                stopOnFocus: true
+
+            }).showToast();
+        }
+        else if(params.get('error') === 'book_not_found'){
+            Toastify({
+                text: "Book not found!",
+                duration: 5000,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "tomato",
+                stopOnFocus: true
+
+            }).showToast();
+        }
+        history.replaceState(null, "", window.location.pathname);
+
+
+
     }) // END OF DOCUMENT READY
 </script>

@@ -81,7 +81,7 @@ include_once('footer.php');
             dataType : "json",
             data: JSON.stringify({ "set": "add", "value": form_data }),
             success : function(data){
-                window.location.href = ('members.php');
+                window.location.href = ('members.php?status=1');
             }, 
             error : function(data){
                 console.log(data);
