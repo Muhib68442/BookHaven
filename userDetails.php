@@ -1,6 +1,11 @@
 <?php 
 include_once('header.php');
 include_once('core/database.php');
+
+if($role == 'kiosk'){
+    header("Location: index.php");
+    exit;
+}
 ?>
 <body class="landing-body">
     <?php include_once('sidebar.php'); ?>
@@ -29,8 +34,8 @@ include_once('core/database.php');
             <button id="editBtn">Edit</button>
             <button id="statusToggleBtn"></button>
             <button id="deleteBtn">Delete</button>
-            <button>Password</button>
             <?php endif; ?>
+
         </div>
         <div class="userDetailsIssuedContainer">
             <div class="bar">
@@ -159,8 +164,8 @@ include_once('core/database.php');
             $("#userFullName").text(data[0].name);
             $("#userEmail").text(data[0].email);
             $("#userPhone").text(data[0].phone);
-            $("#userJoinDate").text(data[0].created_at);
-            $("#userLastLogin").text(data[0].last_login);
+            $("#userJoinDate").text(formatDate(data[0].created_at));
+            $("#userLastLogin").text(formatDate(data[0].last_login));
             $("#userStatus").text(data[0].status);
             userName = data[0].name;
             data[0].status == "Active" ? $("#userStatus").css("color", "") : $("#userStatus").css("color", "tomato");
@@ -170,6 +175,8 @@ include_once('core/database.php');
             loadUserIssues();
         }
     })
+
+
 
 
 // TOGGLE STATUS
@@ -225,6 +232,16 @@ $(document).on("click", "#editBtn", function(){
 
 // GET THE ISSUE/RETURN DATA 
 function loadUserIssues(){
+
+    // CHECK IF ADMIN, PREVENT HIM TO SUICIDE
+    let loggedIn = "<?php echo $_SESSION['user_role']; ?>";
+    let currentUser = $("#userRole").text();
+
+    if(ucfirst(loggedIn) == ucfirst(currentUser)){
+        $("#statusToggleBtn").hide();
+        $("#deleteBtn").hide();
+    }
+
     $.ajax({
         url : 'ajax/userMgmt.php',
         type : 'post', 
@@ -290,5 +307,11 @@ function loadUserIssues(){
 
 function ucfirst(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
+}
+function formatDate(dateStr){
+    const date = new Date(dateStr);
+    const timeOptions = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+    const dateOptions = { day: 'numeric', month: 'short', year: 'numeric' };
+    return `${date.toLocaleTimeString('en-GB', timeOptions)} - ${date.toLocaleDateString('en-GB', dateOptions)}`;
 }
 </script>

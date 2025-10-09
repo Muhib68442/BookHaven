@@ -2,7 +2,10 @@
 include_once('header.php');
 include_once('core/database.php');
 
-
+if($role == 'kiosk'){
+    header("Location: members.php");
+    exit;
+}
 
 
 ?> 

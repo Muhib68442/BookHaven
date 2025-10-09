@@ -101,10 +101,11 @@
                     border-radius: 4px;
                     padding : 12px 20px;
                     width: 100%;
-                    background-color: $secondary;
+                    background-color: lighten($secondary, 5%);
                     text-decoration: none;
                     transition : 0.1s;
                     font-size : 18px;
+                    font-family: $fontM;
                     color : $text-black;
                     border: 2px solid transparent;
 
@@ -139,5 +140,31 @@
     }
 }
 .logDetailsContainer{
-    
+    display: flex;
+    flex-wrap: wrap;
+    // align-items: center;
+    justify-content: center;
+    gap : 20px;
+    margin : 20px 0px 0 0;
+    div{
+        width : 40%;
+        background-color: $secondary;
+        padding : 20px;
+        border-radius: $radiusT;
+        // margin-bottom : 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap : 10px;
+        h3{
+            @include font($fontSB, 1.4rem, $text-black);
+        }
+        p{
+            @include font($fontM, 1.2rem, $text-black);
+        }
+        a{
+            @include button-secondary();
+            text-decoration: none;
+        }
+    }
 }

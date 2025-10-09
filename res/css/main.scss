@@ -30,6 +30,9 @@ html{
 // SIDEBAR
 .sidebar{
     min-width : 17%;
+    @media(max-width : 1300px){
+        min-width : 10%;
+    }
     min-height : 100vh !important;
     background: $gradient;
     box-shadow: $box-shadow;
@@ -50,7 +53,12 @@ html{
         gap : 24px;
         padding : 10px 4px;
         margin-top : 20px;
-
+        @media(max-width : 1300px){
+            flex-direction: column;
+            h3{
+                font-size : 1rem !important;
+            }
+        }
         img{
             max-width: 48px;
             height: auto;
@@ -95,6 +103,12 @@ html{
                         stroke: $text-black;
                         fill : $text-black;
 
+                    }
+                }
+
+                @media(max-width : 1300px){
+                    p{
+                        display: none;
                     }
                 }
             }
@@ -142,6 +156,9 @@ html{
     padding : 20px;
 
     overflow-y: scroll;
+    @media(max-width : 1300px){
+        min-width : 90%;
+    }
 }
 
 

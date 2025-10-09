@@ -6,6 +6,7 @@
             <img src="res/logo/favicon.png" alt="logo">
             <h3>BookHaven</h3>
         </div>
+        
         <div class="login-form-container">
             <form action="core/auth.php" method="POST">
                 <input type="email" name="email" placeholder="Username" required>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include_once('core/database.php');
 
 // Update last login time before logout

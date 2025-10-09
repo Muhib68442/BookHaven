@@ -7,6 +7,9 @@
         @include top-bar{
             background-color: $secondary;
         }
+        @media(max-width : 1300px){
+            flex-wrap: wrap;
+        }
         // margin-bottom: 20px;
         h3{
             @include font($fontSB, 1.4rem, $text-black);
@@ -48,7 +51,14 @@
             position : sticky;
             top: 0;
             z-index: 10;
+
         }
+        table tbody tr td a{
+            @include button-secondary;
+            text-decoration: none;
+            padding : 4px 12px;
+        }
+
         
     }
 
@@ -150,6 +160,11 @@
         .member-details-table{
             @include table;
             text-align: left;
+            table tbody tr td a{
+                @include button-secondary;
+                text-decoration: none;
+                padding : 4px 12px;
+            }
         }
     }
 

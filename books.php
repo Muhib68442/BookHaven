@@ -1,13 +1,7 @@
 <?php include_once('header.php'); 
 
 if(isset($_GET['status'])){
-    // if($_GET['status'] == "success"){
-    //     echo '<script>alert("Book added successfully")</script>';
-    // }
 
-    // if($_GET['status'] == "error"){
-    //     echo '<script>alert("Book could not be added")</script>';
-    // }
 }
 
 if(isset($_GET['genre']))
@@ -38,20 +32,22 @@ if(isset($_GET['genre']))
                         <option value="book_name">Book Name</option>
                         <option value="author">Author</option>
                         <option value="year">Year</option>
-                        <option value="mostIssued">Most Issued</option>
+                        <option value="created_at">Oldest</option>
+                        <option value="issued_count">Most Issued</option>
                         <option value="status">Status</option>
                     </select>
                 </div>
     
                 <label class="switch">
-                    <input type="checkbox" checked>
+                    <input type="checkbox" >
                     <span class="slider round">
                         <span class="tableBtn">Grid</span>
                         <span class="gridBtn">Table</span>
                     </span>
                 </label>
-    
+                <?php if($role == "admin") { ?>
                 <a href="addbooks.php">Add Books</a>
+                <?php } ?>
             </div>
     
             <!-- TABLE -->
@@ -64,12 +60,14 @@ if(isset($_GET['genre']))
                             <th>Author</th>
                             <th>ISBN/Code</th>
                             <th>Genre</th>
-                            <th>Stock</th>
+                            <th>Available</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="bookTableBody">
-                        
+                        <tr>
+                            <td colspan="8" style="text-align: center; padding: 30px; font-size: 20px; font-weight: 600; color: #000;">No Books Found</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -107,6 +105,7 @@ if(isset($_GET['genre']))
 
 
 <?php include_once('footer.php'); ?>
+
 
 <script>
 
@@ -168,6 +167,7 @@ if(isset($_GET['genre']))
         // SORT BOOK DATA 
         $("#sortBookData").change(function(){
             var sort_by = $(this).val();
+
             $.ajax({
                 
                 url : "ajax/get_book.php",
@@ -184,9 +184,9 @@ if(isset($_GET['genre']))
 
         
         // SWITCH BETWEEN VIEW - TABLE / GRID 
-        var display = "table";
-        $("#bookTable").show();
-        $("#bookGrid").hide();
+        var display = "grid";
+        $("#bookTable").hide();
+        $("#bookGrid").show();
         $(".switch input").on("change", function() {
             if($(this).is(":checked")) {
                 display = "table";
@@ -229,21 +229,26 @@ if(isset($_GET['genre']))
             $("#bookTableBody").empty();
             let row = "";
 
+            if(data.data.length == 0){
+                row += `
+                    <tr>
+                        <td colspan="8" style="text-align: center; padding: 30px; font-size: 20px; font-weight: 600; color: #000;">No Books Found</td>
+                    </tr>
+                `
+            }
             data.data.forEach((element, index) => {
                 row += `
                     <tr >
                         <td> ${index+1}</td>
                         <td class="truncateText">${element.book_name}</td>
-                        <td class="truncateText">${element.author}</td>
+                        <td class="truncateText">${element.author} (${element.year})</td>
                         <td style="color : ${element.status != 'Active' ? 'tomato' : ''};">BHB${element.book_id}</td>
                         <td>${element.genre_name}</td>
-                        <td>n/${element.stock}</td>
+                        <td>${element.issued_count}/${parseInt(element.stock) + parseInt(element.issued_count)}</td>
                         <td><button class="bookDetailsBtn">Details</button></td>
                     </tr>
                 `;
-                // if (element.status == "Inactive") { 
-                //     row.find("td").css("color", "red");
-                // }
+                
             });
             $("#bookTableBody").html(row).hide().fadeIn(200);
             
@@ -253,15 +258,15 @@ if(isset($_GET['genre']))
             data.data.forEach(element =>{
                 $(".grid-container").append(`
                     <div class="grid-item">
-                        <img src="res/uploads/book_cover/1.jpg" alt="Book Cover">
+                        <img src="res/uploads/book_cover/${(element.book_cover == null || element.book_cover == "" ? "default.jpg" : element.book_cover)}" alt="Book Cover" >
                         <div class="book-info">
                             <h3 class="truncateText">${element.book_name}</h3>
                             <p>Genre : ${element.genre_name}</p>
                             <p class="truncateText">${element.author}</p>
                             <p>Release Year : ${element.year}</p>
                             <p>ISBN/Code : <span style="color : ${element.status != 'Active' ? 'tomato' : ''};">BHB${element.book_id}</span></p>
-                            <p>Total Copies : ${element.stock}</p>
-                            <p>Issued : ${element.issued} times</p>
+                            <p>Available Copies : ${element.stock}</p>
+                            <p>Issued : ${element.issued_count} times</p>
                             <p>Status : <span style="color : ${element.status != 'Active' ? 'tomato' : ''};">${element.status}</span></p>
                             <button class="bookDetailsBtn">Details</button>
                         </div>
@@ -286,14 +291,13 @@ if(isset($_GET['genre']))
 
             }).showToast();
 
-        }else if(params.get('status') === '2'){
+        }
+        else if(params.get('status') === '3'){
             Toastify({
-                text: "Book updated successfully!",
+                text: "Book deleted successfully!",
                 duration: 5000,
                 gravity: "top",
                 position: "center",
-                backgroundColor: "#dda704ff",
-                color : "black",
                 stopOnFocus: true
 
             }).showToast();

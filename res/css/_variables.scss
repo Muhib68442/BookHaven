@@ -66,6 +66,11 @@ $fontM : 'fontM';
         background-color: transparent;
     }
     @content;
+
+    @media(max-width : 1300px){
+        font-size : 1rem;
+        padding : 8px 14px;
+    }
 }
 
 @mixin button-secondary {
@@ -114,20 +119,23 @@ $fontM : 'fontM';
 
     // HEADING
     thead {
-        th {
-            background-color: $theme;
-            padding: 18px 8px;
-            font-family: $fontSB;
-            font-size: 1.2rem;
-            color: $text-white;
-
-            &:first-child {
-                border-top-left-radius: $radiusT;
-                border-bottom-left-radius: $radiusT;
-            }
-            &:last-child {
-                border-top-right-radius: $radiusT;
-                border-bottom-right-radius: $radiusT;
+        tr{
+            th {
+                background-color: $theme;
+                padding: 18px 8px;
+                font-family: $fontSB;
+                font-size: 1.2rem;
+                color: $text-white;
+                text-align : left !important;
+    
+                &:first-child {
+                    border-top-left-radius: $radiusT;
+                    border-bottom-left-radius: $radiusT;
+                }
+                &:last-child {
+                    border-top-right-radius: $radiusT;
+                    border-bottom-right-radius: $radiusT;
+                }
             }
         }
     }
@@ -188,6 +196,10 @@ $fontM : 'fontM';
         width : 60%;
         margin : 40px auto;
 
+        @media(max-width : 1300px){
+            width : 80%;
+        }
+
         .form-topbar{
             background-color: $theme;
             padding : 12px 20px;
@@ -215,6 +227,9 @@ $fontM : 'fontM';
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
+            @media(max-width : 1300px){
+                flex-direction: column;
+            }
             gap : 10px;
 
             .uploadPreview{
@@ -225,7 +240,7 @@ $fontM : 'fontM';
                 gap: 20px;
                 background-color: darken($secondary, 5%);
                 border-radius: $radiusT;
-                width: 50%;
+                width: 40%;
                 height: 70vh; 
                 min-height: 300px; 
                 object-fit: cover;
@@ -242,6 +257,11 @@ $fontM : 'fontM';
                     @include button-secondary;
                     text-align: center;
                 }
+
+                @media(max-width : 1300px){
+                    width : 100%;
+                    height : auto;
+                }
             }
 
             .form-fields{
@@ -249,9 +269,12 @@ $fontM : 'fontM';
                 display: flex;
                 flex-direction: column;
                 gap: 14px;
+                @media(max-width : 1300px){
+                    width : 100%;
+                }
 
                 input{
-                    @include input-style;
+                    @include input-style();
                 }
                 select{
                     @include input-style;
@@ -270,7 +293,12 @@ $fontM : 'fontM';
                     @include input-style;
                     
                 }
-
+                .form-wrapper{
+                    display: flex;
+                    flex-direction: row;
+                    gap: 10px;
+                    align-items: center;
+                }
                 div{
                     display: flex;
                     justify-content: space-between;
@@ -305,6 +333,7 @@ $fontM : 'fontM';
         @include font($fontSB, 1.4rem, $text-white);
     }
     @content;
+
 }
 
 @mixin font($family, $size, $color: $text-black) {
@@ -373,12 +402,6 @@ $fontM : 'fontM';
     }
     @content;
 }
-
-
-
-
-
-
 
 
 

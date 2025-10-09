@@ -3,7 +3,7 @@
 include_once('header.php');
 include('core/database.php');
 
-if($role === 'kiosk' || $role === 'staff') {
+if($role != 'admin') {
     header('Location: books.php');
 }
 
@@ -20,20 +20,23 @@ if($role === 'kiosk' || $role === 'staff') {
             </div>
             <div class="form-body">
                 <div class="uploadPreview">
-                    <div class="uploadPreview">
                         <h3>Upload Cover</h3>
                         <label id="bookCoverUploadBtn" for="bookCoverUpload">Select</label>
                         <input type="file" id="bookCoverUpload" style="display:none;">
-                        <button id="uploadCoverBtn">Upload</button>
-                    </div>
+                        <button id="uploadCoverBtn" style="display:none;">Upload</button>
                 </div>
                 <div class="form-fields">
                     <input type="hidden" name="book_cover" id="bookCoverHidden">
                     <input type="text" name="book_name" placeholder="Book Name" required>
                     <input type="text" name="author" placeholder="Author">
                     <input type="text" name="publisher" placeholder="Publisher">
-                    <input type="number" name="year" placeholder="Year">
+                    <div class="form-wrapper">
+                        <input type="number" name="year" placeholder="Year" id="year">
+                        <input type="number" name="stock" placeholder="Stock" required id="stock">
+                    </div>
+                    
                     <select name="genre_id" required>
+                        <option value="">Select Genre</option>
                         <?php 
                             $db = new database();
                             $db->select("genres", "*", null, null, null, null);
@@ -45,14 +48,29 @@ if($role === 'kiosk' || $role === 'staff') {
                             }
                         ?>
                     </select>
-                    <input type="text" name="book_id" placeholder="ISBN/code" oninput="this.value = this.value.trim() ? this.value : ''"/>
 
-                    <input type="number" name="stock" placeholder="Stock" required>
+                    <?php 
+                        $db = new database();
+                        $db->sql("SELECT MAX(book_id) AS last_id FROM books");
+                        $lastID = $db->get_result()[0]['last_id'];
+                    ?>
+
                     <!-- <input type="number" placeholder="Price"> -->
-                    <select name="status" id="">
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
-                    </select>
+
+                    <div class="form-wrapper">
+                        <input type="text" name="book_id" placeholder="ISBN/code" value="<?php echo $lastID + 1; ?>" oninput="this.value = this.value.trim() ? this.value : ''" id="bookID"/>
+
+                        <select name="status" id="statusSelect" >
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="form-wrapper" >
+                        <input type="text" name="shelf_number" id="shelfNumber" placeholder="Shelf Number">
+
+                        <input type="text" name="row_number" id="rowNumber" placeholder="Row Number">
+                    </div>
+
                     <button id="insertBookBtn">Add</button>
                 </div>
             </div>
@@ -78,7 +96,7 @@ $("#insertBookBtn").click(function(e){
         }
     });
 
-    console.log(form_data);
+    // console.log(form_data);
 
     // AJAX SEND
     $.ajax({
@@ -92,6 +110,7 @@ $("#insertBookBtn").click(function(e){
         }, 
         error : function(data){
             console.log(data);
+            alert("Book failed to add. Please try again.");
         }
     })
 
@@ -100,6 +119,7 @@ $("#insertBookBtn").click(function(e){
 // PREVIEW
 $("#bookCoverUpload").on("change", function(){
     const file = this.files[0];
+    $("#uploadCoverBtn").show();
     if(file){
         const reader = new FileReader();
         reader.onload = function(e){
@@ -113,8 +133,10 @@ $("#bookCoverUpload").on("change", function(){
     }
 });
 
-
+// BOOK COVER UPLOAD
 $("#uploadCoverBtn").click(function(){
+    $("#uploadCoverBtn").fadeOut(200);
+    $("#bookCoverUploadBtn").fadeOut(200);
     const file = $("#bookCoverUpload")[0].files[0];
     const ext = file.name.split('.').pop();
     const randomName = Date.now() + "_" + Math.floor(Math.random() * 1000) + "." + ext;

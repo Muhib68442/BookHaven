@@ -1,4 +1,12 @@
-<?php include_once('header.php'); ?>
+<?php 
+
+include_once('header.php'); 
+if($role == 'kiosk'){
+    header("Location: index.php");
+    exit;
+}
+
+?>
 
 <body class="landing-body">
     <?php include_once('sidebar.php'); ?>
@@ -21,7 +29,7 @@
                         <option value="full_name">Name</option>
                         <option value="member_id">ID</option>
                         <option value="join_date">Joined</option>
-                        <option value="mostIssued">Most Issued</option>
+                        <option value="total_issues">Most Issued</option>
                         <option value="status">Status</option>
                     </select>
                 </div>
@@ -89,6 +97,13 @@
             let tableBody = $("#memberTableBody");
             tableBody.empty();
             let html = "";
+            if(data.data.length == 0){
+                html += `
+                    <tr>
+                        <td colspan="8" style="text-align: center; padding: 30px; font-size: 20px; font-weight: 600; color: #000;">No Member Found</td>
+                    </tr>
+                `
+            }
             data.data.forEach((element, index) => {
                 html += `
                     <tr>
@@ -96,10 +111,10 @@
                         <td>${element.full_name}</td>
                         <td style="${element.status == 'Inactive' ? 'color : tomato' : ''}">BHM${element.member_id}</td>
                         <td>${new Date(element.join_date).toLocaleDateString('en-GB')}</td>
-                        <td>${element.issues}</td>
+                        <td>${element.total_issues} Issues</td>
                         <td>${element.phone}</td>
                         <td style="${element.status == 'Inactive' ? 'color : tomato' : ''}">${element.status}</td>
-                        <td><button><a href="memberDetails.php?id=${element.member_id}">Details</a></button></td>
+                        <td><button id="memberDetailsBtn" data-id="${element.member_id}">Details</button></td>
                     </tr>
                 `
             })
@@ -111,6 +126,10 @@
     }
     renderTable();
 
+    // DETAILSBTN 
+    $(document).on("click", "#memberDetailsBtn", function(){
+        window.location.href = 'memberDetails.php?id='+$(this).data("id");
+    })
 
     // SEARCH
     $(".search input").on("input", function(){

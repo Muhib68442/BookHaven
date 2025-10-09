@@ -7,6 +7,11 @@ if(!isset($_GET['id'])) {
     exit();
 }
 
+if($role == 'kiosk') {
+    header('Location: index.php');
+    exit();
+}
+
 // AUTH
 // $allowed_roles = array('admin', 'staff', 'member');
 // if (!in_array($_SESSION['role'], $allowed_roles)) {

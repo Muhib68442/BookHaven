@@ -213,40 +213,39 @@
 
 
     // TOASTIFY
-        const params = new URLSearchParams(window.location.search);
-        if (params.get('status') === '1') {
-            Toastify({
-                text: "Genre added successfully!",
-                duration: 5000,
-                gravity: "top",
-                position: "center",
-                stopOnFocus: true
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('status') === '1') {
+        Toastify({
+            text: "Genre added successfully!",
+            duration: 5000,
+            gravity: "top",
+            position: "center",
+            stopOnFocus: true
 
-            }).showToast();
+        }).showToast();
 
-        }else if(params.get('status') === '2'){
-            Toastify({
-                text: "Genre renamed successfully!",
-                duration: 5000,
-                gravity: "top",
-                position: "center",
-                // backgroundColor: "#dda704ff",
-                color : "black",
-                stopOnFocus: true
+    }else if(params.get('status') === '2'){
+        Toastify({
+            text: "Genre renamed successfully!",
+            duration: 5000,
+            gravity: "top",
+            position: "center",
+            // backgroundColor: "#dda704ff",
+            color : "black",
+            stopOnFocus: true
 
-            }).showToast();
-        }
-        else if(params.get('status') === '3'){
-            Toastify({
-                text: "Genre deleted successfully!",
-                duration: 5000,
-                gravity: "top",
-                position: "center",
-                // backgroundColor: "tomato",
-                stopOnFocus: true
+        }).showToast();
+    }
+    else if(params.get('status') === '3'){
+        Toastify({
+            text: "Genre deleted successfully!",
+            duration: 5000,
+            gravity: "top",
+            position: "center",
+            // backgroundColor: "tomato",
+            stopOnFocus: true
 
-            }).showToast();
-        }
-        history.replaceState(null, "", window.location.pathname);
-
+        }).showToast();
+    }
+    history.replaceState(null, "", window.location.pathname);
 </script>

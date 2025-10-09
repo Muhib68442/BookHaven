@@ -12,7 +12,13 @@ $database = new database();
 $raw_data = json_decode(file_get_contents("php://input"), true);
 
 if($raw_data['show'] == "all"){
-    $database->select("members", "*", null, null, null, null);
+    $database->sql("SELECT 
+  members.*, 
+  COUNT(issues.issue_id) AS total_issues
+FROM members
+LEFT JOIN issues ON issues.member_id = members.member_id
+GROUP BY members.member_id;");
+    // $database->select("members", "*", null, null, null, null);
     $result = $database->get_result();
     echo json_encode(array("data" => $result, "num_members" => count($result)));
 }else if($raw_data['show'] == "search"){
@@ -23,7 +29,16 @@ if($raw_data['show'] == "all"){
 }
 else if($raw_data['show'] == "sort"){
     $term = $raw_data['value'];
-    $database->select("members", "*", null, null, "$term ASC", null);
+    $order = ($term == "total_issues" || $term == "status") ? "DESC" : "ASC";
+    $database->sql("SELECT 
+  members.*, 
+  COUNT(issues.issue_id) AS total_issues
+FROM members
+LEFT JOIN issues ON issues.member_id = members.member_id
+GROUP BY members.member_id
+ORDER BY $term $order;");
+
+    // $database->select("members", "*", null, null, "$term $order", null);
     $result = $database->get_result();
     echo json_encode(array("data" => $result));
 }else if($raw_data['show'] == "details"){

@@ -1,4 +1,10 @@
-<?php include_once('header.php'); ?>
+<?php 
+include_once('header.php'); 
+if($role == 'kiosk'){
+    header("Location: index.php");
+    exit;
+}
+?>
 
 <body class="landing-body">
     <?php include_once('sidebar.php'); ?>
@@ -131,8 +137,17 @@
         })
     })
 
+
     const param = new URLSearchParams(window.location.search);
+
+
+    // RETURN VALUE FROM URL
+    if(param.get('bookID')){
+        $("#bookIDSearch").val(param.get('bookID'));
+    }
     
+
+    // TOASTIFY
     if(param.get('status') == 1){
         Toastify({
             text: "Book returned successfully!",
@@ -141,7 +156,9 @@
             position: "center",
             stopOnFocus: true
         }).showToast();
+        history.replaceState(null, "", window.location.pathname);
     }
-    history.replaceState(null, "", window.location.pathname);
+
+    
 
 </script>

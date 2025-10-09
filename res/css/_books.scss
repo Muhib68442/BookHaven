@@ -13,7 +13,9 @@
         width : 100%;
         border-radius: $radiusT;
         padding : 2px 16px;
-
+        @media(max-width : 1300px){
+            flex-wrap: wrap;
+        }
         .sort-table{
             display: flex;
             align-items: center;
@@ -135,15 +137,23 @@
             border-radius: $radius;
             display: flex;
             // align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             gap: 20px;
             // padding: 10px;
-
+            @media (max-width: 1300px) {
+                // flex-direction: column;
+                flex: 0 0 48%;
+            }
             img {
-                width: 36%;          
+                width: 40%;          
                 height: auto;        
                 object-fit: cover;   
                 border-radius: $radius;
+                @media(max-width : 1300px){
+                    width: 40%;
+                    // min-height: 600px;
+                    object-fit: cover !important;
+                }
             }
 
             .book-info {
@@ -159,7 +169,7 @@
                 }
                 button {
                     @include button-secondary;
-                    width: 100%;
+                    width: 40%;
                 }
             }
         }
@@ -221,12 +231,7 @@
             display: flex;
             flex-direction: column;
             gap : 10px;
-            div{
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                gap : 10px;
-            }
+            
             // padding: 12px 0;
             h3{
                 @include font($fontSB, 1.4rem, $text-black);
@@ -237,28 +242,50 @@
             button{
                 @include button-secondary;
             }
+            
         }
-        .book-location{
-            box-shadow: $box-shadow;
-            margin: 20px;
-            padding : 20px;
-            height : 100%;
-            border-radius: 20px;
-            flex: 1;
+
+        .bookDetailsLocationContainer{
+            width : 30%;
             display: flex;
+            justify-content: center;
+            align-items: center;
             flex-direction: column;
-            gap : 10px;
-            h3{
-                @include font($fontSB, 1.4rem, $text-black);
+            gap : 30px;
+            .book-location{
+                box-shadow: $box-shadow;
+                // margin: 20px;
+                padding : 20px;
+                height : 100%;
+                border-radius: 20px;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap : 10px;
+                h3{
+                    @include font($fontSB, 1.4rem, $text-black);
+                }
+                p{
+                    @include font($fontM, 1.2rem, $text-black);
+                }
+                
+                #disabled{
+                    opacity: 0.6;
+                    font-size : 0.9rem;
+                    font-family : $fontSB;
+                    text-align: center
+                }
             }
-            p{
-                @include font($fontM, 1.2rem, $text-black);
-            }
-            #disabled{
-                opacity: 0.6;
-                font-size : 0.9rem;
-                font-family : $fontSB;
-                text-align: center
+            .btns{
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                gap : 10px;
+                
+                button{
+                    @include button-secondary;
+                }
             }
         }
 
@@ -306,6 +333,11 @@
 // ADD BOOK MODAL
 .addBookModal{
     @include form;
+
+    #shelfNumber, #rowNumber, #year, #stock, #statusSelect, #bookID{
+        width : 250px;
+        
+    }
     
 }
 

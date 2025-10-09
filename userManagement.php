@@ -1,6 +1,10 @@
 <?php 
 include_once('header.php');
 include_once('core/database.php');
+if($role == 'kiosk'){
+    header("Location: index.php");
+    exit;
+}
 ?>
 <body class="landing-body">
     <?php include_once('sidebar.php'); ?>
@@ -111,7 +115,7 @@ $.ajax({
                     <td>${element.name}</td>
                     <td>${element.email}</td>
                     <td>${element.phone}</td>
-                    <td>${element.last_login}</td>
+                    <td>${(element.last_login == null ? 'New User' : element.last_login)}</td>
                     <td>${ucfirst(element.role)}</td>
                     <td style="${element.status == 'Inactive' ? 'color : tomato' : ''}" >${element.status}</td>
                     <td>

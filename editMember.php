@@ -1,6 +1,14 @@
 <?php
 include_once('header.php');
 include_once('core/database.php');
+
+
+if($role == 'kiosk'){
+    header("Location: members.php");
+    exit;
+}
+
+
 ?> 
 <body>
     <!-- MEMBERS - EDIT -->
@@ -14,20 +22,21 @@ include_once('core/database.php');
             </div>
             <div class="form-body">
                  <div class="uploadPreview">
-                     <h3>Upload Image</h3>
-                     <label id="bookCoverUploadBtn" for="bookCoverUpload">Select</label>
-                     <input type="file" id="bookCoverUpload">
+                    <h3>Upload Image</h3>
+                    <label id="bookCoverUploadBtn" for="bookCoverUpload">Select</label>
+                    <input type="file" id="bookCoverUpload">
                  </div>
                  <div class="form-fields">
                     <input type="text" name="full_name" placeholder="Full Name" required>
                     <input type="email" name="email" placeholder="Email">
                     <input type="number" name="phone" placeholder="Phone" required>
                     <input type="text" name="address" placeholder="Address" required>
-    
-                    <select name="status" id="status">
+                    
+                    <!-- CHANGE STATUS FROM DETAILS PAGE  -->
+                    <!-- <select name="status" id="status">
                         <option value="active">Active</option>
                         <option value="inactive">Inactive</option>
-                    </select>
+                    </select> -->
                     
                     <p>Member ID : BHM<span><?php echo $_GET['id']; ?></span></p>
                     <p>Join Date : <span id="memberJoinDate"></span></p>
@@ -75,7 +84,7 @@ include_once('footer.php');
             email: $("#addBookFormContainer input[name='email']").val(),
             phone: $("#addBookFormContainer input[name='phone']").val(),
             address: $("#addBookFormContainer input[name='address']").val(),
-            status: $("#addBookFormContainer select[name='status']").val()
+            // status: $("#addBookFormContainer select[name='status']").val()
         };
         
         $.ajax({

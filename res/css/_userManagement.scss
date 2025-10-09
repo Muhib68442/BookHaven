@@ -79,6 +79,9 @@
         @include form(){
             width : 50% !important;
             margin : 0 auto;
+            @media(max-width : 1300px){
+                width : 80% !important;
+            }
         }
     }
 }
@@ -94,6 +97,7 @@
     }
 
     .userDetailsContainer{
+        padding-left: 20px;
         h3{@include font($fontSB, 1.4rem, $text-black);};
         p{
             @include font($fontM, 1.2rem, $text-black);
@@ -102,6 +106,7 @@
         button{@include button-secondary};
     }
     .userDetailsIssuedContainer{
+        margin-top: 20px;;
         @include table(){
             text-align: left !important;
         };

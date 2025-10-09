@@ -2,7 +2,9 @@
 include_once('core/database.php');
 include_once('header.php');
 
-// AUTH
+if($role != 'admin'){
+    header("Location: books.php");
+}
 
 
 if (isset($_GET['book_id'])) {
@@ -90,6 +92,15 @@ if (isset($_GET['book_id'])) {
                         </select>
                     </div>
 
+                    <div>
+                        <label for="shelf_number">Shelf</label>
+                        <input type="text" name="shelf_number" value="<?php echo $book['shelf_number']; ?>" placeholder="Shelf Location" style="width: 100px;">
+                        <label for="row_number">Row</label>
+                        <input type="text" name="row_number" value="<?php echo $book['row_number']; ?>" placeholder="Row" style="width: 100px;">
+                    </div>
+
+       
+
                     <button id="updateBookBtn">Update</button>
                 </div>
             </div>
@@ -134,7 +145,7 @@ if (isset($_GET['book_id'])) {
             dataType : "json",
             data: JSON.stringify({ "set": "edit", "value": form_data, "book_id": "<?php echo $book['book_id']; ?>" }),
             success : function(data){
-                window.location.href = "books.php?status=2";
+                window.location.href = "bookDetails.php?id=<?php echo $book['book_id'];?>&status=2";
             },
             error : function(data){
                 console.log(data);
@@ -162,6 +173,8 @@ if (isset($_GET['book_id'])) {
     });
 
     $("#uploadCoverBtn").click(function(){
+        $("#uploadCoverBtn").fadeOut(200);
+        $("#bookCoverUploadBtn").fadeOut(200);
         const file = $("#bookCoverUpload")[0].files[0];
         if(!file) return alert("Select a file first");
 

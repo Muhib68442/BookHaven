@@ -46,7 +46,9 @@
     .return-search-container{
         @include window;
         width: 45%;
-
+        @media(max-width : 1300px){
+            width : 80%;
+        }
         margin-bottom : 40px;
     }
     .return-summary-container{

@@ -74,6 +74,11 @@ if($raw_data['get'] == "searchBook"){
         issues.book_id LIKE '%$term%' OR 
         issues.member_id LIKE '%$term%' OR 
         issues.issue_id LIKE '%$term%' OR 
+        issues.issued_by LIKE '%$term%' OR 
+        issues.returned_by LIKE '%$term%' OR 
+        issues.status LIKE '%$term%' OR
+        issues.issue_date LIKE '%$term%' OR 
+        issues.return_date LIKE '%$term%' OR
         book_name LIKE '%$term%' OR 
         full_name LIKE '%$term%' OR 
         email LIKE '%$term%' OR 

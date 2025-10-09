@@ -13,20 +13,14 @@ date_default_timezone_set('Asia/Dhaka');
     <div class="content admin-container" >
         <div class="top-bar">
             <h3>Admin Log</h3>
+
             <p> <?php echo date('h:i A'); ?> | <?php echo date('d/m/Y') ?></p>
+
             <div class="search">
-                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-                <input type="text" placeholder="Search Here">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M15.8 15.8L21 21M18 10.5C18 14.6 14.6 18 10.5 18C6.4 18 3 14.6 3 10.5C3 6.4 6.4 3 10.5 3C14.6 3 18 6.4 18 10.5Z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <input type="text" id="searchInput" placeholder="Search Here">
             </div>
-
-            <div class="sort-table">
-                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M13 12H21M13 8H21M13 16H21M6 7V17M6 17L3 14M6 17L9 14" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-                <select name="sort" id="sortBookData">
-                    <option value="default">Default</option>
-                    
-                </select>
-            </div>
-
+       
             <a id="refreshLog">Refresh</a>
         </div>
 
@@ -69,18 +63,25 @@ date_default_timezone_set('Asia/Dhaka');
                     // activated_member
                     // add_member
                     // delete_member
-                    // edit_member
+                    // update_member
                     // issue 
                     // return
+                    // add_book
+                    // update_book
+                    // delete_book
+                    // activated_book
+                    // deactivated_book
 
 
                     switch (element.action_type) {
+                        // MEMBER 
                         case "add_member":
                             logText += `Added Member (${element.member_id})`;
                             color = 'green';
                             break;
-                        case "edit_member":
-                            logText += `Edited Member (${element.member_id}`;
+                        case "update_member":
+                            logText += `Edited Member (${element.member_id})`;
+                            color = '#96218cff';
                             break;
                         case "delete_member":
                             logText += `Deleted Member (${element.member_id})`;
@@ -94,15 +95,39 @@ date_default_timezone_set('Asia/Dhaka');
                             logText += `Deactivated Member (${element.member_id})`;
                             color = 'tomato';
                             break;
+                        // BOOK
+                        case "add_book":
+                            logText += `Added Book (${element.book_id})`;
+                            color = 'green';
+                            break;
+                        case "update_book":
+                            logText += `Edited Book (${element.book_id})`;
+                            color = '#96218cff';
+                            break;
+                        case "delete_book":
+                            logText += `Deleted Book (${element.book_id})`;
+                            color = 'tomato';
+                            break;
+                        case "activated_book":
+                            logText += `Activated Book (${element.book_id})`;
+                            color = 'green';
+                            break;
+                        case "deactivated_book":
+                            logText += `Deactivated Book (${element.book_id})`;
+                            color = 'tomato';
+                            break;
+                        // ISSUE / RETURN
                         case "issue":
                             logText += `Issued (${element.target_id}) Book (${element.book_id}) to Member (${element.member_id})`;
+                            color = '#0070e7ff';
                             break;
                         case "return":
                             logText += `Returned (${element.target_id}) Book (${element.book_id}) from Member (${element.member_id})`;
+                            color = '#ff9800';
                             break;
                     }
 
-                    $("#logList").append(`<li style="color:${color}"><a class="logDetailsBtn" href="adminLogDetails.php?id=${element.admin_log_id}">${logText}</a> </li>`).hide().slideDown(200);
+                    $("#logList").append(`<li><a class="logDetailsBtn" style="color:${color} !important" href="adminLogDetails.php?id=${element.admin_log_id}">${logText}</a> </li>`).hide().slideDown(200);
                 });
                 // let log_text = element.created_at +" | "+ element.name+"("+element.user_id+")"+" "+element.action_type+"ed ("+element.target_id+") "+"Book ("+element.book_id+") to "+"Member ("+element.member_id+")";
             },
@@ -116,4 +141,38 @@ date_default_timezone_set('Asia/Dhaka');
     $("#refreshLog").click(function(){
         fetchData();
     })
+
+
+    ///////////// DOM SEARCH AND SORT  //////////////////////////
+const logs = [
+  { id: 1, type: "Issue", color: "green", text: "Issued book to member" },
+  { id: 2, type: "Return", color: "blue", text: "Returned book from member" },
+  { id: 3, type: "Add Member", color: "orange", text: "New member added" },
+  { id: 4, type: "Edit Member", color: "purple", text: "Member info updated" },
+  { id: 5, type: "Delete Member", color: "red", text: "Member deleted" },
+];
+
+// Inject logs into DOM
+logs.forEach((log, index) => {
+  const $li = $(`
+    <li data-type="${log.type.toLowerCase()}">
+      <a class="logDetailsBtn" style="color:${log.color} !important" href="adminLogDetails.php?id=${log.id}">
+        ${log.text}
+      </a>
+    </li>
+  `);
+
+  $("#logList").append($li).hide().fadeIn(200);
+});
+
+// Search filter
+$("#searchInput").on("input", function () {
+  const keyword = $(this).val().toLowerCase();
+  $("#logList li").each(function () {
+    const text = $(this).text().toLowerCase();
+    $(this).toggle(text.includes(keyword));
+  });
+});
+
+
 </script>

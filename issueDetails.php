@@ -1,6 +1,11 @@
 <?php 
 include_once('header.php');
 include_once('core/database.php'); 
+
+if($role == 'kiosk'){
+    header("Location: index.php");
+    exit;
+}
 ?>
 
 <body class="landing-body">
@@ -16,34 +21,39 @@ include_once('core/database.php');
 
         <div class="issue-details-container">
             <div class="issue-info">
-                <h3>Issue Information</h3>
-                <p>Issue ID : BHI<span class="issueID"></span></p>
-                <p>Issue Date : <span class="issueDate"></span></p>
-                <p>Return Date : <span class="returnDate"></span></p>
-                <p>Issued By : <span class="issuedBy"></span></p>
-                <p>Returned By : <span class="returnedBy"></span></p>
-                <p>Current Status : <span class="status"></span></p>
-                <br>
-                <a id="returnBookBtn">Return Book</a>
-
+                <div style="padding : 0px">
+                    <h3>Issue Information</h3>
+                    <p>Issue ID : BHI<span class="issueID"></span></p>
+                    <p>Issue Date : <span class="issueDate"></span></p>
+                    <p>Return Date : <span class="returnDate"></span></p>
+                    <p>Issued By : <span class="issuedBy"></span></p>
+                    <p>Returned By : <span class="returnedBy"></span></p>
+                    <p>Current Status : <span class="status"></span></p>
+                    <br>
+                    <a id="returnBookBtn">Return Book</a>
+                </div>
             </div>
             <div class="book-info">
                 <img src="res/uploads/book_cover/default.jpg" class="bookCover" onerror="this.onerror=null; this.src='res/uploads/book_cover/default.jpg';" alt="default">
-                <h3>Book Information</h3>
-                <p>Book Name : <span class="bookName"></span></p>
-                <p>Author : <span class="bookAuthor"></span></p>
-                <p>Genre : <span class="bookGenre"></span></p>
-                <p>ISBN/Code : BHB<span class="bookID"></span> </p>
-                <a id="bookDetailsLink">Book Details</a>
+                <div style="padding : 0px">
+                    <h3>Book Information</h3>
+                    <p>Book Name : <span class="bookName"></span></p>
+                    <p>Author : <span class="bookAuthor"></span></p>
+                    <p>Genre : <span class="bookGenre"></span></p>
+                    <p>ISBN/Code : BHB<span class="bookID"></span> </p>
+                    <a id="bookDetailsLink">Book Details</a>
+                </div>
             </div>
             <div class="member-info">
                 <img src="res/uploads/members/default2.png" alt="">
-                <h3>Member Information</h3>
-                <p>Name : <span class="memberName"></span></p>
-                <p>Member ID : BHM<span class="memberID"></span></p>
-                <p>Phone : <span class="memberPhone"></span></p>
-                <p>Email : <span class="memberEmail"></span></p>
-                <a id="memberDetailsLink">Member Details</a>
+                <div style="padding : 0px">
+                    <h3>Member Information</h3>
+                    <p>Name : <span class="memberName"></span></p>
+                    <p>Member ID : BHM<span class="memberID"></span></p>
+                    <p>Phone : <span class="memberPhone"></span></p>
+                    <p>Email : <span class="memberEmail"></span></p>
+                    <a id="memberDetailsLink">Member Details</a>
+                </div>
             </div>
         </div>
     </div>

@@ -1,6 +1,7 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
+
 }
 
 $role    = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : null;

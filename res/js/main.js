@@ -45,12 +45,6 @@ $(document).ready(function(){
     //     $("#bookDetailsContainer").slideDown(200);
     // })
 
-    $("#backBtnBookDetails").click(function(){
-        let view = $(".switch input").is(":checked") ? "#bookTable" : "#bookGrid";
-        console.log("View : " + view);
-        $("#bookDetailsContainer").slideUp(200);
-        $(".top-bar, "+view).slideDown(200);
-    })
 
 
 
@@ -71,7 +65,6 @@ $(document).ready(function(){
     $("#selectBookBtn").click(function(){
         $(".issue-member-table").slideUp(200);
         $(".issue-summary").slideUp(200);
-        $("#allIssues").slideUp(200);
 
         $(".issue-book-table").slideDown(200);
 

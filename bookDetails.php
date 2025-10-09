@@ -3,8 +3,17 @@
 include_once('header.php');
 include_once('core/database.php');
 
+// GET THE BOOK ISSUED 
+$db = new database();
+$id = $_GET['id'];
+$db->sql("SELECT COUNT(*) as num_issued FROM issues WHERE book_id = $id ;");
+$data = $db->get_result();
+$num_issued = $data[0]['num_issued'];
 
-
+$db->sql("SELECT COUNT(*) as num_issued FROM issues WHERE book_id = $id AND status = 'Issued';");
+$total_issued = $db->get_result();
+$total_issued = $total_issued[0]['num_issued'];
+echo "<span id='bookTotalIssued' style='display:none;'>$total_issued</span>"
 ?>
 
 <body class="landing-body">
@@ -19,38 +28,42 @@ include_once('core/database.php');
             </div>
 
             <div class="book-details">
-                <img id="bookCover" src="res/uploads/book_cover/${data[0].book_cover}"  alt="" onerror="this.onerror=null; this.src='res/uploads/book_cover/default.jpg';">
+                <img id="bookCover" src="res/uploads/book_cover/default.jpg"  alt="" onerror="this.onerror=null; this.src='res/uploads/book_cover/default.jpg';">
                 <div class="book-info">
                     <h3 id="bookName"></h3>
                     <p><b>Author:</b> <span id="bookAuthor"></span></p>
                     <p><b>Publisher:</b> <span id="bookPublisher"></span></p>
                     <p><b>Year:</b> <span id="bookYear"></span></p>
+                    <p><b>Arrival:</b> <span id="bookArrival"></span></p>
                     <p><b>Genre:</b> <span id="bookGenre"></span></p>
                     <p><b>ISBN/Code:</b> BHB<span id="bookID"></span></p>
-                    <p class="bookStockText"><b>Stock:</b> <span id="bookStock"></span></p>
-                    <p><b>Issued:</b> <span id="bookIssued"></span></p>
+                    <p class="bookStockText"><b>Total Stock:</b> <span id="bookStock"></span> Pcs</p>
+                    <p><b>Pending Return:</b> <?php echo $total_issued ?> Pcs</p>
+                    <p><b>Total Issued:</b> <span id="bookIssued"><?php echo $num_issued?> Times</span></p>
                     <p><b>Status:</b> <span class="bookStatusText"></span></p>
-                    
-
-                    <div>
-                        <?php if($role == 'admin') : ?>
+                    <?php if($role == 'admin') : ?>
                         <button id="toogleBookStatus"></button>
+                    <?php endif; ?>
+                </div>
+
+                <div class="bookDetailsLocationContainer">
+                    <div class="book-location">
+                        <h3>Book Location</h3>
+                        <p><b>Section:</b> <span id='bookSection'></span></p>
+                        <p><b>Shelf:</b> <span id='bookShelf'></span></p>
+                        <p><b>Row:</b> <span id='bookRow'></span></p>
+                        <p id="disabled">Please keep the book where it is after reading</p>
+                    </div>
+
+                    <div class="btns">
+                        <?php if($role == 'admin') : ?>
                         <a id="editBookBtn" href="editBook.php?book_id="><button>Edit</button></a>
                         <button id="deleteBookBtn">Delete</button>
                         <?php endif; if($role == 'staff' || $role == 'admin') : ?>
-                        <div style="margin-top: 10px;">
-                            <button id="selectBook">Issue</button>
-                            <button>Return</button>
-                        </div>
+                        <button id="selectBook">Issue</button>
+                        <button id="returnBookBtn">Return</button>
                         <?php endif; ?>
                     </div>
-                </div>
-                <div class="book-location">
-                    <h3>Book Location</h3>
-                    <p><b>Section:</b> <span id='bookSection'></span></p>
-                    <p><b>Shelf:</b> <span id='bookShelf'></span></p>
-                    <p><b>Row:</b> <span id='bookRow'></span></p>
-                    <p id="disabled">Please keep the book where it is after reading</p>
                 </div>
             </div>
 
@@ -129,10 +142,11 @@ include_once('core/database.php');
             $("#bookPublisher").text(data[0].publisher);
             $("#bookYear").text(data[0].year);
             $("#bookGenre").text(data[0].genre_name);
-            $("#bookStock").text(data[0].stock);
+            $("#bookStock").text(parseInt(data[0].stock) + parseInt($("#bookTotalIssued").text()));
             $("#bookIssued").text(data[0].issued);
             $(".bookStatusText").text(data[0].status);
             $("#toogleBookStatus").text(statusTextInverse);
+            $("#bookArrival").text(formatDate(data[0].created_at));
             $("#editBookBtn").attr("href", "editBook.php?book_id="+data[0].book_id);
             data[0].book_cover == null ? $("#bookCover").attr("src", "res/uploads/book_cover/default.jpg") : $("#bookCover").attr("src", "res/uploads/book_cover/"+data[0].book_cover);
             
@@ -181,6 +195,14 @@ include_once('core/database.php');
                     $(".bookStatusText").css("color", "tomato");
                     $(".bookStatusText").text("Inactive");
                 }
+                Toastify({
+                    text: "Book "+(statusText == "Active" ? "Activated" : "Deactivated")+"ed successfully!",
+                    duration: 5000,
+                    gravity: "top",
+                    position: "center",
+                    stopOnFocus: true
+
+                }).showToast();
                 // renderData();
             }, 
             error : function(data){
@@ -201,9 +223,7 @@ include_once('core/database.php');
                 dataType : "json",
                 data: JSON.stringify({ "set": "delete", "value": book_id }),
                 success : function(data){
-                    $("#bookDetailsContainer").slideUp(200);
-                    $(".top-bar").slideDown(200);
-                    $("#bookTable").slideDown(200);
+                    window.location.href = "books.php?status=3";
                     renderData();
                 }
             })
@@ -277,9 +297,25 @@ include_once('core/database.php');
     // SELECT BOOK FOR ISSUE 
     $(document).on("click", "#selectBook", function(){
         if($(".bookStockText").text().trim() == "Out of Stock (0 Copies)") return alert("Out of stock");
+        if($(".bookStatusText").text().trim() == "Inactive") return alert("Book is Inactive");
         window.location.href = "issue.php?selectedBook="+book_id;
     })
 
+    // RETURN BOOK BTN 
+    $("#returnBookBtn").on("click", function(){
+        window.location.href = "return.php?bookID="+book_id;
+    })
+
+    if(param.get('status') === '2'){
+        Toastify({
+            text: "Book updated successfully!",
+            duration: 5000,
+            gravity: "top",
+            position: "center",
+            stopOnFocus: true
+
+        }).showToast();
+    }
 
 
     function formatDate(dateStr){

@@ -1,5 +1,14 @@
-<?php include_once('header.php'); ?>
-<?php include_once('core/database.php'); ?>
+<?php 
+
+include_once('header.php'); 
+include_once('core/database.php');
+
+if($role == 'kiosk'){
+    header("Location: index.php");
+    exit;
+}
+
+?>
 
 <body class="landing-body">
     <?php include_once('sidebar.php'); ?>
@@ -106,6 +115,7 @@
                             <p>Issue ID : BHI<?php echo $newIssueID; ?></p>
                             <p>Issue Date : <?php echo date('d/m/Y'); ?></p>
                             <p>Return Date : <?php echo date('d/m/Y', strtotime('+6 month')); ?></p>
+                            <p>Issued By : <?php echo $_SESSION['user_name']; ?></p>
                             <button id="issueBook">Issue</button>
                         </div>
                         
@@ -386,10 +396,10 @@
         $(".dynamic-table, #allIssues").slideToggle(200);
         if($("#allIssues").is(":visible")){
             getAllIssue();
-            $('.selectedBtn').removeClass("selectedBtn");
-            $(this).addClass("selectedBtn");
+            $(this).toggleClass("selectedBtn");
+            // $(this).addClass("selectedBtn");
         }else{
-            $(this).removeClass("selectedBtn");
+            // $(this).removeClass("selectedBtn");
         }
     })
 
